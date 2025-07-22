@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DeyMem</title>
+    <title>DeyMem Pro</title>
     <style>
         :root {
             --main-bg: #0f0f0f;
@@ -187,6 +187,21 @@
             margin-top: 5px;
         }
         
+        .templates-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .refresh-templates {
+            background: none;
+            border: none;
+            color: var(--accent);
+            cursor: pointer;
+            font-size: 1.2em;
+            padding: 0;
+        }
+        
         .templates {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -285,54 +300,41 @@
             font-family: 'Arial Black';
             src: local('Arial Black');
         }
-        @font-face {
-            font-family: 'Bebas Neue';
-            src: url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-        }
-        @font-face {
-            font-family: 'Roboto Condensed';
-            src: url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-        }
-        @font-face {
-            font-family: 'Oswald';
-            src: url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
-        }
-        @font-face {
-            font-family: 'Anton';
-            src: url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-        }
-        @font-face {
-            font-family: 'Archivo Black';
-            src: url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
-        }
-        @font-face {
-            font-family: 'Poppins';
-            src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-        }
-        @font-face {
-            font-family: 'Montserrat';
-            src: url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
-        }
-        @font-face {
-            font-family: 'Raleway';
-            src: url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
-        }
-        @font-face {
-            font-family: 'Lobster';
-            src: url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-        }
-        @font-face {
-            font-family: 'Pacifico';
-            src: url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-        }
-        @font-face {
-            font-family: 'Righteous';
-            src: url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Paytone+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Knewave&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plaster&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Volkhov:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Yeseva+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap');
     </style>
 </head>
 <body>
-    <div class="logo">DeyMem</div>
+    <div class="logo">DeyMem Pro</div>
     
     <div class="app-container">
         <div class="controls-panel">
@@ -366,16 +368,36 @@
                         <option value="Lobster" style="font-family: 'Lobster'">Lobster</option>
                         <option value="Pacifico" style="font-family: 'Pacifico'">Pacifico</option>
                         <option value="Righteous" style="font-family: 'Righteous'">Righteous</option>
+                        <option value="Rubik Mono One" style="font-family: 'Rubik Mono One'">Rubik Mono One</option>
+                        <option value="Press Start 2P" style="font-family: 'Press Start 2P'">Press Start 2P</option>
+                        <option value="Fredoka One" style="font-family: 'Fredoka One'">Fredoka One</option>
+                        <option value="Black Ops One" style="font-family: 'Black Ops One'">Black Ops One</option>
+                        <option value="Alfa Slab One" style="font-family: 'Alfa Slab One'">Alfa Slab One</option>
+                        <option value="Bangers" style="font-family: 'Bangers'">Bangers</option>
+                        <option value="Creepster" style="font-family: 'Creepster'">Creepster</option>
+                        <option value="Fjalla One" style="font-family: 'Fjalla One'">Fjalla One</option>
+                        <option value="Staatliches" style="font-family: 'Staatliches'">Staatliches</option>
+                        <option value="Paytone One" style="font-family: 'Paytone One'">Paytone One</option>
+                        <option value="Abril Fatface" style="font-family: 'Abril Fatface'">Abril Fatface</option>
+                        <option value="Ultra" style="font-family: 'Ultra'">Ultra</option>
+                        <option value="Knewave" style="font-family: 'Knewave'">Knewave</option>
+                        <option value="Monoton" style="font-family: 'Monoton'">Monoton</option>
+                        <option value="Plaster" style="font-family: 'Plaster'">Plaster</option>
+                        <option value="Russo One" style="font-family: 'Russo One'">Russo One</option>
+                        <option value="Titan One" style="font-family: 'Titan One'">Titan One</option>
+                        <option value="Volkhov" style="font-family: 'Volkhov'">Volkhov</option>
+                        <option value="Yeseva One" style="font-family: 'Yeseva One'">Yeseva One</option>
+                        <option value="Zilla Slab" style="font-family: 'Zilla Slab'">Zilla Slab</option>
                     </select>
-                    <button class="reset-font-btn" title="Сбросить шрифт" onclick="resetFont()">A</button>
+                    <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                 </div>
             </div>
             
             <div class="style-controls">
                 <div class="control-group">
                     <label class="control-label">Размер текста:</label>
-                    <input type="range" id="font-size" min="16" max="72" value="32">
-                    <div style="text-align: center; font-size: 0.8em;" id="font-size-value">32px</div>
+                    <input type="range" id="font-size" min="30" max="100" value="42">
+                    <div style="text-align: center; font-size: 0.8em;" id="font-size-value">42px</div>
                 </div>
                 
                 <div class="control-group">
@@ -388,11 +410,12 @@
             </div>
             
             <div class="control-group">
-                <label class="control-label">Шаблоны:</label>
-                <div class="templates">
-                    <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
-                    <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот">
-                    <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
+                <div class="templates-header">
+                    <label class="control-label">Шаблоны:</label>
+                    <button class="refresh-templates" onclick="loadRandomTemplates()">⟳</button>
+                </div>
+                <div class="templates" id="templates-container">
+                    <!-- Шаблоны будут загружены динамически -->
                 </div>
             </div>
             
@@ -402,6 +425,9 @@
                 </button>
                 <button onclick="downloadMeme()">
                     💾 Скачать
+                </button>
+                <button onclick="shareMeme()">
+                    ↗ Поделиться
                 </button>
             </div>
         </div>
@@ -429,6 +455,48 @@
         const memeImage = document.getElementById('meme-image');
         const topTextElement = document.getElementById('top-text');
         const bottomTextElement = document.getElementById('bottom-text');
+        const templatesContainer = document.getElementById('templates-container');
+        
+        // Популярные шаблоны мемов
+        const memeTemplates = [
+            "https://i.imgflip.com/1bij.jpg", // Ждун
+            "https://i.imgflip.com/1bgw.jpg", // Кот
+            "https://i.imgflip.com/9vct.jpg", // Драма
+            "https://i.imgflip.com/1g8my.jpg", // Два парня
+            "https://i.imgflip.com/1ihzfe.jpg", // Дрейк
+            "https://i.imgflip.com/1h7in3.jpg", // Леонардо ДиКаприо
+            "https://i.imgflip.com/9ehk.jpg", // Один парень
+            "https://i.imgflip.com/gtj5t.jpg", // Смена канала
+            "https://i.imgflip.com/1o00in.jpg", // Женщина кричит на кота
+            "https://i.imgflip.com/4/1g8my.jpg", // Два парня за столом
+            "https://i.imgflip.com/4/1bij.jpg", // Ждун
+            "https://i.imgflip.com/4/1bgw.jpg", // Кот за столом
+            "https://i.imgflip.com/4/1bqw.jpg", // Собака в огне
+            "https://i.imgflip.com/4/1bhf.jpg", // Парень с табличкой
+            "https://i.imgflip.com/4/1bh8.jpg", // Парень смотрит
+            "https://i.imgflip.com/4/1bh3.jpg", // Парень с телефоном
+            "https://i.imgflip.com/4/1bhw.jpg", // Парень с ноутбуком
+            "https://i.imgflip.com/4/1bhm.jpg", // Парень с кофе
+            "https://i.imgflip.com/4/1bhk.jpg", // Парень с пиццей
+            "https://i.imgflip.com/4/1bhj.jpg"  // Парень с бургером
+        ];
+        
+        // Загрузка случайных шаблонов
+        function loadRandomTemplates() {
+            templatesContainer.innerHTML = '';
+            
+            // Создаем массив из случайных шаблонов
+            const shuffled = [...memeTemplates].sort(() => 0.5 - Math.random());
+            const selectedTemplates = shuffled.slice(0, 3);
+            
+            selectedTemplates.forEach(template => {
+                const img = document.createElement('img');
+                img.src = template;
+                img.className = 'template';
+                img.onclick = function() { useTemplate(this); };
+                templatesContainer.appendChild(img);
+            });
+        }
         
         // Обновление мема в реальном времени
         function updateMeme() {
@@ -448,9 +516,11 @@
             bottomTextElement.style.color = textColor;
         }
         
-        // Сброс шрифта к стандартному
-        function resetFont() {
-            fontFamilySelect.value = 'Impact';
+        // Случайный шрифт
+        function randomFont() {
+            const fonts = Array.from(fontFamilySelect.options).map(opt => opt.value);
+            const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            fontFamilySelect.value = randomFont;
             updateMeme();
         }
         
@@ -473,14 +543,13 @@
             memeImage.style.display = 'block';
         }
         
-        // Умная генерация мема (демо-версия)
+        // Умная генерация мема
         function generateSmartMeme() {
             if (!memeImage.src) {
                 alert('Сначала загрузи изображение!');
                 return;
             }
             
-            // В реальном проекте здесь будет вызов AI API
             const memeTemplates = [
                 ["Когда увидел цену", "на бензин"],
                 ["Это не баг", "это фича"],
@@ -488,13 +557,42 @@
                 ["404", "Мотивация не найдена"],
                 ["Выглядит нормально", "не трогай!"],
                 ["Ctrl+C", "Ctrl+V"],
-                ["Работает? Не трогай!", "Не работает? Все равно не трогай!"]
+                ["Работает? Не трогай!", "Не работает? Все равно не трогай!"],
+                ["Когда кто-то говорит", "что программирование легко"],
+                ["Понедельник:", "Я готов к продуктивной неделе!"],
+                ["Пятница:", "Где неделя?"],
+                ["Когда код работает", "с первого раза"],
+                ["Когда находишь", "старый код"],
+                ["Я на работе:", "*прокручиваю мемы*"],
+                ["План на день:", "Ничего не делать"],
+                ["Прогресс:", "0%"],
+                ["Мотивация:", "Отсутствует"],
+                ["Когда deadline", "уже завтра"],
+                ["Я:", "Должен работать"],
+                ["Также я:", "*прокручиваю мемы*"],
+                ["Когда понимаешь", "что понедельник завтра"]
             ];
             
             const randomTemplate = memeTemplates[Math.floor(Math.random() * memeTemplates.length)];
             topTextInput.value = randomTemplate[0];
             bottomTextInput.value = randomTemplate[1];
+            
+            // Также случайный шрифт и цвет
+            randomFont();
+            textColorInput.value = getRandomColor();
+            colorHex.textContent = textColorInput.value.toUpperCase();
+            
             updateMeme();
+        }
+        
+        // Генерация случайного цвета
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
         
         // Скачивание мема
@@ -507,9 +605,47 @@
             html2canvas(document.getElementById('meme-container')).then(canvas => {
                 const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
-                link.download = 'deymem-' + Date.now() + '.png';
+                link.download = 'deymem-pro-' + Date.now() + '.png';
                 link.click();
             });
+        }
+        
+        // Поделиться мемом
+        function shareMeme() {
+            if (!memeImage.src) {
+                alert('Сначала создайте мем!');
+                return;
+            }
+            
+            html2canvas(document.getElementById('meme-container')).then(canvas => {
+                canvas.toBlob(function(blob) {
+                    if (navigator.share) {
+                        navigator.share({
+                            title: 'Мой мем из DeyMem Pro',
+                            text: 'Посмотрите мой мем!',
+                            files: [new File([blob], 'meme.png', { type: 'image/png' })]
+                        }).catch(err => {
+                            console.error('Ошибка при попытке поделиться:', err);
+                            fallbackShare(canvas);
+                        });
+                    } else {
+                        fallbackShare(canvas);
+                    }
+                });
+            });
+        }
+        
+        // Альтернативный способ поделиться
+        function fallbackShare(canvas) {
+            const dataUrl = canvas.toDataURL('image/png');
+            const tempLink = document.createElement('a');
+            tempLink.href = dataUrl;
+            tempLink.download = 'meme.png';
+            tempLink.click();
+            
+            setTimeout(() => {
+                alert('Мем сохранен! Теперь вы можете отправить его вручную.');
+            }, 100);
         }
         
         // Обновление значения размера шрифта
@@ -542,6 +678,7 @@
         textColorInput.addEventListener('input', updateMeme);
         
         // Инициализация
+        loadRandomTemplates();
         updateMeme();
     </script>
 </body>
