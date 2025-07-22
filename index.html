@@ -21,45 +21,27 @@
             align-items: center;
             min-height: 100vh;
             box-sizing: border-box;
-            overflow-x: hidden;
         }
         
         .logo {
-            font-size: 3.5em;
+            font-size: 3em;
             font-weight: bold;
             margin: 10px 0 20px;
-            background: linear-gradient(45deg, #ff5e62, #4facfe);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            position: relative;
-            text-shadow: 0 0 15px rgba(255,94,98,0.3);
-        }
-        
-        .logo::after {
-            content: "eyMem";
-            position: absolute;
-            left: 0.5em;
-            top: 0;
-            background: linear-gradient(45deg, #4facfe, #a18cd1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            z-index: -1;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
         }
         
         .main-container {
             display: flex;
             flex-direction: column;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             gap: 15px;
         }
         
         .file-upload {
             position: relative;
             width: 100%;
-            margin-bottom: 10px;
         }
         
         .file-upload-btn {
@@ -68,7 +50,7 @@
             padding: 15px;
             background: rgba(255,255,255,0.05);
             color: var(--text);
-            font-size: 1.1em;
+            font-size: 1em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
@@ -99,7 +81,7 @@
             color: white;
             border: none;
             border-radius: 10px;
-            padding: 12px 20px;
+            padding: 12px;
             font-size: 1em;
             cursor: pointer;
             transition: all 0.3s;
@@ -119,6 +101,7 @@
             display: flex;
             gap: 10px;
             width: 100%;
+            align-items: center;
         }
         
         input[type="text"] {
@@ -129,21 +112,25 @@
             padding: 12px;
             color: var(--text);
             font-size: 1em;
+            min-width: 0;
         }
         
         #meme-container {
             position: relative;
             width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
+            aspect-ratio: 1/1;
             background: black;
             border-radius: 5px;
             overflow: hidden;
+            margin: 10px 0;
         }
         
         #meme-image {
             width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: none;
+            background: black;
         }
         
         .meme-text {
@@ -165,27 +152,49 @@
         }
         
         #download {
-            margin-top: 15px;
+            margin-top: 10px;
             display: none;
             text-decoration: none;
+            width: 100%;
+            text-align: center;
         }
         
-        .color-picker {
-            width: 100%;
-            margin: 10px 0;
+        .color-picker-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .color-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+        
+        input[type="color"] {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            padding: 0;
+            cursor: pointer;
+        }
+        
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 50%;
         }
         
         .templates {
             display: flex;
             gap: 10px;
-            margin: 10px 0;
+            margin: 5px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
         
         .template {
-            width: 80px;
-            height: 80px;
+            width: 60px;
+            height: 60px;
             object-fit: cover;
             border-radius: 8px;
             cursor: pointer;
@@ -198,25 +207,42 @@
             transform: scale(1.05);
         }
         
-        /* Адаптация под мобильные */
-        @media (max-width: 600px) {
-            .logo {
-                font-size: 2.5em;
-            }
-            
-            .controls-row {
-                flex-direction: column;
-            }
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            display: none;
+        }
+        
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--accent);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <div class="logo">DayMem</div>
+    <div class="logo">DeyMem</div>
     
     <div class="main-container">
         <div class="file-upload">
             <label class="file-upload-btn">
-                📁 Загрузи фото для мема
+                📁 Загрузи фото
                 <input type="file" id="upload" accept="image/*">
             </label>
         </div>
@@ -224,9 +250,17 @@
         <div class="controls-row">
             <input type="text" id="text-top" placeholder="Верхний текст">
             <input type="text" id="text-bottom" placeholder="Нижний текст">
+            <div class="color-picker-container">
+                <span class="color-label">Цвет:</span>
+                <input type="color" id="text-color" value="#ffffff">
+            </div>
         </div>
         
-        <input type="color" id="text-color" value="#ffffff" class="color-picker">
+        <div class="templates">
+            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
+            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот">
+            <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
+        </div>
         
         <button onclick="generateMeme()">
             ✨ Создать мем
@@ -236,62 +270,74 @@
             🧠 Умный мем (AI)
         </button>
         
-        <div class="templates">
-            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
-            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот за ноутом">
-            <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
-        </div>
-        
         <div id="meme-container">
             <img id="meme-image" src="">
             <div id="top-text" class="meme-text"></div>
             <div id="bottom-text" class="meme-text"></div>
         </div>
         
-        <a id="download" class="file-upload-btn" style="text-align: center; display: none;">
+        <a id="download" class="file-upload-btn">
             💾 Скачать мем
         </a>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
-        // Смешные фразы для разных категорий изображений
-        const memePhrases = {
-            vehicle: [
-                ["Когда заправляешься", "на последние 100 рублей"],
-                ["ПДД - это", "просто рекомендации"],
-                ["Парковаться -", "для слабаков"],
-                ["Мой байк", "мои правила"],
-                ["Газ в пол -", "тормоза придумали трусы"]
-            ],
-            animal: [
-                ["Когда хозяин", "опять забыл покормить"],
-                ["Я не толстый", "я пушистый"],
-                ["Спать 20 часов -", "это профессия"],
-                ["Мяу значит", "дай еды"],
-                ["Выгляжу мило -", "но могу убить"]
-            ],
-            person: [
-                ["Когда понял", "что понедельник завтра"],
-                ["Я не ленивый", "я на энергосбережении"],
-                ["Улыбаюсь, но", "внутри кричу"],
-                ["Выгляжу нормально -", "внутри хаос"],
-                ["Это не я -", "это мой демон"]
-            ],
-            food: [
-                ["Диета начинается", "со следующей ложки"],
-                ["Это последний кусок", "как последний раз"],
-                ["Калории не считаются", "если вкусно"],
-                ["Я не жру -", "я дегустирую"],
-                ["Съел бы и тебя", "но ты невкусный"]
-            ],
-            default: [
-                ["Когда код работает", "но ты не знаешь почему"],
-                ["Жизнь - боль", "но я крепкий орешек"],
-                ["Это не баг -", "это фича"],
-                ["Выглядит нормально", "не трогай и будет работать"],
-                ["Всё под контролем", "(нет)"]
-            ]
+        // Для работы с AI (демо-версия)
+        const AI = {
+            analyzeImage: async (imageData) => {
+                // В реальном проекте здесь будет вызов API (например, Google Cloud Vision)
+                // В демо-версии используем случайный выбор из категорий
+                
+                const categories = [
+                    'vehicle', 'animal', 'person', 'food', 'nature', 'object'
+                ];
+                
+                // Имитация задержки API
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                return {
+                    category: categories[Math.floor(Math.random() * categories.length)],
+                    objects: ['object' + Math.floor(Math.random() * 10)]
+                };
+            },
+            
+            generateMemeText: async (analysis) => {
+                const phrases = {
+                    vehicle: [
+                        ["Когда заправляешься", "на последние 100 рублей"],
+                        ["ПДД - это", "просто рекомендации"],
+                        ["Мой байк", "мои правила"]
+                    ],
+                    animal: [
+                        ["Когда хозяин", "опять забыл покормить"],
+                        ["Я не толстый", "я пушистый"],
+                        ["Спать 20 часов -", "это профессия"]
+                    ],
+                    person: [
+                        ["Когда понял", "что понедельник завтра"],
+                        ["Я не ленивый", "я на энергосбережении"],
+                        ["Улыбаюсь, но", "внутри кричу"]
+                    ],
+                    food: [
+                        ["Диета начинается", "со следующей ложки"],
+                        ["Это последний кусок", "как последний раз"],
+                        ["Калории не считаются", "если вкусно"]
+                    ],
+                    default: [
+                        ["Когда код работает", "но ты не знаешь почему"],
+                        ["Жизнь - боль", "но я крепкий орешек"],
+                        ["Это не баг -", "это фича"]
+                    ]
+                };
+                
+                const categoryPhrases = phrases[analysis.category] || phrases.default;
+                return categoryPhrases[Math.floor(Math.random() * categoryPhrases.length)];
+            }
         };
         
         // Загрузка изображения
@@ -328,19 +374,32 @@
         }
         
         // Умная генерация мема
-        function generateSmartMeme() {
-            // Здесь должна быть интеграция с AI API для анализа изображения
-            // В демо-версии используем случайные фразы
+        async function generateSmartMeme() {
+            const image = document.getElementById('meme-image');
+            if (!image.src) {
+                alert('Сначала загрузи изображение!');
+                return;
+            }
             
-            const categories = Object.keys(memePhrases);
-            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-            const phrases = memePhrases[randomCategory];
-            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+            showLoading(true);
             
-            document.getElementById('text-top').value = randomPhrase[0];
-            document.getElementById('text-bottom').value = randomPhrase[1];
-            
-            generateMeme();
+            try {
+                // Анализ изображения
+                const analysis = await AI.analyzeImage(image.src);
+                
+                // Генерация текста
+                const [topText, bottomText] = await AI.generateMemeText(analysis);
+                
+                document.getElementById('text-top').value = topText;
+                document.getElementById('text-bottom').value = bottomText;
+                
+                generateMeme();
+            } catch (error) {
+                console.error('AI error:', error);
+                alert('Ошибка генерации. Попробуйте ещё раз.');
+            } finally {
+                showLoading(false);
+            }
         }
         
         // Создание финального изображения
@@ -353,9 +412,10 @@
             });
         }
         
-        // Для реального проекта нужно подключить API для анализа изображений:
-        // Например, Google Cloud Vision API или аналоги
-        // Это потребует серверной части и API ключей
+        // Показать/скрыть загрузку
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'flex' : 'none';
+        }
     </script>
 </body>
 </html>
