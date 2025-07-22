@@ -130,8 +130,29 @@
             opacity: 0.8;
         }
         
+        .font-select-container {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .reset-font-btn {
+            background: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .reset-font-btn:hover {
+            background: #555;
+        }
+        
         select {
-            background: rgba(255,255,255,0.1);
+            background: #333;
             border: 1px solid #444;
             border-radius: 8px;
             padding: 8px;
@@ -140,12 +161,10 @@
             width: 100%;
         }
         
-        .font-preview {
-            font-size: 14px;
+        option {
+            background: #333;
             padding: 5px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.05);
-            margin-top: 3px;
+            font-family: inherit;
         }
         
         .color-control {
@@ -331,23 +350,25 @@
             
             <div class="control-group">
                 <label class="control-label">Шрифт:</label>
-                <select id="font-family">
-                    <option value="Impact" data-preview="Impact">Impact</option>
-                    <option value="Arial Black" data-preview="Arial Black">Arial Black</option>
-                    <option value="Bebas Neue" data-preview="Bebas Neue">Bebas Neue</option>
-                    <option value="Roboto Condensed" data-preview="Roboto Condensed">Roboto Condensed</option>
-                    <option value="Oswald" data-preview="Oswald">Oswald</option>
-                    <option value="Anton" data-preview="ANTON">Anton</option>
-                    <option value="Archivo Black" data-preview="ARCHIVO">Archivo Black</option>
-                    <option value="Poppins" data-preview="POPPINS">Poppins</option>
-                    <option value="Montserrat" data-preview="MONTSERRAT">Montserrat</option>
-                    <option value="Raleway" data-preview="RALEWAY">Raleway</option>
-                    <option value="Comic Sans" data-preview="Comic Sans">Comic Sans</option>
-                    <option value="Lobster" data-preview="Lobster">Lobster</option>
-                    <option value="Pacifico" data-preview="Pacifico">Pacifico</option>
-                    <option value="Righteous" data-preview="Righteous">Righteous</option>
-                </select>
-                <div class="font-preview" id="font-preview">Пример текста</div>
+                <div class="font-select-container">
+                    <select id="font-family">
+                        <option value="Impact" style="font-family: Impact">Impact</option>
+                        <option value="Arial Black" style="font-family: Arial Black">Arial Black</option>
+                        <option value="Bebas Neue" style="font-family: 'Bebas Neue'">Bebas Neue</option>
+                        <option value="Roboto Condensed" style="font-family: 'Roboto Condensed'">Roboto Condensed</option>
+                        <option value="Oswald" style="font-family: 'Oswald'">Oswald</option>
+                        <option value="Anton" style="font-family: 'Anton'">Anton</option>
+                        <option value="Archivo Black" style="font-family: 'Archivo Black'">Archivo Black</option>
+                        <option value="Poppins" style="font-family: 'Poppins'">Poppins</option>
+                        <option value="Montserrat" style="font-family: 'Montserrat'">Montserrat</option>
+                        <option value="Raleway" style="font-family: 'Raleway'">Raleway</option>
+                        <option value="Comic Sans" style="font-family: 'Comic Sans'">Comic Sans</option>
+                        <option value="Lobster" style="font-family: 'Lobster'">Lobster</option>
+                        <option value="Pacifico" style="font-family: 'Pacifico'">Pacifico</option>
+                        <option value="Righteous" style="font-family: 'Righteous'">Righteous</option>
+                    </select>
+                    <button class="reset-font-btn" title="Сбросить шрифт" onclick="resetFont()">A</button>
+                </div>
             </div>
             
             <div class="style-controls">
@@ -405,7 +426,6 @@
         const fontSizeValue = document.getElementById('font-size-value');
         const textColorInput = document.getElementById('text-color');
         const colorHex = document.getElementById('color-hex');
-        const fontPreview = document.getElementById('font-preview');
         const memeImage = document.getElementById('meme-image');
         const topTextElement = document.getElementById('top-text');
         const bottomTextElement = document.getElementById('bottom-text');
@@ -426,10 +446,12 @@
             const textColor = textColorInput.value;
             topTextElement.style.color = textColor;
             bottomTextElement.style.color = textColor;
-            
-            // Обновление предпросмотра шрифта
-            fontPreview.style.fontFamily = fontFamily;
-            fontPreview.textContent = fontFamilySelect.options[fontFamilySelect.selectedIndex].dataset.preview;
+        }
+        
+        // Сброс шрифта к стандартному
+        function resetFont() {
+            fontFamilySelect.value = 'Impact';
+            updateMeme();
         }
         
         // Загрузка изображения
@@ -499,6 +521,17 @@
         // Обновление hex-значения цвета
         textColorInput.addEventListener('input', function() {
             colorHex.textContent = this.value.toUpperCase();
+            updateMeme();
+        });
+        
+        // Предпросмотр шрифта при наведении
+        fontFamilySelect.addEventListener('mouseover', function() {
+            const selectedFont = this.options[this.selectedIndex].value;
+            topTextElement.style.fontFamily = selectedFont;
+            bottomTextElement.style.fontFamily = selectedFont;
+        });
+        
+        fontFamilySelect.addEventListener('mouseout', function() {
             updateMeme();
         });
         
