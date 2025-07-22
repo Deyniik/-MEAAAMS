@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- OpenGraph разметка для красивого превью -->
+    <meta property="og:title" content="Мем из DeyMem Pro">
+    <meta property="og:description" content="Создано в DeyMem Pro">
+    <meta property="og:image" content="">
+    <meta property="og:url" content="">
+    <title>Просмотр мема</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f0f0f;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        #meme-container {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        #meme-image {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .meme-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        button {
+            background: #ff5e62;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="meme-container">
+        <img id="meme-image" src="">
+        <div id="top-text" class="meme-text"></div>
+        <div id="bottom-text" class="meme-text"></div>
+    </div>
+    <button onclick="window.location.href='index.html'">Создать свой мем</button>
+
+    <script>
+        // 1. Получаем ID мема из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const memeId = urlParams.get('id');
+
+        // 2. Загружаем мем из localStorage
+        if (memeId) {
+            const memeData = JSON.parse(localStorage.getItem(memeId));
+            if (memeData) {
+                // 3. Отображаем мем
+                document.getElementById('meme-image').src = memeData.imageSrc;
+                document.getElementById('top-text').textContent = memeData.topText;
+                document.getElementById('bottom-text').textContent = memeData.bottomText;
+                document.getElementById('top-text').style.fontFamily = memeData.font;
+                document.getElementById('bottom-text').style.fontFamily = memeData.font;
+                document.getElementById('top-text').style.color = memeData.color;
+                document.getElementById('bottom-text').style.color = memeData.color;
+
+                // 4. Обновляем OpenGraph-разметку для превью
+                document.querySelector('meta[property="og:title"]').content = memeData.topText + ' | ' + memeData.bottomText;
+                document.querySelector('meta[property="og:image"]').content = memeData.imageSrc;
+                document.querySelector('meta[property="og:url"]').content = window.location.href;
+            } else {
+                alert('Мем не найден!');
+                window.location.href = 'index.html';
+            }
+        } else {
+            alert('Неверная ссылка!');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
