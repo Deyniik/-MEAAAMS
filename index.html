@@ -1,178 +1,314 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MEAAAMS Ultra</title>
+    <title>MEAAAMS PRO</title>
     <style>
         :root {
-            --main-bg: #111;
-            --container-bg: #1e1e1e;
+            --main-bg: #0f0f0f;
+            --container-bg: #1a1a1a;
             --accent: #ff5e62;
-            --text: #eee;
+            --accent-dark: #e04a4e;
+            --text: #f0f0f0;
+            --border: #333;
         }
+        
         body {
             font-family: 'Arial', sans-serif;
             background: var(--main-bg);
             color: var(--text);
             margin: 0;
             padding: 20px;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-sizing: border-box;
+            align-items: center;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+        
         h1 {
             color: var(--accent);
-            margin: 0;
-            font-size: 2.2em;
+            margin: 0 0 20px 0;
+            font-size: 2.5em;
+            text-align: center;
+            background: linear-gradient(45deg, var(--accent), var(--accent-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
         }
+        
         .main-container {
             display: flex;
-            flex: 1;
+            flex-direction: column;
+            width: 100%;
+            max-width: 800px;
             gap: 20px;
-            max-height: calc(100vh - 150px);
         }
+        
         .controls {
-            width: 250px;
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 10px;
+            margin-bottom: 20px;
         }
-        button, input, select {
-            padding: 8px 12px;
-            border: none;
-            border-radius: 6px;
-            background: #333;
-            color: white;
-            font-size: 14px;
+        
+        .file-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
         }
-        button {
-            background: var(--accent);
+        
+        .file-upload-btn {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
-        }
-        button:hover {
-            opacity: 0.9;
-        }
-        .meme-area {
-            flex: 1;
+            transition: all 0.3s;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 8px;
         }
+        
+        .file-upload-btn:hover {
+            border-color: var(--accent);
+            background: rgba(255, 94, 98, 0.1);
+        }
+        
+        .file-upload input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        
+        button {
+            background: linear-gradient(45deg, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 94, 98, 0.4);
+        }
+        
+        input[type="text"] {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            color: var(--text);
+            font-size: 16px;
+            min-width: 200px;
+        }
+        
+        .meme-container-wrapper {
+            position: relative;
+            margin: 0 auto;
+            width: fit-content;
+        }
+        
         #meme-container {
-            flex: 1;
             position: relative;
             background: black;
-            border: 8px solid black;
-            border-bottom: 30px solid black;
+            border: 12px solid black;
+            border-bottom: 40px solid black;
             box-shadow: 0 0 0 2px #444;
             max-width: 500px;
             margin: 0 auto;
         }
+        
         #meme-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            max-width: 100%;
             display: none;
         }
+        
         .meme-text {
             position: absolute;
             width: 90%;
             left: 5%;
             text-align: center;
             font-weight: bold;
-            text-shadow: 2px 2px 0 #000;
+            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
             word-wrap: break-word;
         }
+        
         #top-text {
             top: 10px;
         }
+        
         #bottom-text {
             bottom: 10px;
         }
-        .caption {
+        
+        .meme-caption {
             position: absolute;
-            bottom: -25px;
+            bottom: -35px;
+            left: 0;
             width: 100%;
             text-align: center;
-            font-size: 12px;
             color: white;
+            font-size: 14px;
+            padding: 5px 0;
         }
+        
         #download {
-            margin-top: 10px;
-            align-self: center;
-            padding: 8px 20px;
-            background: #333;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
+            margin-top: 20px;
             display: none;
         }
-        .template {
-            width: 100%;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 4px;
-            cursor: pointer;
-            border: 2px solid #333;
-            margin-bottom: 5px;
+        
+        .color-picker-container {
+            position: relative;
+            display: inline-block;
         }
+        
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+        }
+        
+        .color-palette {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--container-bg);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            display: none;
+        }
+        
+        .color-option {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin: 5px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            display: inline-block;
+        }
+        
+        .text-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .templates {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .template {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: all 0.3s;
+        }
+        
         .template:hover {
             border-color: var(--accent);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>MEAAAMS ULTRA</h1>
-    </div>
-
     <div class="main-container">
+        <h1>MEAAAMS PRO</h1>
+        
         <div class="controls">
-            <button onclick="document.getElementById('upload').click()">📁 Загрузить фото</button>
-            <input type="file" id="upload" accept="image/*" hidden>
+            <div class="file-upload">
+                <label class="file-upload-btn">
+                    📁 Загрузить фото
+                    <input type="file" id="upload" accept="image/*">
+                </label>
+            </div>
             
-            <button onclick="randomText()">🎲 Рандом текст</button>
+            <button onclick="randomText()">
+                🎲 Рандом текст
+            </button>
             
+            <button onclick="generateMeme()">
+                ✨ Создать мем
+            </button>
+        </div>
+        
+        <div class="text-controls">
             <input type="text" id="text-top" placeholder="Верхний текст">
             <input type="text" id="text-bottom" placeholder="Нижний текст">
             
+            <div class="color-picker-container">
+                <div class="color-preview" style="background: white;" onclick="toggleColorPicker('text')"></div>
+                <div class="color-palette" id="text-color-palette">
+                    <div class="color-option" style="background: white;" onclick="setTextColor('white')"></div>
+                    <div class="color-option" style="background: yellow;" onclick="setTextColor('yellow')"></div>
+                    <div class="color-option" style="background: #ff5e62;" onclick="setTextColor('#ff5e62')"></div>
+                    <div class="color-option" style="background: #00ff00;" onclick="setTextColor('#00ff00')"></div>
+                    <div class="color-option" style="background: #00ffff;" onclick="setTextColor('#00ffff')"></div>
+                    <div class="color-option" style="background: #ff00ff;" onclick="setTextColor('#ff00ff')"></div>
+                </div>
+            </div>
+            
             <select id="font-size">
-                <option value="20px">Маленький</option>
-                <option value="28px" selected>Средний</option>
-                <option value="36px">Большой</option>
+                <option value="24px">Маленький</option>
+                <option value="32px" selected>Средний</option>
+                <option value="48px">Большой</option>
             </select>
-            
-            <select id="text-color">
-                <option value="white">Белый</option>
-                <option value="yellow">Жёлтый</option>
-                <option value="#00ff00">Зелёный</option>
-                <option value="#ff5e62">Розовый</option>
-            </select>
-            
-            <h3>Шаблоны:</h3>
-            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)">
-            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)">
-            
-            <button onclick="generateMeme()">🖼️ Создать мем</button>
         </div>
-
-        <div class="meme-area">
+        
+        <div class="templates">
+            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
+            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот за ноутом">
+            <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
+        </div>
+        
+        <div class="meme-container-wrapper">
             <div id="meme-container">
                 <img id="meme-image" src="">
                 <div id="top-text" class="meme-text"></div>
                 <div id="bottom-text" class="meme-text"></div>
-                <div class="caption">meaaams.com</div>
+                <div class="meme-caption">@meaaams</div>
             </div>
-            <a id="download">💾 Скачать мем</a>
         </div>
+        
+        <a id="download" class="file-upload-btn" style="text-decoration: none;">💾 Скачать мем</a>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
+        // Текущие настройки
+        let currentTextColor = 'white';
+        
         // Загрузка изображения
         document.getElementById('upload').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -194,13 +330,16 @@
 
         // Смешные двухстрочные фразы
         const randomPhrases = [
-            ["Когда твой код", "внезапно заработал"],
-            ["Я не ленивый", "я на энергосбережении"],
-            ["Чай без сахара -", "это ошибка природы"],
-            ["Ждун одобряет", "но не сильно"],
-            ["404:", "Мотивация не найдена"],
+            ["Когда понял, что", "понедельник уже завтра"],
+            ["Я не прокрастинирую", "я просто заряжаюсь"],
+            ["Чай без печенья -", "как код без комментариев"],
+            ["Ждун одобряет", "но без энтузиазма"],
+            ["Ошибка 418:", "Я - чайник"],
             ["Не трогай это -", "это гениально не работает"],
-            ["Я не знаю кто я", "и мне это нравится"]
+            ["Я не знаю кто я", "и мне это нравится"],
+            ["Когда твой код", "внезапно заработал"],
+            ["404:", "Мотивация не найдена"],
+            ["Ctrl+C, Ctrl+V", "— философия жизни"]
         ];
 
         function randomText() {
@@ -209,20 +348,31 @@
             document.getElementById('text-bottom').value = randomPhrases[randomIndex][1];
         }
 
+        // Управление цветом текста
+        function toggleColorPicker(type) {
+            const picker = document.getElementById(`${type}-color-palette`);
+            picker.style.display = picker.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setTextColor(color) {
+            currentTextColor = color;
+            document.querySelector('.color-preview').style.background = color;
+            document.getElementById('text-color-palette').style.display = 'none';
+        }
+
         // Генерация мема
         function generateMeme() {
             // Применяем настройки
             const topText = document.getElementById('text-top').value;
             const bottomText = document.getElementById('text-bottom').value;
             const fontSize = document.getElementById('font-size').value;
-            const textColor = document.getElementById('text-color').value;
 
             document.getElementById('top-text').innerText = topText;
             document.getElementById('bottom-text').innerText = bottomText;
             document.getElementById('top-text').style.fontSize = fontSize;
             document.getElementById('bottom-text').style.fontSize = fontSize;
-            document.getElementById('top-text').style.color = textColor;
-            document.getElementById('bottom-text').style.color = textColor;
+            document.getElementById('top-text').style.color = currentTextColor;
+            document.getElementById('bottom-text').style.color = currentTextColor;
 
             // Создаем мем
             html2canvas(document.getElementById('meme-container')).then(canvas => {
@@ -232,6 +382,13 @@
                 link.style.display = 'block';
             });
         }
+
+        // Закрываем палитру при клике вне её
+        window.addEventListener('click', function(e) {
+            if (!e.target.closest('.color-picker-container')) {
+                document.getElementById('text-color-palette').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
