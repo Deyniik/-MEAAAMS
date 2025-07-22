@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Мем-Генератор с архивом</title>
+  <style>
+    body { font-family: Arial; text-align: center; }
+    #meme-container { margin: 20px; position: relative; }
+    #meme-image { max-width: 500px; }
+    #top-text, #bottom-text { 
+      position: absolute; 
+      width: 100%; 
+      color: white; 
+      font-size: 40px; 
+      text-shadow: 2px 2px 0 #000; 
+    }
+    #top-text { top: 10px; }
+    #bottom-text { bottom: 10px; }
+    .gallery img { max-width: 200px; margin: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Создай мем</h1>
+  <input type="file" id="upload" accept="image/*">
+  <br>
+  <input type="text" id="text-top" placeholder="Верхний текст">
+  <input type="text" id="text-bottom" placeholder="Нижний текст">
+  <button onclick="generateMeme()">Создать мем</button>
+  <div id="meme-container">
+    <img id="meme-image" src="" style="display: none;">
+    <div id="top-text"></div>
+    <div id="bottom-text"></div>
+  </div>
+  <button onclick="loadMemes()">Показать архив</button>
+  <div id="gallery" class="gallery"></div>
+
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script>
+    const API_URL = "ВАШ_APPS_SCRIPT_URL"; // Замените на URL из шага 2
+
+    // Загрузка мема в архив
+    async function generateMeme() {
+      const topText = document.getElementById('text-top').value;
+      const bottomText = document.getElementById('text-bottom').value;
+      document.getElementById('top-text').innerText = topText;
+      document.getElementById('bottom-text').innerText = bottomText;
+
+      html2canvas(document.getElementById('meme-container')).then(canvas => {
+        const image = canvas.toDataURL('image/png');
+        fetch(API_URL, {
+          method: 'POST',
+          body: JSON.stringify({ image, topText, bottomText })
+        }).then(() => alert("Мем сохранён!"));
+      });
+    }
+
+    // Загрузка архива
+    async function loadMemes() {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = '';
+      const response = await fetch(API_URL);
+      const memes = await response.json();
+      memes.forEach(meme => {
+        const img = document.createElement('img');
+        img.src = meme.image;
+        img.title = `${meme.topText}\n${meme.bottomText}`;
+        gallery.appendChild(img);
+      });
+    }
+  </script>
+</body>
+</html>
