@@ -15,20 +15,22 @@
             background: var(--main-bg);
             color: var(--text);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
             box-sizing: border-box;
+            overflow: hidden;
         }
         
         .logo {
-            font-size: 3em;
+            font-size: 2.5em;
             font-weight: bold;
-            margin: 10px 0 20px;
+            margin: 5px 0 10px;
             color: var(--accent);
             text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
+            white-space: nowrap;
         }
         
         .main-container {
@@ -36,7 +38,17 @@
             flex-direction: column;
             width: 100%;
             max-width: 500px;
-            gap: 15px;
+            height: calc(100vh - 150px);
+            gap: 10px;
+        }
+        
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+            background: var(--container-bg);
+            border-radius: 10px;
         }
         
         .file-upload {
@@ -46,17 +58,17 @@
         
         .file-upload-btn {
             border: 2px dashed #444;
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 12px;
             background: rgba(255,255,255,0.05);
             color: var(--text);
-            font-size: 1em;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
             box-sizing: border-box;
         }
@@ -76,61 +88,95 @@
             cursor: pointer;
         }
         
-        button {
-            background: linear-gradient(45deg, var(--accent), #e04a4e);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s;
+        .text-inputs {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
             gap: 8px;
-            width: 100%;
-        }
-        
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,94,98,0.4);
-        }
-        
-        .controls-row {
-            display: flex;
-            gap: 10px;
-            width: 100%;
-            align-items: center;
         }
         
         input[type="text"] {
-            flex: 1;
             background: rgba(255,255,255,0.1);
             border: 1px solid #444;
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 8px;
+            padding: 10px;
             color: var(--text);
-            font-size: 1em;
-            min-width: 0;
+            font-size: 0.9em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .style-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .control-label {
+            font-size: 0.8em;
+            opacity: 0.8;
+        }
+        
+        select, input[type="color"] {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 8px;
+            color: var(--text);
+            font-size: 0.9em;
+            width: 100%;
+        }
+        
+        input[type="color"] {
+            padding: 2px;
+            height: 30px;
+            cursor: pointer;
+        }
+        
+        .templates {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 5px 0;
+        }
+        
+        .template {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid #444;
+            transition: all 0.2s;
+        }
+        
+        .template:hover {
+            border-color: var(--accent);
+            transform: scale(1.03);
         }
         
         #meme-container {
             position: relative;
             width: 100%;
-            aspect-ratio: 1/1;
+            flex: 1;
+            min-height: 0;
             background: black;
-            border-radius: 5px;
+            border-radius: 8px;
             overflow: hidden;
-            margin: 10px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         #meme-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            max-width: 100%;
+            max-height: 100%;
             display: none;
-            background: black;
         }
         
         .meme-text {
@@ -141,6 +187,7 @@
             font-weight: bold;
             text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
             word-wrap: break-word;
+            padding: 5px;
         }
         
         #top-text {
@@ -153,86 +200,76 @@
         
         #download {
             margin-top: 10px;
-            display: none;
+            display: block;
             text-decoration: none;
-            width: 100%;
             text-align: center;
-        }
-        
-        .color-picker-container {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .color-label {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-        
-        input[type="color"] {
-            width: 30px;
-            height: 30px;
-            border: none;
-            border-radius: 50%;
-            padding: 0;
-            cursor: pointer;
-        }
-        
-        input[type="color"]::-webkit-color-swatch {
-            border: none;
-            border-radius: 50%;
-        }
-        
-        .templates {
-            display: flex;
-            gap: 10px;
-            margin: 5px 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .template {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
+            padding: 10px;
+            background: var(--accent);
+            color: white;
             border-radius: 8px;
-            cursor: pointer;
-            border: 2px solid #444;
-            transition: all 0.3s;
+            font-weight: bold;
         }
         
-        .template:hover {
-            border-color: var(--accent);
-            transform: scale(1.05);
+        /* Шрифты */
+        @font-face {
+            font-family: 'Impact';
+            src: local('Impact');
         }
-        
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            display: none;
+        @font-face {
+            font-family: 'Comic Sans';
+            src: local('Comic Sans MS');
         }
-        
-        .spinner {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--accent);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
+        @font-face {
+            font-family: 'Arial Black';
+            src: local('Arial Black');
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @font-face {
+            font-family: 'Verdana';
+            src: local('Verdana');
+        }
+        @font-face {
+            font-family: 'Courier New';
+            src: local('Courier New');
+        }
+        @font-face {
+            font-family: 'Georgia';
+            src: local('Georgia');
+        }
+        @font-face {
+            font-family: 'Palatino';
+            src: local('Palatino Linotype');
+        }
+        @font-face {
+            font-family: 'Times New Roman';
+            src: local('Times New Roman');
+        }
+        @font-face {
+            font-family: 'Trebuchet MS';
+            src: local('Trebuchet MS');
+        }
+        @font-face {
+            font-family: 'Lucida Sans';
+            src: local('Lucida Sans Unicode');
+        }
+        @font-face {
+            font-family: 'Franklin Gothic';
+            src: local('Franklin Gothic Medium');
+        }
+        @font-face {
+            font-family: 'Century Gothic';
+            src: local('Century Gothic');
+        }
+        @font-face {
+            font-family: 'Bahnschrift';
+            src: local('Bahnschrift');
+        }
+        @font-face {
+            font-family: 'Segoe UI';
+            src: local('Segoe UI');
+        }
+        @font-face {
+            font-family: 'Calibri';
+            src: local('Calibri');
         }
     </style>
 </head>
@@ -240,35 +277,74 @@
     <div class="logo">DeyMem</div>
     
     <div class="main-container">
-        <div class="file-upload">
-            <label class="file-upload-btn">
-                📁 Загрузи фото
-                <input type="file" id="upload" accept="image/*">
-            </label>
-        </div>
-        
-        <div class="controls-row">
-            <input type="text" id="text-top" placeholder="Верхний текст">
-            <input type="text" id="text-bottom" placeholder="Нижний текст">
-            <div class="color-picker-container">
-                <span class="color-label">Цвет:</span>
-                <input type="color" id="text-color" value="#ffffff">
+        <div class="controls-section">
+            <div class="file-upload">
+                <label class="file-upload-btn">
+                    📁 Загрузи фото
+                    <input type="file" id="upload" accept="image/*">
+                </label>
+            </div>
+            
+            <div class="text-inputs">
+                <input type="text" id="text-top" placeholder="Верхний текст">
+                <input type="text" id="text-bottom" placeholder="Нижний текст">
+            </div>
+            
+            <div class="style-controls">
+                <div class="control-group">
+                    <span class="control-label">Шрифт:</span>
+                    <select id="font-family">
+                        <option value="Impact">Impact</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Arial Black">Arial Black</option>
+                        <option value="Comic Sans">Comic Sans</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Palatino">Palatino</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Lucida Sans">Lucida Sans</option>
+                        <option value="Franklin Gothic">Franklin Gothic</option>
+                        <option value="Century Gothic">Century Gothic</option>
+                        <option value="Bahnschrift">Bahnschrift</option>
+                        <option value="Segoe UI">Segoe UI</option>
+                        <option value="Calibri">Calibri</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <span class="control-label">Размер:</span>
+                    <select id="font-size">
+                        <option value="20px">Маленький</option>
+                        <option value="28px" selected>Средний</option>
+                        <option value="36px">Большой</option>
+                        <option value="48px">Огромный</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <span class="control-label">Цвет:</span>
+                    <input type="color" id="text-color" value="#ffffff">
+                </div>
+                
+                <div class="control-group">
+                    <span class="control-label">Стиль:</span>
+                    <select id="font-style">
+                        <option value="normal">Обычный</option>
+                        <option value="italic">Курсив</option>
+                        <option value="bold">Жирный</option>
+                        <option value="bold italic">Жирный курсив</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="templates">
+                <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
+                <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот">
+                <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
             </div>
         </div>
-        
-        <div class="templates">
-            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)" title="Ждун">
-            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)" title="Кот">
-            <img src="https://i.imgflip.com/9vct.jpg" class="template" onclick="useTemplate(this)" title="Драма">
-        </div>
-        
-        <button onclick="generateMeme()">
-            ✨ Создать мем
-        </button>
-        
-        <button onclick="generateSmartMeme()">
-            🧠 Умный мем (AI)
-        </button>
         
         <div id="meme-container">
             <img id="meme-image" src="">
@@ -276,146 +352,88 @@
             <div id="bottom-text" class="meme-text"></div>
         </div>
         
-        <a id="download" class="file-upload-btn">
-            💾 Скачать мем
-        </a>
-    </div>
-    
-    <div class="loading" id="loading">
-        <div class="spinner"></div>
+        <a id="download" onclick="downloadMeme()">💾 Скачать мем</a>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script>
-        // Для работы с AI (демо-версия)
-        const AI = {
-            analyzeImage: async (imageData) => {
-                // В реальном проекте здесь будет вызов API (например, Google Cloud Vision)
-                // В демо-версии используем случайный выбор из категорий
-                
-                const categories = [
-                    'vehicle', 'animal', 'person', 'food', 'nature', 'object'
-                ];
-                
-                // Имитация задержки API
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                return {
-                    category: categories[Math.floor(Math.random() * categories.length)],
-                    objects: ['object' + Math.floor(Math.random() * 10)]
-                };
-            },
+        // Элементы управления
+        const uploadInput = document.getElementById('upload');
+        const topTextInput = document.getElementById('text-top');
+        const bottomTextInput = document.getElementById('text-bottom');
+        const fontFamilySelect = document.getElementById('font-family');
+        const fontSizeSelect = document.getElementById('font-size');
+        const textColorInput = document.getElementById('text-color');
+        const fontStyleSelect = document.getElementById('font-style');
+        const memeImage = document.getElementById('meme-image');
+        const topTextElement = document.getElementById('top-text');
+        const bottomTextElement = document.getElementById('bottom-text');
+        
+        // Обновление мема в реальном времени
+        function updateMeme() {
+            topTextElement.textContent = topTextInput.value;
+            bottomTextElement.textContent = bottomTextInput.value;
             
-            generateMemeText: async (analysis) => {
-                const phrases = {
-                    vehicle: [
-                        ["Когда заправляешься", "на последние 100 рублей"],
-                        ["ПДД - это", "просто рекомендации"],
-                        ["Мой байк", "мои правила"]
-                    ],
-                    animal: [
-                        ["Когда хозяин", "опять забыл покормить"],
-                        ["Я не толстый", "я пушистый"],
-                        ["Спать 20 часов -", "это профессия"]
-                    ],
-                    person: [
-                        ["Когда понял", "что понедельник завтра"],
-                        ["Я не ленивый", "я на энергосбережении"],
-                        ["Улыбаюсь, но", "внутри кричу"]
-                    ],
-                    food: [
-                        ["Диета начинается", "со следующей ложки"],
-                        ["Это последний кусок", "как последний раз"],
-                        ["Калории не считаются", "если вкусно"]
-                    ],
-                    default: [
-                        ["Когда код работает", "но ты не знаешь почему"],
-                        ["Жизнь - боль", "но я крепкий орешек"],
-                        ["Это не баг -", "это фича"]
-                    ]
-                };
-                
-                const categoryPhrases = phrases[analysis.category] || phrases.default;
-                return categoryPhrases[Math.floor(Math.random() * categoryPhrases.length)];
-            }
-        };
+            topTextElement.style.fontFamily = fontFamilySelect.value;
+            bottomTextElement.style.fontFamily = fontFamilySelect.value;
+            
+            topTextElement.style.fontSize = fontSizeSelect.value;
+            bottomTextElement.style.fontSize = fontSizeSelect.value;
+            
+            topTextElement.style.color = textColorInput.value;
+            bottomTextElement.style.color = textColorInput.value;
+            
+            topTextElement.style.fontStyle = fontStyleSelect.value.includes('italic') ? 'italic' : 'normal';
+            bottomTextElement.style.fontStyle = fontStyleSelect.value.includes('italic') ? 'italic' : 'normal';
+            
+            topTextElement.style.fontWeight = fontStyleSelect.value.includes('bold') ? 'bold' : 'normal';
+            bottomTextElement.style.fontWeight = fontStyleSelect.value.includes('bold') ? 'bold' : 'normal';
+        }
         
         // Загрузка изображения
-        document.getElementById('upload').addEventListener('change', function(e) {
+        uploadInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(event) {
-                    document.getElementById('meme-image').src = event.target.result;
-                    document.getElementById('meme-image').style.display = 'block';
+                    memeImage.src = event.target.result;
+                    memeImage.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
         });
-
+        
         // Использование шаблона
         function useTemplate(img) {
-            document.getElementById('meme-image').src = img.src;
-            document.getElementById('meme-image').style.display = 'block';
-        }
-
-        // Генерация мема
-        function generateMeme() {
-            const topText = document.getElementById('text-top').value;
-            const bottomText = document.getElementById('text-bottom').value;
-            const textColor = document.getElementById('text-color').value;
-
-            document.getElementById('top-text').innerText = topText;
-            document.getElementById('bottom-text').innerText = bottomText;
-            document.getElementById('top-text').style.color = textColor;
-            document.getElementById('bottom-text').style.color = textColor;
-
-            createMemeImage();
+            memeImage.src = img.src;
+            memeImage.style.display = 'block';
         }
         
-        // Умная генерация мема
-        async function generateSmartMeme() {
-            const image = document.getElementById('meme-image');
-            if (!image.src) {
+        // Скачивание мема
+        function downloadMeme() {
+            if (!memeImage.src) {
                 alert('Сначала загрузи изображение!');
                 return;
             }
             
-            showLoading(true);
-            
-            try {
-                // Анализ изображения
-                const analysis = await AI.analyzeImage(image.src);
-                
-                // Генерация текста
-                const [topText, bottomText] = await AI.generateMemeText(analysis);
-                
-                document.getElementById('text-top').value = topText;
-                document.getElementById('text-bottom').value = bottomText;
-                
-                generateMeme();
-            } catch (error) {
-                console.error('AI error:', error);
-                alert('Ошибка генерации. Попробуйте ещё раз.');
-            } finally {
-                showLoading(false);
-            }
-        }
-        
-        // Создание финального изображения
-        function createMemeImage() {
             html2canvas(document.getElementById('meme-container')).then(canvas => {
-                const link = document.getElementById('download');
+                const link = document.createElement('a');
                 link.href = canvas.toDataURL('image/png');
                 link.download = 'deymem-' + Date.now() + '.png';
-                link.style.display = 'block';
+                link.click();
             });
         }
         
-        // Показать/скрыть загрузку
-        function showLoading(show) {
-            document.getElementById('loading').style.display = show ? 'flex' : 'none';
-        }
+        // Слушатели изменений
+        topTextInput.addEventListener('input', updateMeme);
+        bottomTextInput.addEventListener('input', updateMeme);
+        fontFamilySelect.addEventListener('change', updateMeme);
+        fontSizeSelect.addEventListener('change', updateMeme);
+        textColorInput.addEventListener('input', updateMeme);
+        fontStyleSelect.addEventListener('change', updateMeme);
+        
+        // Инициализация
+        updateMeme();
     </script>
 </body>
 </html>
