@@ -1,63 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MEAAAMS Pro</title>
+    <title>MEAAAMS Ultra</title>
     <style>
         :root {
-            --neon-pink: #ff5e62;
-            --neon-blue: #4facfe;
-            --neon-purple: #a18cd1;
+            --main-bg: #111;
+            --container-bg: #1e1e1e;
+            --accent: #ff5e62;
+            --text: #eee;
         }
         body {
             font-family: 'Arial', sans-serif;
-            background: #0f0f0f;
-            color: white;
-            text-align: center;
+            background: var(--main-bg);
+            color: var(--text);
             margin: 0;
             padding: 20px;
-            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
         }
         h1 {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            font-size: 3em;
-            text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
+            color: var(--accent);
+            margin: 0;
+            font-size: 2.2em;
         }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #1a1a1a;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        .main-container {
+            display: flex;
+            flex: 1;
+            gap: 20px;
+            max-height: calc(100vh - 150px);
+        }
+        .controls {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button, input, select {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            background: #333;
+            color: white;
+            font-size: 14px;
+        }
+        button {
+            background: var(--accent);
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        .meme-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         #meme-container {
+            flex: 1;
             position: relative;
-            margin: 20px auto;
-            width: 100%;
+            background: black;
+            border: 8px solid black;
+            border-bottom: 30px solid black;
+            box-shadow: 0 0 0 2px #444;
             max-width: 500px;
-            border: 3px dashed #444;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s;
-        }
-        #meme-container:hover {
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 15px var(--neon-purple);
+            margin: 0 auto;
         }
         #meme-image {
             width: 100%;
+            height: 100%;
+            object-fit: contain;
             display: none;
         }
         .meme-text {
             position: absolute;
-            width: 100%;
-            color: white;
+            width: 90%;
+            left: 5%;
+            text-align: center;
             font-weight: bold;
-            text-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
-            padding: 5px;
+            text-shadow: 2px 2px 0 #000;
             word-wrap: break-word;
         }
         #top-text {
@@ -66,141 +93,82 @@
         #bottom-text {
             bottom: 10px;
         }
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        input, button, select {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.2s;
-        }
-        input[type="text"] {
-            width: 200px;
-            background: #333;
+        .caption {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
             color: white;
-        }
-        input[type="file"] {
-            display: none;
-        }
-        button {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue));
-            color: white;
-            cursor: pointer;
-            font-weight: bold;
-            min-width: 120px;
-        }
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 94, 98, 0.4);
-        }
-        .custom-file-upload {
-            border: 2px dashed #444;
-            display: inline-block;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 8px;
-            background: #333;
-        }
-        .custom-file-upload:hover {
-            border-color: var(--neon-blue);
-        }
-        .templates {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .template {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        .template:hover {
-            border-color: var(--neon-pink);
-            transform: scale(1.05);
         }
         #download {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            margin-top: 10px;
+            align-self: center;
+            padding: 8px 20px;
+            background: #333;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            opacity: 0;
-            transition: opacity 0.3s;
+            border-radius: 6px;
+            display: none;
         }
-        .text-controls {
-            background: #222;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
+        .template {
+            width: 100%;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid #333;
+            margin-bottom: 5px;
         }
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--neon-pink); }
-            50% { box-shadow: 0 0 20px var(--neon-blue); }
-            100% { box-shadow: 0 0 5px var(--neon-pink); }
-        }
-        .generating {
-            animation: glow 1.5s infinite;
+        .template:hover {
+            border-color: var(--accent);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MEAAAMS Pro</h1>
-        <p>Создай мем как профессионал!</p>
-        
-        <div class="controls">
-            <label for="upload" class="custom-file-upload">
-                📁 Выбрать фото
-            </label>
-            <input type="file" id="upload" accept="image/*">
-            <button onclick="randomText()">🎲 Рандом</button>
-            <button onclick="generateMeme()">✨ Создать мем</button>
-        </div>
+    <div class="header">
+        <h1>MEAAAMS ULTRA</h1>
+    </div>
 
-        <div class="text-controls">
+    <div class="main-container">
+        <div class="controls">
+            <button onclick="document.getElementById('upload').click()">📁 Загрузить фото</button>
+            <input type="file" id="upload" accept="image/*" hidden>
+            
+            <button onclick="randomText()">🎲 Рандом текст</button>
+            
             <input type="text" id="text-top" placeholder="Верхний текст">
             <input type="text" id="text-bottom" placeholder="Нижний текст">
+            
             <select id="font-size">
-                <option value="24px">Маленький</option>
-                <option value="32px" selected>Средний</option>
-                <option value="48px">Большой</option>
+                <option value="20px">Маленький</option>
+                <option value="28px" selected>Средний</option>
+                <option value="36px">Большой</option>
             </select>
+            
             <select id="text-color">
                 <option value="white">Белый</option>
                 <option value="yellow">Жёлтый</option>
+                <option value="#00ff00">Зелёный</option>
                 <option value="#ff5e62">Розовый</option>
-                <option value="#4facfe">Голубой</option>
             </select>
+            
+            <h3>Шаблоны:</h3>
+            <img src="https://i.imgflip.com/1bij.jpg" class="template" onclick="useTemplate(this)">
+            <img src="https://i.imgflip.com/1bgw.jpg" class="template" onclick="useTemplate(this)">
+            
+            <button onclick="generateMeme()">🖼️ Создать мем</button>
         </div>
 
-        <div class="templates">
-            <img src="https://i.imgur.com/WqY9w9x.jpg" class="template" onclick="useTemplate(this)">
-            <img src="https://i.imgur.com/5WuhB9n.jpg" class="template" onclick="useTemplate(this)">
-            <img src="https://i.imgur.com/7vGd0Yh.jpg" class="template" onclick="useTemplate(this)">
+        <div class="meme-area">
+            <div id="meme-container">
+                <img id="meme-image" src="">
+                <div id="top-text" class="meme-text"></div>
+                <div id="bottom-text" class="meme-text"></div>
+                <div class="caption">meaaams.com</div>
+            </div>
+            <a id="download">💾 Скачать мем</a>
         </div>
-
-        <div id="meme-container">
-            <img id="meme-image" src="">
-            <div id="top-text" class="meme-text"></div>
-            <div id="bottom-text" class="meme-text"></div>
-        </div>
-
-        <a id="download">💾 Скачать мем</a>
     </div>
 
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -224,28 +192,26 @@
             document.getElementById('meme-image').style.display = 'block';
         }
 
-        // Рандомные фразы
+        // Смешные двухстрочные фразы
         const randomPhrases = [
-            "Когда забыл выключить стрим",
-            "Понедельник меня не догонит",
-            "Чай без сахара — ошибка природы",
-            "Ждун одобряет",
-            "Кот учёный не одобряет",
-            "404: Мотивация не найдена"
+            ["Когда твой код", "внезапно заработал"],
+            ["Я не ленивый", "я на энергосбережении"],
+            ["Чай без сахара -", "это ошибка природы"],
+            ["Ждун одобряет", "но не сильно"],
+            ["404:", "Мотивация не найдена"],
+            ["Не трогай это -", "это гениально не работает"],
+            ["Я не знаю кто я", "и мне это нравится"]
         ];
 
         function randomText() {
             const randomIndex = Math.floor(Math.random() * randomPhrases.length);
-            document.getElementById('text-top').value = randomPhrases[randomIndex];
-            document.getElementById('text-bottom').value = " ";
+            document.getElementById('text-top').value = randomPhrases[randomIndex][0];
+            document.getElementById('text-bottom').value = randomPhrases[randomIndex][1];
         }
 
         // Генерация мема
         function generateMeme() {
-            const memeContainer = document.getElementById('meme-container');
-            memeContainer.classList.add('generating');
-
-            // Применяем настройки текста
+            // Применяем настройки
             const topText = document.getElementById('text-top').value;
             const bottomText = document.getElementById('text-bottom').value;
             const fontSize = document.getElementById('font-size').value;
@@ -258,16 +224,13 @@
             document.getElementById('top-text').style.color = textColor;
             document.getElementById('bottom-text').style.color = textColor;
 
-            // Создаём мем
-            setTimeout(() => {
-                html2canvas(memeContainer).then(canvas => {
-                    const link = document.getElementById('download');
-                    link.href = canvas.toDataURL('image/png');
-                    link.download = 'meme-' + Date.now() + '.png';
-                    link.style.opacity = '1';
-                    memeContainer.classList.remove('generating');
-                });
-            }, 500);
+            // Создаем мем
+            html2canvas(document.getElementById('meme-container')).then(canvas => {
+                const link = document.getElementById('download');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'meaaams-meme.png';
+                link.style.display = 'block';
+            });
         }
     </script>
 </body>
