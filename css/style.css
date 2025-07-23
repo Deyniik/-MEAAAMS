@@ -30,6 +30,21 @@ body {
     color: var(--accent);
     text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
     text-align: center;
+    font-family: 'Russo One', sans-serif;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.logo::after {
+    content: '+';
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 1.2em;
+    color: #ffcc00;
 }
 
 .app-container {
@@ -63,6 +78,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
 }
 
 .control-panel {
@@ -212,18 +230,38 @@ option {
     gap: 10px;
 }
 
-input[type="color"] {
+.color-picker-wrapper {
+    position: relative;
     width: 35px;
     height: 35px;
-    border: 1px solid #444;
     border-radius: 50%;
-    padding: 0;
-    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     transition: transform 0.2s;
 }
 
-input[type="color"]:hover {
+.color-picker-wrapper:hover {
     transform: scale(1.1);
+}
+
+.color-picker-wrapper input[type="color"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.color-picker-preview {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: currentColor;
+    pointer-events: none;
+    border: 2px solid rgba(255,255,255,0.3);
 }
 
 input[type="range"] {
@@ -453,6 +491,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     box-sizing: border-box;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.action-buttons button span {
+    overflow: hidden;
     text-overflow: ellipsis;
 }
 
@@ -475,7 +517,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .panel {
     display: none;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     margin-top: 12px;
     animation: slideDown 0.3s ease-out;
@@ -526,11 +568,17 @@ input[type="range"]::-webkit-slider-thumb:hover {
     border-color: var(--accent);
 }
 
-.frame-control {
+.frame-control-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.frame-control-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 12px;
 }
 
 .toggle-switch {
@@ -637,11 +685,26 @@ input:checked + .slider:before {
     .meme-panel {
         order: 1;
         margin-bottom: 20px;
+        position: static;
     }
     .left-column {
         order: 2;
     }
     .right-column {
         order: 3;
+    }
+    
+    .panel {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .style-controls {
+        grid-template-columns: 1fr;
     }
 }
