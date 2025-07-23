@@ -57,6 +57,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            position: relative;
         }
         
         .file-upload {
@@ -259,6 +260,8 @@
             font-weight: bold;
             word-wrap: break-word;
             padding: 5px;
+            cursor: text;
+            user-select: text;
         }
         
         #top-text {
@@ -319,6 +322,41 @@
             box-shadow: 0 5px 15px rgba(255,94,98,0.4);
         }
         
+        /* Мемные рамки справа */
+        .frames-panel {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .frame-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .frame-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255,94,98,0.3);
+        }
+        
+        .frame-btn.active {
+            background: var(--accent);
+        }
+        
         /* Мемные рамки */
         .meme-frame {
             position: absolute;
@@ -330,91 +368,6 @@
             background-repeat: no-repeat;
             opacity: 0.8;
         }
-        
-        .frame-selector {
-            display: flex;
-            gap: 5px;
-            margin-top: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .frame-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 4px;
-            cursor: pointer;
-            background-size: cover;
-            border: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        
-        .frame-option:hover {
-            transform: scale(1.1);
-        }
-        
-        .frame-option.selected {
-            border-color: var(--accent);
-            transform: scale(1.1);
-        }
-        
-        /* Шрифты с гарантированной поддержкой кириллицы */
-        @font-face {
-            font-family: 'Impact';
-            src: local('Impact');
-        }
-        @font-face {
-            font-family: 'Arial';
-            src: local('Arial');
-        }
-        @font-face {
-            font-family: 'Arial Black';
-            src: local('Arial Black');
-        }
-        @font-face {
-            font-family: 'Comic Sans MS';
-            src: local('Comic Sans MS');
-        }
-        @font-face {
-            font-family: 'Courier New';
-            src: local('Courier New');
-        }
-        @font-face {
-            font-family: 'Georgia';
-            src: local('Georgia');
-        }
-        @font-face {
-            font-family: 'Times New Roman';
-            src: local('Times New Roman');
-        }
-        @font-face {
-            font-family: 'Verdana';
-            src: local('Verdana');
-        }
-        @font-face {
-            font-family: 'Trebuchet MS';
-            src: local('Trebuchet MS');
-        }
-        @font-face {
-            font-family: 'Palatino Linotype';
-            src: local('Palatino Linotype');
-        }
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap&subset=cyrillic');
-        @import url('https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic');
     </style>
 </head>
 <body>
@@ -448,23 +401,23 @@
                         <option value="Verdana" style="font-family: Verdana">Verdana</option>
                         <option value="Trebuchet MS" style="font-family: Trebuchet MS">Trebuchet MS</option>
                         <option value="Palatino Linotype" style="font-family: Palatino Linotype">Palatino</option>
-                        <option value="Roboto" style="font-family: Roboto">Roboto</option>
-                        <option value="Open Sans" style="font-family: Open Sans">Open Sans</option>
-                        <option value="PT Sans" style="font-family: PT Sans">PT Sans</option>
-                        <option value="PT Serif" style="font-family: PT Serif">PT Serif</option>
-                        <option value="Ubuntu" style="font-family: Ubuntu">Ubuntu</option>
-                        <option value="Play" style="font-family: Play">Play</option>
-                        <option value="Exo 2" style="font-family: Exo 2">Exo 2</option>
-                        <option value="Rubik" style="font-family: Rubik">Rubik</option>
-                        <option value="Oswald" style="font-family: Oswald">Oswald</option>
-                        <option value="Montserrat" style="font-family: Montserrat">Montserrat</option>
-                        <option value="Raleway" style="font-family: Raleway">Raleway</option>
-                        <option value="Roboto Condensed" style="font-family: Roboto Condensed">Roboto Condensed</option>
-                        <option value="Cuprum" style="font-family: Cuprum">Cuprum</option>
-                        <option value="Neucha" style="font-family: Neucha">Neucha</option>
-                        <option value="Bad Script" style="font-family: Bad Script">Bad Script</option>
-                        <option value="Marck Script" style="font-family: Marck Script">Marck Script</option>
-                        <option value="Underdog" style="font-family: Underdog">Underdog</option>
+                        <option value="Roboto" style="font-family: 'Roboto', sans-serif">Roboto</option>
+                        <option value="Open Sans" style="font-family: 'Open Sans', sans-serif">Open Sans</option>
+                        <option value="PT Sans" style="font-family: 'PT Sans', sans-serif">PT Sans</option>
+                        <option value="PT Serif" style="font-family: 'PT Serif', serif">PT Serif</option>
+                        <option value="Ubuntu" style="font-family: 'Ubuntu', sans-serif">Ubuntu</option>
+                        <option value="Play" style="font-family: 'Play', sans-serif">Play</option>
+                        <option value="Exo 2" style="font-family: 'Exo 2', sans-serif">Exo 2</option>
+                        <option value="Rubik" style="font-family: 'Rubik', sans-serif">Rubik</option>
+                        <option value="Oswald" style="font-family: 'Oswald', sans-serif">Oswald</option>
+                        <option value="Montserrat" style="font-family: 'Montserrat', sans-serif">Montserrat</option>
+                        <option value="Raleway" style="font-family: 'Raleway', sans-serif">Raleway</option>
+                        <option value="Roboto Condensed" style="font-family: 'Roboto Condensed', sans-serif">Roboto Condensed</option>
+                        <option value="Cuprum" style="font-family: 'Cuprum', sans-serif">Cuprum</option>
+                        <option value="Neucha" style="font-family: 'Neucha', cursive">Neucha</option>
+                        <option value="Bad Script" style="font-family: 'Bad Script', cursive">Bad Script</option>
+                        <option value="Marck Script" style="font-family: 'Marck Script', cursive">Marck Script</option>
+                        <option value="Underdog" style="font-family: 'Underdog', cursive">Underdog</option>
                     </select>
                     <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                 </div>
@@ -473,7 +426,7 @@
             <div class="style-controls">
                 <div class="control-group">
                     <label class="control-label">Размер текста:</label>
-                    <input type="range" id="font-size" min="30" max="100" value="42">
+                    <input type="range" id="font-size" min="10" max="100" value="42">
                     <div style="text-align: center; font-size: 0.8em;" id="font-size-value">42px</div>
                 </div>
                 
@@ -483,17 +436,6 @@
                         <input type="color" id="text-color" value="#ffffff">
                         <span id="color-hex">#FFFFFF</span>
                     </div>
-                </div>
-            </div>
-            
-            <div class="control-group">
-                <label class="control-label">Мемные рамки:</label>
-                <div class="frame-selector">
-                    <div class="frame-option selected" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"none\"/></svg>')" onclick="setMemeFrame('none')"></div>
-                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\"/></svg>')" onclick="setMemeFrame('solid')"></div>
-                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\" stroke-dasharray=\"10,5\"/></svg>')" onclick="setMemeFrame('dashed')"></div>
-                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\" rx=\"20\"/></svg>')" onclick="setMemeFrame('rounded')"></div>
-                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><path d=\"M10,10 L90,10 L90,90 L10,90 Z\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\"/></svg>')" onclick="setMemeFrame('angled')"></div>
                 </div>
             </div>
             
@@ -528,9 +470,18 @@
                 <img id="meme-image" src="">
                 <div id="top-text-background" class="text-background"></div>
                 <div id="bottom-text-background" class="text-background"></div>
-                <div id="top-text" class="meme-text"></div>
-                <div id="bottom-text" class="meme-text"></div>
+                <div id="top-text" class="meme-text" contenteditable="true"></div>
+                <div id="bottom-text" class="meme-text" contenteditable="true"></div>
                 <div id="meme-frame" class="meme-frame"></div>
+            </div>
+            
+            <!-- Панель рамок справа -->
+            <div class="frames-panel">
+                <div class="frame-btn" onclick="setMemeFrame('none')">×</div>
+                <div class="frame-btn" onclick="setMemeFrame('solid')">□</div>
+                <div class="frame-btn" onclick="setMemeFrame('dashed')">--</div>
+                <div class="frame-btn" onclick="setMemeFrame('rounded')">○</div>
+                <div class="frame-btn" onclick="setMemeFrame('angled')">◇</div>
             </div>
         </div>
     </div>
@@ -552,6 +503,7 @@
         const templatesContainer = document.getElementById('templates-container');
         const memeContainer = document.getElementById('meme-container');
         const memeFrame = document.getElementById('meme-frame');
+        const frameButtons = document.querySelectorAll('.frame-btn');
         
         // Популярные шаблоны мемов
         const memeTemplates = [
@@ -604,10 +556,11 @@
             // Удаляем все классы
             memeFrame.className = 'meme-frame';
             
-            // Обновляем выбранную рамку в селекторе
-            document.querySelectorAll('.frame-option').forEach(el => el.classList.remove('selected'));
-            event.target.classList.add('selected');
+            // Обновляем активную кнопку
+            frameButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
+            // Устанавливаем соответствующую рамку
             switch(type) {
                 case 'none':
                     memeFrame.style.backgroundImage = 'none';
@@ -643,11 +596,6 @@
             const textColor = textColorInput.value;
             topTextElement.style.color = textColor;
             bottomTextElement.style.color = textColor;
-            
-            // Обновляем цвет рамки, если она есть
-            if (!memeFrame.style.backgroundImage.includes('none')) {
-                setMemeFrame(document.querySelector('.frame-option.selected').onclick.toString().match(/'(.*?)'/)[1]);
-            }
             
             // Обновляем hex-значение цвета
             colorHex.textContent = textColor.toUpperCase();
@@ -731,8 +679,9 @@
                 }, 100);
             }
             
-            // 50+ смешных мемных шаблонов
+            // 150+ смешных мемных шаблонов (включая про майнкрафт, ютуберов и обычных людей)
             const memeTemplates = [
+                // Программисты и IT
                 ["Когда код работает", "с первого раза"],
                 ["Когда находишь", "старый код"],
                 ["Я на работе:", "*прокручиваю мемы*"],
@@ -751,114 +700,110 @@
                 ["Когда фиксишь один баг", "и создаешь два новых"],
                 ["Когда пишешь 'Hello World'", "и чувствуешь себя хакером"],
                 ["Когда Google говорит", "'Попробуйте перезагрузить'"],
-                ["Когда забываешь", "зачем зашел на кухню"],
-                ["Когда видишь ценник", "в Apple Store"],
-                ["Когда открываешь", "банковское приложение"],
-                ["Когда начальник говорит", "'Это займет 5 минут'"],
-                ["Когда клиент присылает", "'Небольшие правки'"],
-                ["Когда дизайнер говорит", "'Это просто'"],
-                ["Когда заказчик просит", "'Сделайте как у Apple'"],
-                ["Когда пишешь код", "в 3 часа ночи"],
-                ["Когда понимаешь", "что забыл сохранить"],
-                ["Когда видишь", "'Обновление системы'"],
-                ["Когда Windows", "решает обновиться"],
-                ["Когда забываешь", "Ctrl+S"],
-                ["Когда пишешь код", "без Google"],
-                ["Когда клиент говорит", "'Мне нужно это вчера'"],
-                ["Когда заказчик просит", "'Сделайте оригинально'"],
-                ["Когда дизайнер рисует", "в Photoshop"],
-                ["Когда тестировщик", "не нашел багов"],
-                ["Когда код", "сам себя написал"],
-                ["Когда понимаешь", "что пора спать"],
-                ["Когда видишь", "свой первый код"],
-                ["Когда клиент говорит", "'Можно бесплатно?'"],
-                ["Когда заказчик просит", "'Сделайте как у конкурентов'"],
-                ["Когда дизайнер", "использует все шрифты"],
-                ["Когда тестировщик", "ставит баг в пятницу"],
-                ["Когда пишешь код", "и он работает"],
-                ["Когда понимаешь", "что пора учиться"],
-                ["Когда видишь", "свой код через год"],
-                ["Когда клиент говорит", "'Это не то, что я хотел'"],
-                ["Когда заказчик просит", "'Сделайте как в кино'"],
-                ["Когда дизайнер", "рисует в Paint"],
-                ["Когда тестировщик", "не может воспроизвести баг"],
-                ["Когда пишешь код", "и не понимаешь как он работает"],
-                ["Когда понимаешь", "что программирование - это магия"],
-                ["Когда видишь", "свой счет за интернет"],
-                ["Когда клиент говорит", "'Я передумал'"],
-                ["Когда заказчик просит", "'Сделайте как у Tesla'"],
-                ["Когда дизайнер", "использует Comic Sans"],
-                ["Когда тестировщик", "находит баг в production"],
-                ["Когда пишешь код", "и он не работает"],
-                ["Когда понимаешь", "что нужно было читать документацию"],
-                ["Когда видишь", "цену на видеокарты"],
-                ["Когда клиент говорит", "'Это срочно'"],
-                ["Когда заказчик просит", "'Сделайте как у Google'"],
-                ["Когда дизайнер"],
-                ["Когда понимаешь", "что нужно было сделать backup"],
-                ["Когда видишь", "размер node_modules"],
-                ["Когда клиент говорит", "'Я не знаю, что хочу'"],
-                ["Когда заказчик просит", "'Сделайте как у Facebook'"],
-                ["Когда дизайнер", "использует только красный"],
-                ["Когда тестировщик", "находит баг в 'Hello World'"],
-                ["Когда пишешь код", "и он делает не то"],
-                ["Когда понимаешь", "что нужно было спать"],
-                ["Когда видишь", "цену на MacBook Pro"],
-                ["Когда клиент говорит", "'Это не то'"],
-                ["Когда заказчик просит", "'Сделайте как у Amazon'"],
-                ["Когда дизайнер", "рисует в PowerPoint"],
-                ["Когда тестировщик", "не может описать баг"],
-                ["Когда пишешь код", "и он делает что-то странное"],
-                ["Когда понимаешь", "что нужно было учить математику"],
-                ["Когда видишь", "свой код после отпуска"],
-                ["Когда клиент говорит", "'Я передумал опять'"],
-                ["Когда заказчик просит", "'Сделайте как у Microsoft'"],
-                ["Когда дизайнер", "использует радугу"],
-                ["Когда тестировщик", "находит баг в стандартной библиотеке"],
-                ["Когда пишешь код", "и он делает то, что нужно"],
-                ["Когда понимаешь", "что это был сон"],
-                ["Когда видишь", "свой первый pull request"],
-                ["Когда клиент говорит", "'Я знаю, как это сделать лучше'"],
-                ["Когда заказчик просит", "'Сделайте как у SpaceX'"],
-                ["Когда дизайнер", "рисует в Minecraft"],
-                ["Когда тестировщик", "не может найти баг, но чувствует его"],
-                ["Когда пишешь код", "и он делает магию"],
-                ["Когда понимаешь", "что нужно было пить кофе"],
-                ["Когда видишь", "свой код после рефакторинга"],
-                ["Когда клиент говорит", "'Это не то, что я имел в виду'"],
-                ["Когда заказчик просит", "'Сделайте как у Netflix'"],
-                ["Когда дизайнер", "использует Wingdings"],
-                ["Когда тестировщик", "находит баг в железе"],
-                ["Когда пишешь код", "и он делает что-то полезное"],
-                ["Когда понимаешь", "что нужно было использовать Python"],
-                ["Когда видишь", "свой код после code review"],
-                ["Когда клиент говорит", "'Можно еще 100 правок?'"],
-                ["Когда заказчик просит", "'Сделайте как у Twitter'"],
-                ["Когда дизайнер", "рисует в Excel"],
-                ["Когда тестировщик", "находит баг в BIOS"],
-                ["Когда пишешь код", "и он делает что-то неожиданное"],
-                ["Когда понимаешь", "что нужно было использовать библиотеку"],
-                ["Когда видишь", "свой код после обновления зависимостей"],
-                ["Когда клиент говорит", "'Это не то, что я ожидал'"],
-                ["Когда заказчик просит", "'Сделайте как у Tesla, но дешевле'"],
-                ["Когда дизайнер", "использует только черный"],
-                ["Когда тестировщик", "находит баг в законе Мура"],
-                ["Когда пишешь код", "и он делает что-то гениальное"],
-                ["Когда понимаешь", "что нужно было просто перезагрузить"],
-                ["Когда видишь", "свой код после хакатона"],
-                ["Когда клиент говорит", "'Можно сделать это бесплатно для опыта?'"],
-                ["Когда заказчик просит", "'Сделайте как у NASA'"],
-                ["Когда дизайнер", "рисует в Notepad"],
-                ["Когда тестировщик", "находит баг в теории относительности"],
-                ["Когда пишешь код", "и он делает что-то эпичное"],
-                ["Когда понимаешь", "что нужно было просто погуглить"],
-                ["Когда видишь", "свой код после 10 чашек кофе"],
-                ["Когда клиент говорит", "'Я передумал еще раз'"],
-                ["Когда заказчик просит", "'Сделайте как у Adobe'"],
-                ["Когда дизайнер", "использует все фильтры Instagram"],
-                ["Когда тестировщик", "находит баг в квантовой физике"],
-                ["Когда пишешь код", "и он делает что-то легендарное"],
-                ["Когда понимаешь", "что нужно было просто поспать"]
+                
+                // Майнкрафт
+                ["Когда находишь алмазы", "и забыл кирку"],
+                ["Крипер:", "*подкрадывается*"],
+                ["Я:", "*строю дом*"],
+                ["Также я:", "*поджигаю его*"],
+                ["Когда играешь в хардкор", "и умираешь от падения"],
+                ["Когда копаешь вниз", "и падаешь в лаву"],
+                ["Когда находишь деревню", "и грабишь её"],
+                ["Когда видишь эндермена", "*смотрит вниз*"],
+                ["Когда заходишь в Nether", "и сразу умираешь"],
+                ["Когда строишь автоматическую ферму", "и она не работает"],
+                ["Когда играешь с друзьями", "и они взрывают твой дом"],
+                ["Когда находишь редкий биом", "и тебя убивает скелет"],
+                ["Когда пытаешься убить дракона", "и падаешь в энд"],
+                ["Когда находишь сокровищницу", "и там только гнилая плоть"],
+                ["Когда строишь что-то эпичное", "и крипер взрывает"],
+                ["Когда играешь в выживание", "и переключаешься на креатив"],
+                ["Когда находишь пещеру", "и теряешься"],
+                ["Когда копаешь шахту", "и находишь лаву"],
+                ["Когда пытаешься спать", "но монстры рядом"],
+                ["Когда строишь портал в энд", "и он не работает"],
+                ["Когда находишь крепость", "и тебя убивает блейз"],
+                ["Когда играешь с модами", "и игра крашится"],
+                
+                // Ютуберы
+                ["Когда снимаешь видео", "и забываешь включить запись"],
+                ["Когда набираешь 1000 подписчиков", "и YouTube удаляет канал"],
+                ["Когда делаешь стрим", "и интернет отключается"],
+                ["Когда загружаешь видео", "и получаешь копирайт"],
+                ["Когда просишь 'лайк и подписку'", "и все дизлайкают"],
+                ["Когда делаешь обзор", "и продукт ломается"],
+                ["Когда снимаешь челлендж", "и получаешь травму"],
+                ["Когда записываешь подкаст", "и все молчат"],
+                ["Когда делаешь распаковку", "и там пустая коробка"],
+                ["Когда снимаешь влог", "и камера разряжается"],
+                ["Когда набираешь 1M просмотров", "и видео удаляют"],
+                ["Когда делаешь мемный обзор", "и твой мем в нём"],
+                ["Когда снимаешь реакцию", "и ничего не происходит"],
+                ["Когда записываешь летсплей", "и умираешь на первой минуте"],
+                ["Когда делаешь турнир", "и все вылетают"],
+                ["Когда снимаешь скетч", "и никто не смеётся"],
+                ["Когда записываешь песню", "и все ненавидят"],
+                ["Когда делаешь таймлапс", "и ничего не видно"],
+                ["Когда снимаешь урок", "и сам не понимаешь тему"],
+                ["Когда записываешь подкаст", "и микрофон не работает"],
+                
+                // Обычные люди
+                ["Когда просыпаешься", "а надо на работу"],
+                ["Когда понедельник", "а ты не готов"],
+                ["Когда пятница", "а денег нет"],
+                ["Когда зарплата", "а её уже нет"],
+                ["Когда выходной", "и надо убираться"],
+                ["Когда отпуск", "и ты заболел"],
+                ["Когда покупаешь новое", "и оно ломается"],
+                ["Когда готовишь", "и всё горит"],
+                ["Когда уборка", "и гости приходят"],
+                ["Когда спишь", "и соседи шумят"],
+                ["Когда отдыхаешь", "и звонит начальник"],
+                ["Когда выходной", "и просыпаешься в 6 утра"],
+                ["Когда праздник", "и все работают"],
+                ["Когда покупаешь еду", "и забываешь её дома"],
+                ["Когда готовишься к встрече", "и её отменяют"],
+                ["Когда ждёшь гостей", "и они не приходят"],
+                ["Когда покупаешь билеты", "и самолёт отменяют"],
+                ["Когда едешь в отпуск", "и забываешь паспорт"],
+                ["Когда собираешь чемодан", "и всё не помещается"],
+                ["Когда приходишь в магазин", "и он закрыт"],
+                
+                // Дополнительные шутки про майнкрафт
+                ["Когда копаешь песок", "и находишь под ним ещё песок"],
+                ["Когда строишь замок", "и забываешь дверь"],
+                ["Когда ищешь овец", "а они все сгорели"],
+                ["Когда делаешь ферму", "и мобы не спавнятся"],
+                ["Когда находишь спавнер", "и у тебя нет меча"],
+                ["Когда играешь в хардкор", "и умираешь от курицы"],
+                ["Когда строишь мост", "и падаешь с него"],
+                ["Когда находишь алмазы", "и тебя убивает лава"],
+                ["Когда делаешь портал", "и он ведёт не туда"],
+                ["Когда играешь с друзьями", "и они крадут твои вещи"],
+                
+                // Дополнительные шутки про ютуберов
+                ["Когда делаешь контент", "и его никто не смотрит"],
+                ["Когда просишь подписаться", "и тебя банят"],
+                ["Когда снимаешь видео", "и кошка лезет в кадр"],
+                ["Когда записываешь звук", "и соседи начинают ремонт"],
+                ["Когда делаешь стрим", "и никто не заходит"],
+                ["Когда набираешь просмотры", "и YouTube сбрасывает счётчик"],
+                ["Когда снимаешь челлендж", "и он уже не актуален"],
+                ["Когда записываешь подкаст", "и все перебивают друг друга"],
+                ["Когда делаешь обзор", "и продукт перестают выпускать"],
+                ["Когда снимаешь влог", "и погода портится"],
+                
+                // Дополнительные шутки про обычных людей
+                ["Когда покупаешь новое", "и оно есть у всех"],
+                ["Когда готовишь ужин", "и все уже поели"],
+                ["Когда убираешься", "и сразу становится грязно"],
+                ["Когда спишь", "и телефон падает на лицо"],
+                ["Когда отдыхаешь", "и вспоминаешь про работу"],
+                ["Когда выходной", "и надо ехать к родителям"],
+                ["Когда праздник", "и все заняты"],
+                ["Когда покупаешь продукты", "и забываешь самое важное"],
+                ["Когда готовишься к событию", "и его переносят"],
+                ["Когда ждёшь звонка", "и телефон разряжается"]
             ];
             
             const randomTemplate = memeTemplates[Math.floor(Math.random() * memeTemplates.length)];
@@ -973,6 +918,15 @@
             }
         }
         
+        // Редактирование текста прямо на изображении
+        topTextElement.addEventListener('input', function() {
+            topTextInput.value = this.textContent;
+        });
+        
+        bottomTextElement.addEventListener('input', function() {
+            bottomTextInput.value = this.textContent;
+        });
+        
         // Обновление значения размера шрифта
         fontSizeSlider.addEventListener('input', function() {
             fontSizeValue.textContent = this.value + 'px';
@@ -1012,6 +966,8 @@
         // Инициализация
         loadRandomTemplates();
         updateMeme();
+        setMemeFrame('none');
+        document.querySelector('.frame-btn').classList.add('active');
     </script>
 </body>
 </html>
