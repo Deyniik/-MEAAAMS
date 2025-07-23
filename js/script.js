@@ -25,7 +25,6 @@ const frameSizeControl = document.getElementById('frame-size-control');
 const topTextBackground = document.getElementById('top-text-background');
 const bottomTextBackground = document.getElementById('bottom-text-background');
 const uploadPlaceholder = document.getElementById('upload-placeholder');
-const fileUploadPanel = document.getElementById('file-upload-panel');
 const downloadBtn = document.getElementById('download-btn');
 const shareBtn = document.getElementById('share-btn');
 const smartMemeBtn = document.getElementById('smart-meme-btn');
@@ -233,7 +232,7 @@ function applyVintageFilter() {
 }
 
 // Пиксельный эффект
-function applyPixelFilter() {
+function applyPixelEffect() {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = memeImage.naturalWidth;
@@ -254,6 +253,7 @@ function applyPixelFilter() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -273,6 +273,7 @@ function applyBlurEffect() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -303,6 +304,7 @@ function applyNoiseEffect() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -331,6 +333,7 @@ function applyVignetteEffect() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -361,6 +364,7 @@ function applyPosterizeEffect() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -380,54 +384,7 @@ function applyEdgeEffect() {
     tempImg.onload = function() {
         memeImage.src = this.src;
         framedImage.src = this.src;
-    };
-}
-
-// Эффект инверсии
-function applyInvertEffect() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = memeImage.naturalWidth;
-    canvas.height = memeImage.naturalHeight;
-    
-    ctx.filter = 'invert(100%)';
-    ctx.drawImage(memeImage, 0, 0);
-    
-    const tempImg = new Image();
-    tempImg.src = canvas.toDataURL();
-    
-    tempImg.onload = function() {
-        memeImage.src = this.src;
-        framedImage.src = this.src;
-    };
-}
-
-// Эффект соляризации
-function applySolarizeEffect() {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = memeImage.naturalWidth;
-    canvas.height = memeImage.naturalHeight;
-    
-    ctx.drawImage(memeImage, 0, 0);
-    
-    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-    const data = imageData.data;
-    
-    for (let i = 0; i < data.length; i += 4) {
-        data[i] = data[i] < 128 ? 255 - data[i] : data[i];     // R
-        data[i+1] = data[i+1] < 128 ? 255 - data[i+1] : data[i+1]; // G
-        data[i+2] = data[i+2] < 128 ? 255 - data[i+2] : data[i+2]; // B
-    }
-    
-    ctx.putImageData(imageData, 0, 0);
-    
-    const tempImg = new Image();
-    tempImg.src = canvas.toDataURL();
-    
-    tempImg.onload = function() {
-        memeImage.src = this.src;
-        framedImage.src = this.src;
+        applyFilter('none');
     };
 }
 
@@ -621,7 +578,6 @@ function handleFileUpload(e, inputElement) {
             memeImage.src = event.target.result;
             memeImage.style.display = 'block';
             uploadPlaceholder.style.display = 'none';
-            fileUploadPanel.style.display = 'block';
             downloadBtn.disabled = false;
             shareBtn.disabled = false;
             
@@ -649,7 +605,6 @@ document.addEventListener('paste', function(e) {
                 memeImage.src = event.target.result;
                 memeImage.style.display = 'block';
                 uploadPlaceholder.style.display = 'none';
-                fileUploadPanel.style.display = 'block';
                 downloadBtn.disabled = false;
                 shareBtn.disabled = false;
                 
@@ -670,7 +625,6 @@ function useTemplate(img) {
     memeImage.src = img.src;
     memeImage.style.display = 'block';
     uploadPlaceholder.style.display = 'none';
-    fileUploadPanel.style.display = 'block';
     downloadBtn.disabled = false;
     shareBtn.disabled = false;
     
@@ -820,7 +774,6 @@ strokeWidthSlider.addEventListener('input', function() {
 
 // Инициализация
 loadRandomTemplates();
-fileUploadPanel.style.display = 'none';
 downloadBtn.disabled = true;
 shareBtn.disabled = true;
 updateMeme();
