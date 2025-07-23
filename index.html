@@ -1105,3 +1105,95 @@
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DeyMem Pro+</title>
+    <style>
+        /* Все предыдущие стили остаются без изменений */
+        /* ... */
+        
+        /* Добавляем стили для масок */
+        .mask-option {
+            width: 100%;
+            height: 60px;
+            object-fit: contain;
+            cursor: pointer;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 5px;
+            box-sizing: border-box;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+        
+        .mask-option:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        /* Иконки для кнопок */
+        .icon-btn {
+            font-size: 1.5em;
+            padding: 5px;
+            text-align: center;
+        }
+    </style>
+    <!-- Все подключения шрифтов остаются -->
+    <!-- ... -->
+</head>
+<body>
+    <!-- Предыдущая разметка остается -->
+    <!-- ... -->
+    
+    <!-- Обновленная секция масок -->
+    <div class="control-group">
+        <div class="more-btn icon-btn" onclick="togglePanel('masks-panel')">👓</div>
+        <div class="masks-panel" id="masks-panel">
+            <img src="https://i.ibb.co/7QZ7QZ7/glasses.png" class="mask-option" onclick="applyMask(this.src, 'glasses')" alt="Очки">
+            <img src="https://i.ibb.co/0jQ7J7Q/mustache.png" class="mask-option" onclick="applyMask(this.src, 'mustache')" alt="Усы">
+            <img src="https://i.ibb.co/0jQ7J7Q/hat.png" class="mask-option" onclick="applyMask(this.src, 'hat')" alt="Кепка">
+            <img src="https://i.ibb.co/0jQ7J7Q/crown.png" class="mask-option" onclick="applyMask(this.src, 'crown')" alt="Корона">
+            <img src="https://i.ibb.co/0jQ7J7Q/dog.png" class="mask-option" onclick="applyMask(this.src, 'dog')" alt="Собака">
+            <div class="effect-btn" onclick="applyMask('', 'none')">Убрать</div>
+        </div>
+    </div>
+
+    <script>
+        // Обновленная функция для масок
+        function applyMask(src, type) {
+            currentStyle.mask = type;
+            
+            if (type === 'none') {
+                memeMask.innerHTML = '';
+                return;
+            }
+            
+            // Позиционируем маску в зависимости от типа
+            let style = '';
+            switch(type) {
+                case 'glasses':
+                    style = 'width: 150px; top: 40%; left: 50%; transform: translate(-50%, -50%);';
+                    break;
+                case 'mustache':
+                    style = 'width: 120px; top: 55%; left: 50%; transform: translate(-50%, -50%);';
+                    break;
+                case 'hat':
+                    style = 'width: 180px; top: 30%; left: 50%; transform: translate(-50%, -50%);';
+                    break;
+                case 'crown':
+                    style = 'width: 150px; top: 25%; left: 50%; transform: translate(-50%, -50%);';
+                    break;
+                case 'dog':
+                    style = 'width: 200px; bottom: 10%; left: 50%; transform: translate(-50%, 0);';
+                    break;
+            }
+            
+            memeMask.innerHTML = `<img src="${src}" style="position: absolute; ${style}">`;
+        }
+
+        // Все остальные функции остаются без изменений
+        // ...
+    </script>
+</body>
+</html>
