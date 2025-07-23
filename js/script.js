@@ -234,22 +234,220 @@ function applyVintageFilter() {
 
 // Пиксельный эффект
 function applyPixelFilter() {
-    currentStyle.filter = 'contrast(2) brightness(1.2)';
-    memeImage.style.filter = currentStyle.filter;
-    framedImage.style.filter = currentStyle.filter;
-    
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = memeImage.naturalWidth;
     canvas.height = memeImage.naturalHeight;
     
-    const size = Math.min(canvas.width, canvas.height) * 0.1;
-    ctx.drawImage(memeImage, 0, 0, size, size);
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(canvas, 0, 0, size, size, 0, 0, canvas.width, canvas.height);
+    const pixelSize = Math.max(5, Math.min(canvas.width, canvas.height) / 20);
     
-    memeImage.src = canvas.toDataURL();
-    framedImage.src = canvas.toDataURL();
+    // Уменьшаем изображение
+    ctx.drawImage(memeImage, 0, 0, canvas.width / pixelSize, canvas.height / pixelSize);
+    // Увеличиваем обратно
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(canvas, 0, 0, canvas.width / pixelSize, canvas.height / pixelSize, 
+                  0, 0, canvas.width, canvas.height);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект размытия
+function applyBlurEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.filter = 'blur(5px)';
+    ctx.drawImage(memeImage, 0, 0, canvas.width, canvas.height);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект шума
+function applyNoiseEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    
+    for (let i = 0; i < data.length; i += 4) {
+        const noise = Math.random() * 50 - 25;
+        data[i] += noise;     // R
+        data[i+1] += noise;   // G
+        data[i+2] += noise;   // B
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект виньетки
+function applyVignetteEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const gradient = ctx.createRadialGradient(
+        canvas.width/2, canvas.height/2, canvas.width*0.4,
+        canvas.width/2, canvas.height/2, canvas.width*0.6
+    );
+    gradient.addColorStop(0, 'rgba(0,0,0,0)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0.7)');
+    
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект постеризации
+function applyPosterizeEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    const levels = 4;
+    
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = Math.floor(data[i] / 255 * levels) / levels * 255;     // R
+        data[i+1] = Math.floor(data[i+1] / 255 * levels) / levels * 255; // G
+        data[i+2] = Math.floor(data[i+2] / 255 * levels) / levels * 255; // B
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект краев
+function applyEdgeEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.filter = 'grayscale(100%) contrast(200%)';
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект инверсии
+function applyInvertEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.filter = 'invert(100%)';
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Эффект соляризации
+function applySolarizeEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+    
+    for (let i = 0; i < data.length; i += 4) {
+        data[i] = data[i] < 128 ? 255 - data[i] : data[i];     // R
+        data[i+1] = data[i+1] < 128 ? 255 - data[i+1] : data[i+1]; // G
+        data[i+2] = data[i+2] < 128 ? 255 - data[i+2] : data[i+2]; // B
+    }
+    
+    ctx.putImageData(imageData, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+    };
+}
+
+// Сброс эффектов изображения
+function applyNoneEffect() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = memeImage.naturalWidth;
+    canvas.height = memeImage.naturalHeight;
+    
+    ctx.drawImage(memeImage, 0, 0);
+    
+    const tempImg = new Image();
+    tempImg.src = canvas.toDataURL();
+    
+    tempImg.onload = function() {
+        memeImage.src = this.src;
+        framedImage.src = this.src;
+        applyFilter('none');
+    };
 }
 
 // Установка позиции текста
@@ -379,13 +577,9 @@ function updateFrame() {
 function updateImageFormat() {
     if (currentStyle.squareFormat && memeImage.src) {
         memeImage.style.objectFit = 'cover';
-        memeImage.style.width = '100%';
-        memeImage.style.height = '100%';
         framedImage.style.objectFit = 'cover';
     } else {
         memeImage.style.objectFit = 'contain';
-        memeImage.style.width = '';
-        memeImage.style.height = '';
         framedImage.style.objectFit = 'contain';
     }
 }
@@ -444,6 +638,33 @@ function handleFileUpload(e, inputElement) {
     }
 }
 
+// Обработчик вставки из буфера обмена
+document.addEventListener('paste', function(e) {
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].type.indexOf('image') !== -1) {
+            const blob = items[i].getAsFile();
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                memeImage.src = event.target.result;
+                memeImage.style.display = 'block';
+                uploadPlaceholder.style.display = 'none';
+                fileUploadPanel.style.display = 'block';
+                downloadBtn.disabled = false;
+                shareBtn.disabled = false;
+                
+                memeImage.onload = function() {
+                    imageAspectRatio = this.naturalWidth / this.naturalHeight;
+                    updateFrame();
+                    updateImageFormat();
+                };
+            };
+            reader.readAsDataURL(blob);
+            break;
+        }
+    }
+});
+
 // Использование шаблона
 function useTemplate(img) {
     memeImage.src = img.src;
@@ -486,7 +707,14 @@ function downloadMeme() {
         return;
     }
     
-    html2canvas(memeContainer).then(canvas => {
+    html2canvas(memeContainer, {
+        width: currentStyle.squareFormat ? Math.min(memeImage.naturalWidth, memeImage.naturalHeight) : memeImage.naturalWidth,
+        height: currentStyle.squareFormat ? Math.min(memeImage.naturalWidth, memeImage.naturalHeight) : memeImage.naturalHeight,
+        scale: 1,
+        logging: false,
+        useCORS: true,
+        allowTaint: true
+    }).then(canvas => {
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
         link.download = 'deymem-pro-' + Date.now() + '.png';
@@ -502,7 +730,15 @@ async function shareMeme() {
     }
     
     try {
-        const canvas = await html2canvas(memeContainer);
+        const canvas = await html2canvas(memeContainer, {
+            width: currentStyle.squareFormat ? Math.min(memeImage.naturalWidth, memeImage.naturalHeight) : memeImage.naturalWidth,
+            height: currentStyle.squareFormat ? Math.min(memeImage.naturalWidth, memeImage.naturalHeight) : memeImage.naturalHeight,
+            scale: 1,
+            logging: false,
+            useCORS: true,
+            allowTaint: true
+        });
+        
         canvas.toBlob(async function(blob) {
             try {
                 const formData = new FormData();
