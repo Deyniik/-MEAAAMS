@@ -296,3 +296,26 @@
     <script src="js/script.js"></script>
 </body>
 </html>
+<div class="control-panel">
+    <div class="panel-title">
+        <i class="fas fa-image"></i>
+        <span>Изображение</span>
+    </div>
+    <div class="file-upload" id="file-upload-panel" style="display: none;">
+        <label class="file-upload-btn">
+            <i class="fas fa-upload"></i> Загрузить новое фото
+            <input type="file" id="upload" accept="image/*">
+        </label>
+    </div>
+    
+    <!-- Остальные элементы панели -->
+    
+    <div class="action-buttons">
+        <button id="download-btn" onclick="downloadMeme()" disabled>
+            <i class="fas fa-download"></i> Скачать
+        </button>
+        <button id="share-btn" onclick="shareMeme()" disabled>
+            <i class="fas fa-share-alt"></i> Поделиться
+        </button>
+    </div>
+</div>
