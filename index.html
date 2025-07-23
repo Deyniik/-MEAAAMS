@@ -6,11 +6,10 @@
     <title>DeyMem Pro+</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Основные шрифты -->
+    <!-- Шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <!-- Дополнительные шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
@@ -20,17 +19,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <!-- Новые шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Scada:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -45,9 +37,9 @@
                     <i class="fas fa-image"></i>
                     <span>Изображение</span>
                 </div>
-                <div class="file-upload" id="file-upload-panel" style="display: none;">
+                <div class="file-upload">
                     <label class="file-upload-btn">
-                        <i class="fas fa-upload"></i> Загрузить новое фото (Ctrl+V)
+                        <i class="fas fa-upload"></i> Загрузить фото (или Ctrl+V)
                         <input type="file" id="upload" accept="image/*">
                     </label>
                 </div>
@@ -89,16 +81,10 @@
                             <option value="'Underdog', cursive" style="font-family: 'Underdog', cursive">Underdog</option>
                             <option value="'Neucha', cursive" style="font-family: 'Neucha', cursive">Neucha</option>
                             <option value="'Amatic SC', cursive" style="font-family: 'Amatic SC', cursive">Amatic SC</option>
-                            <option value="'Playfair Display', serif" style="font-family: 'Playfair Display', serif">Playfair Display</option>
                             <option value="'Russo One', sans-serif" style="font-family: 'Russo One', sans-serif">Russo One</option>
                             <option value="'Marck Script', cursive" style="font-family: 'Marck Script', cursive">Marck Script</option>
                             <option value="'Cuprum', sans-serif" style="font-family: 'Cuprum', sans-serif">Cuprum</option>
                             <option value="'Yanone Kaffeesatz', sans-serif" style="font-family: 'Yanone Kaffeesatz', sans-serif">Yanone Kaffeesatz</option>
-                            <option value="'Jura', sans-serif" style="font-family: 'Jura', sans-serif">Jura</option>
-                            <option value="'Philosopher', sans-serif" style="font-family: 'Philosopher', sans-serif">Philosopher</option>
-                            <option value="'Tenor Sans', sans-serif" style="font-family: 'Tenor Sans', sans-serif">Tenor Sans</option>
-                            <option value="'Didact Gothic', sans-serif" style="font-family: 'Didact Gothic', sans-serif">Didact Gothic</option>
-                            <option value="'Scada', sans-serif" style="font-family: 'Scada', sans-serif">Scada</option>
                         </select>
                         <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                     </div>
@@ -114,10 +100,7 @@
                     <div class="control-group">
                         <label class="control-label">Цвет текста:</label>
                         <div class="color-control">
-                            <div class="color-picker-wrapper">
-                                <input type="color" id="text-color" value="#ffffff">
-                                <div class="color-picker-preview"></div>
-                            </div>
+                            <input type="color" id="text-color" value="#ffffff">
                             <span id="color-hex">#FFFFFF</span>
                         </div>
                     </div>
@@ -126,10 +109,7 @@
                 <div class="control-group">
                     <label class="control-label">Обводка текста:</label>
                     <div class="stroke-control">
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="stroke-color" value="#000000">
-                            <div class="color-picker-preview"></div>
-                        </div>
+                        <input type="color" id="stroke-color" value="#000000">
                         <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
                         <span id="stroke-width-value">1px</span>
                     </div>
@@ -145,7 +125,7 @@
                         <input type="file" id="upload-main" accept="image/*">
                         <div class="upload-content">
                             <i class="fas fa-upload"></i>
-                            <span>Загрузить фото (Ctrl+V)</span>
+                            <span>Загрузить фото (или Ctrl+V)</span>
                         </div>
                     </label>
                 </div>
@@ -154,9 +134,20 @@
                 <div id="bottom-text-background" class="text-background"></div>
                 <div id="top-text" class="meme-text" contenteditable="true"></div>
                 <div id="bottom-text" class="meme-text" contenteditable="true"></div>
-                <div id="meme-mask" style="position: absolute; pointer-events: none; z-index: 3;"></div>
                 <div id="frame-overlay" class="frame-overlay" style="display: none;"></div>
                 <img id="framed-image" class="framed-image" style="display: none;">
+            </div>
+            
+            <div class="action-buttons">
+                <button id="smart-meme-btn" onclick="generateSmartMeme()">
+                    <i class="fas fa-brain"></i> Умный мем
+                </button>
+                <button id="download-btn" onclick="downloadMeme()" disabled>
+                    <i class="fas fa-download"></i> Скачать
+                </button>
+                <button id="share-btn" onclick="shareMeme()" disabled>
+                    <i class="fas fa-share-alt"></i> Поделиться
+                </button>
             </div>
         </div>
         
@@ -232,7 +223,7 @@
                         <span>Эффекты изображения</span>
                     </div>
                     <div class="panel" id="image-effects-panel">
-                        <div class="effect-btn" onclick="applyPixelFilter()">
+                        <div class="effect-btn" onclick="applyPixelEffect()">
                             <i class="fas fa-gamepad"></i>
                             Пикселизация
                         </div>
@@ -256,19 +247,19 @@
                             <i class="fas fa-border-all"></i>
                             Края
                         </div>
-                        <div class="effect-btn" onclick="applyInvertEffect()">
-                            <i class="fas fa-adjust"></i>
-                            Инверсия
-                        </div>
-                        <div class="effect-btn" onclick="applySolarizeEffect()">
-                            <i class="fas fa-sun"></i>
-                            Соляризация
-                        </div>
                         <div class="effect-btn" onclick="applyNoneEffect()">
                             <i class="fas fa-times"></i>
                             Сбросить
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Панель фильтров и рамки -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-filter"></i>
+                    <span>Фильтры и рамка</span>
                 </div>
                 
                 <div class="control-group">
@@ -329,19 +320,7 @@
                             <i class="fas fa-film"></i>
                             Кино
                         </div>
-                        <div class="effect-btn" onclick="applyFilter('hue-rotate(180deg)')">
-                            <i class="fas fa-magic"></i>
-                            Инверсия цвета
-                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Панель рамки и действий -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-square"></i>
-                    <span>Рамка и формат</span>
                 </div>
                 
                 <div class="frame-control-vertical">
@@ -365,18 +344,6 @@
                     <label class="control-label">Размер рамки:</label>
                     <input type="range" id="frame-size" min="0" max="50" value="10">
                     <div class="slider-value" id="frame-size-value">10%</div>
-                </div>
-                
-                <div class="action-buttons">
-                    <button id="smart-meme-btn" onclick="generateSmartMeme()">
-                        <i class="fas fa-brain"></i><span>Умный мем</span>
-                    </button>
-                    <button id="download-btn" onclick="downloadMeme()" disabled>
-                        <i class="fas fa-download"></i><span>Скачать</span>
-                    </button>
-                    <button id="share-btn" onclick="shareMeme()" disabled>
-                        <i class="fas fa-share-alt"></i><span>Поделиться</span>
-                    </button>
                 </div>
             </div>
         </div>
