@@ -11,8 +11,6 @@
             --text: #f0f0f0;
             --slider-thumb: #ff5e62;
             --slider-track: #444;
-            --panel-bg: #222;
-            --panel-border: #333;
         }
         
         * {
@@ -25,10 +23,10 @@
             font-family: 'Arial', sans-serif;
             background: var(--main-bg);
             color: var(--text);
-            overflow: hidden;
-            height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            padding: 10px;
         }
         
         .logo {
@@ -37,69 +35,61 @@
             margin: 10px 0;
             color: var(--accent);
             text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
-            white-space: nowrap;
             text-align: center;
         }
         
         .app-container {
             display: flex;
             flex-direction: column;
-            height: calc(100vh - 60px);
-            padding: 0 10px;
+            gap: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
         
-        .controls-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            overflow-y: auto;
-            padding: 5px;
-            max-height: 250px;
-        }
-        
-        .meme-panel {
-            flex: 1;
+        .controls-row {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
+            gap: 15px;
+            flex-wrap: wrap;
         }
         
-        /* Стили для панелей внутри левой части */
-        .control-section {
-            background: var(--panel-bg);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid var(--panel-border);
+        .control-panel {
+            background: var(--container-bg);
+            border-radius: 10px;
+            padding: 15px;
+            flex: 1;
+            min-width: 250px;
         }
         
-        .section-title {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
+        .panel-title {
+            font-size: 1rem;
+            margin-bottom: 10px;
             color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
         }
         
         .file-upload {
             position: relative;
             width: 100%;
+            margin-bottom: 10px;
         }
         
         .file-upload-btn {
             border: 2px dashed #444;
             border-radius: 8px;
-            padding: 8px;
+            padding: 12px;
             background: rgba(255,255,255,0.05);
             color: var(--text);
-            font-size: 0.85em;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            width: 100%;
         }
         
         .file-upload-btn:hover {
@@ -120,33 +110,33 @@
         .text-inputs {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 10px;
         }
         
         input[type="text"] {
             background: rgba(255,255,255,0.1);
             border: 1px solid #444;
-            border-radius: 6px;
-            padding: 8px;
+            border-radius: 8px;
+            padding: 10px;
             color: var(--text);
-            font-size: 0.85em;
+            font-size: 0.9em;
             width: 100%;
         }
         
         .style-controls {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px;
+            gap: 10px;
         }
         
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 5px;
         }
         
         .control-label {
-            font-size: 0.75em;
+            font-size: 0.8em;
             opacity: 0.8;
         }
         
@@ -161,11 +151,10 @@
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 6px;
+            padding: 8px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.2s;
-            font-size: 0.8em;
         }
         
         .reset-font-btn:hover {
@@ -175,10 +164,10 @@
         select {
             background: #333;
             border: 1px solid #444;
-            border-radius: 6px;
-            padding: 6px;
+            border-radius: 8px;
+            padding: 8px;
             color: var(--text);
-            font-size: 0.85em;
+            font-size: 0.9em;
             width: 100%;
         }
         
@@ -191,33 +180,32 @@
         .color-control {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         
         input[type="color"] {
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border: 1px solid #444;
             border-radius: 50%;
             padding: 0;
             cursor: pointer;
         }
         
-        /* Стилизованные ползунки */
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
-            height: 6px;
+            height: 8px;
             background: var(--slider-track);
-            border-radius: 3px;
-            margin: 6px 0;
+            border-radius: 4px;
+            margin: 10px 0;
         }
         
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 15px;
-            height: 15px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             background: var(--slider-thumb);
             cursor: pointer;
@@ -228,25 +216,17 @@
             transform: scale(1.2);
         }
         
-        input[type="range"]::-moz-range-thumb {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background: var(--slider-thumb);
-            cursor: pointer;
-        }
-        
         .slider-value {
             text-align: center;
-            font-size: 0.75em;
-            margin-top: -3px;
+            font-size: 0.8em;
+            margin-top: -5px;
         }
         
         .templates-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         
         .refresh-templates {
@@ -254,12 +234,12 @@
             border: none;
             color: var(--accent);
             cursor: pointer;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75em;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 5px;
             transition: all 0.2s;
         }
         
@@ -270,16 +250,16 @@
         .templates {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 8px;
         }
         
         .template {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            border: 1px solid #444;
+            border: 2px solid #444;
             transition: all 0.2s;
         }
         
@@ -291,13 +271,13 @@
         #meme-container {
             position: relative;
             background: black;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            max-width: 600px;
-            max-height: 400px;
+            max-width: 800px;
+            max-height: 600px;
             width: 100%;
             height: 100%;
             margin: 0 auto;
@@ -317,7 +297,7 @@
             text-align: center;
             font-weight: bold;
             word-wrap: break-word;
-            padding: 4px;
+            padding: 5px;
             cursor: text;
             user-select: text;
             -webkit-text-stroke: 1px black;
@@ -326,11 +306,11 @@
         }
         
         #top-text {
-            top: 8px;
+            top: 10px;
         }
         
         #bottom-text {
-            bottom: 8px;
+            bottom: 10px;
         }
         
         .text-background {
@@ -344,23 +324,16 @@
         
         #top-text-background {
             top: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
         }
         
         #bottom-text-background {
             bottom: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0));
-        }
-        
-        .meme-text {
-            z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         
         .action-buttons {
             display: flex;
-            gap: 8px;
-            margin-top: 8px;
+            gap: 10px;
+            margin-top: 15px;
         }
         
         button {
@@ -368,49 +341,44 @@
             background: linear-gradient(45deg, var(--accent), #e04a4e);
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 8px;
-            font-size: 0.85em;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 6px;
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(255,94,98,0.4);
+            box-shadow: 0 5px 15px rgba(255,94,98,0.4);
         }
         
         .stroke-control {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         
-        #stroke-width {
-            width: 50px;
-        }
-        
-        /* Панели эффектов */
         .panel {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 8px;
+            gap: 8px;
+            margin-top: 10px;
         }
         
         .effect-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid #444;
-            border-radius: 4px;
-            padding: 6px;
+            border-radius: 6px;
+            padding: 8px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s;
-            font-size: 0.75em;
+            font-size: 0.8em;
         }
         
         .effect-btn:hover {
@@ -421,17 +389,16 @@
         .more-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid #444;
-            border-radius: 4px;
-            padding: 6px;
+            border-radius: 6px;
+            padding: 8px;
             cursor: pointer;
             text-align: center;
-            margin-top: 4px;
+            margin-top: 5px;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            font-size: 0.85em;
+            gap: 5px;
         }
         
         .more-btn:hover {
@@ -439,19 +406,18 @@
             border-color: var(--accent);
         }
         
-        /* Новые стили для рамки */
         .frame-control {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 6px;
+            margin-top: 10px;
         }
         
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 40px;
-            height: 20px;
+            width: 50px;
+            height: 24px;
         }
         
         .toggle-switch input {
@@ -469,16 +435,16 @@
             bottom: 0;
             background-color: #444;
             transition: .4s;
-            border-radius: 20px;
+            border-radius: 24px;
         }
         
         .slider:before {
             position: absolute;
             content: "";
-            height: 14px;
-            width: 14px;
-            left: 3px;
-            bottom: 3px;
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
             background-color: white;
             transition: .4s;
             border-radius: 50%;
@@ -489,10 +455,9 @@
         }
         
         input:checked + .slider:before {
-            transform: translateX(20px);
+            transform: translateX(26px);
         }
         
-        /* Стили для рамки вокруг изображения */
         .framed-image {
             position: absolute;
             top: 0;
@@ -512,64 +477,35 @@
             background: black;
             z-index: 0;
         }
-        
-        /* Иконки */
-        .control-icon {
-            font-size: 1em;
-            margin-right: 4px;
-        }
-        
-        /* Скрытие скроллбара */
-        .controls-container::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        
-        .controls-container::-webkit-scrollbar-thumb {
-            background: #444;
-            border-radius: 3px;
-        }
-        
-        .controls-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
     </style>
-    <!-- Подключение шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Podkova:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <!-- Иконки -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="logo">DeyMem Pro+</div>
     
     <div class="app-container">
-        <div class="controls-container">
-            <!-- Секция 1: Загрузка и шаблоны -->
-            <div class="control-section">
-                <div class="section-title">
-                    <i class="fas fa-upload control-icon"></i>
+        <!-- Первая строка панелей -->
+        <div class="controls-row">
+            <!-- Панель загрузки и шаблонов -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-image"></i>
                     <span>Изображение</span>
                 </div>
                 <div class="file-upload">
                     <label class="file-upload-btn">
-                        <i class="fas fa-image"></i> Загрузить
+                        <i class="fas fa-upload"></i> Загрузить фото
                         <input type="file" id="upload" accept="image/*">
                     </label>
                 </div>
                 
                 <div class="templates-header">
-                    <label class="control-label">Шаблоны:</label>
+                    <span>Шаблоны:</span>
                     <button class="refresh-templates" onclick="loadRandomTemplates()">
-                        <i class="fas fa-sync-alt"></i>
+                        <i class="fas fa-sync-alt"></i> Обновить
                     </button>
                 </div>
                 <div class="templates" id="templates-container">
@@ -577,11 +513,11 @@
                 </div>
             </div>
             
-            <!-- Секция 2: Текст -->
-            <div class="control-section">
-                <div class="section-title">
-                    <i class="fas fa-font control-icon"></i>
-                    <span>Текст</span>
+            <!-- Панель текста -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-font"></i>
+                    <span>Текст мема</span>
                 </div>
                 <div class="text-inputs">
                     <input type="text" id="text-top" placeholder="Верхний текст">
@@ -594,11 +530,14 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- Секция 3: Шрифт и цвет -->
-            <div class="control-section">
-                <div class="section-title">
-                    <i class="fas fa-paint-brush control-icon"></i>
+        </div>
+        
+        <!-- Вторая строка панелей -->
+        <div class="controls-row">
+            <!-- Панель стилей -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-paint-brush"></i>
                     <span>Стиль текста</span>
                 </div>
                 <div class="control-group">
@@ -611,19 +550,19 @@
                             <option value="'Montserrat', sans-serif" style="font-family: 'Montserrat', sans-serif">Montserrat</option>
                             <option value="'Oswald', sans-serif" style="font-family: 'Oswald', sans-serif">Oswald</option>
                         </select>
-                        <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()"><i class="fas fa-random"></i></button>
+                        <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                     </div>
                 </div>
                 
                 <div class="style-controls">
                     <div class="control-group">
-                        <label class="control-label">Размер:</label>
+                        <label class="control-label">Размер текста:</label>
                         <input type="range" id="font-size" min="10" max="100" value="42">
                         <div class="slider-value" id="font-size-value">42px</div>
                     </div>
                     
                     <div class="control-group">
-                        <label class="control-label">Цвет:</label>
+                        <label class="control-label">Цвет текста:</label>
                         <div class="color-control">
                             <input type="color" id="text-color" value="#ffffff">
                             <span id="color-hex">#FFFFFF</span>
@@ -632,7 +571,7 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label">Обводка:</label>
+                    <label class="control-label">Обводка текста:</label>
                     <div class="stroke-control">
                         <input type="color" id="stroke-color" value="#000000">
                         <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
@@ -641,61 +580,64 @@
                 </div>
             </div>
             
-            <!-- Секция 4: Эффекты -->
-            <div class="control-section">
-                <div class="section-title">
-                    <i class="fas fa-magic control-icon"></i>
+            <!-- Панель эффектов -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-magic"></i>
                     <span>Эффекты</span>
                 </div>
                 <div class="control-group">
                     <div class="more-btn" onclick="togglePanel('effects-panel')">
                         <i class="fas fa-palette"></i>
-                        <span>Текст</span>
+                        <span>Текстовые эффекты</span>
                     </div>
                     <div class="panel" id="effects-panel">
-                        <div class="effect-btn" onclick="applyTextEffect('gradient')"><i class="fas fa-fill-drip"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('neon')"><i class="fas fa-lightbulb"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('outline')"><i class="fas fa-border-style"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('shadow')"><i class="fas fa-shadow"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('rainbow')"><i class="fas fa-rainbow"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('glow')"><i class="fas fa-sun"></i></div>
-                        <div class="effect-btn" onclick="applyTextEffect('none')"><i class="fas fa-times"></i></div>
+                        <div class="effect-btn" onclick="applyTextEffect('gradient')">Градиент</div>
+                        <div class="effect-btn" onclick="applyTextEffect('neon')">Неон</div>
+                        <div class="effect-btn" onclick="applyTextEffect('outline')">Контур</div>
+                        <div class="effect-btn" onclick="applyTextEffect('shadow')">Тень</div>
+                        <div class="effect-btn" onclick="applyTextEffect('rainbow')">Радуга</div>
+                        <div class="effect-btn" onclick="applyTextEffect('glow')">Свечение</div>
+                        <div class="effect-btn" onclick="applyTextEffect('none')">Нет</div>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <div class="more-btn" onclick="togglePanel('filters-panel')">
                         <i class="fas fa-sliders-h"></i>
-                        <span>Фильтры</span>
+                        <span>Фильтры изображения</span>
                     </div>
                     <div class="panel" id="filters-panel">
-                        <div class="effect-btn" onclick="applyFilter('none')"><i class="fas fa-ban"></i></div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')"><i class="fas fa-moon"></i></div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')"><i class="fas fa-seedling"></i></div>
-                        <div class="effect-btn" onclick="applyFilter('invert(100%)')"><i class="fas fa-adjust"></i></div>
-                        <div class="effect-btn" onclick="applyFilter('blur(2px)')"><i class="fas fa-cloud"></i></div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')"><i class="fas fa-sun"></i></div>
+                        <div class="effect-btn" onclick="applyFilter('none')">Нет</div>
+                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">Ч/Б</div>
+                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')">Сепия</div>
+                        <div class="effect-btn" onclick="applyFilter('invert(100%)')">Инверт</div>
+                        <div class="effect-btn" onclick="applyFilter('blur(2px)')">Размытие</div>
+                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">Ярче</div>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <div class="more-btn" onclick="togglePanel('animations-panel')">
                         <i class="fas fa-running"></i>
-                        <span>Анимации</span>
+                        <span>Анимации текста</span>
                     </div>
                     <div class="panel" id="animations-panel">
-                        <div class="effect-btn" onclick="applyAnimation('none')"><i class="fas fa-stop"></i></div>
-                        <div class="effect-btn" onclick="applyAnimation('blink')"><i class="fas fa-eye"></i></div>
-                        <div class="effect-btn" onclick="applyAnimation('shake')"><i class="fas fa-arrows-alt-h"></i></div>
-                        <div class="effect-btn" onclick="applyAnimation('float')"><i class="fas fa-feather-alt"></i></div>
+                        <div class="effect-btn" onclick="applyAnimation('none')">Нет</div>
+                        <div class="effect-btn" onclick="applyAnimation('blink')">Мерцание</div>
+                        <div class="effect-btn" onclick="applyAnimation('shake')">Дрожание</div>
+                        <div class="effect-btn" onclick="applyAnimation('float')">Плавное</div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Секция 5: Рамка и действия -->
-            <div class="control-section">
-                <div class="section-title">
-                    <i class="fas fa-square control-icon"></i>
+        </div>
+        
+        <!-- Третья строка панелей -->
+        <div class="controls-row">
+            <!-- Панель рамки и действий -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-square"></i>
                     <span>Рамка</span>
                 </div>
                 <div class="frame-control">
@@ -722,6 +664,7 @@
             </div>
         </div>
         
+        <!-- Панель с изображением -->
         <div class="meme-panel">
             <div id="meme-container">
                 <img id="meme-image" src="">
@@ -796,44 +739,19 @@
             frameSize: 10
         };
         
-        // Новые шутки (60+)
+        // Новые шутки
         const lifeJokes = [
             ["Когда просыпаешься", "а надо на работу"],
             ["Когда понедельник", "а ты не готов"],
             ["Когда пятница", "а денег нет"],
             ["Когда зарплата", "а её уже нет"],
-            ["Когда выходной", "и надо убираться"],
-            ["Когда отпуск", "и ты заболел"],
-            ["Когда покупаешь новое", "и оно ломается"],
-            ["Когда готовишь", "и всё горит"],
-            ["Когда уборка", "и гости приходят"],
-            ["Когда спишь", "и соседи шумят"]
+            ["Когда выходной", "и надо убираться"]
         ];
-        
-        const minecraftJokes = [
-            ["Когда находишь алмазы", "и забыл кирку"],
-            ["Крипер:", "*подкрадывается*"],
-            ["Я:", "*строю дом*"],
-            ["Также я:", "*поджигаю его*"],
-            ["Когда играешь в хардкор", "и умираешь от падения"]
-        ];
-        
-        const youtubeJokes = [
-            ["Когда снимаешь видео", "и забываешь включить запись"],
-            ["Когда набираешь 1000 подписчиков", "и YouTube удаляет канал"],
-            ["Когда делаешь стрим", "и интернет отключается"],
-            ["Когда загружаешь видео", "и получаешь копирайт"],
-            ["Когда просишь 'лайк и подписку'", "и все дизлайкают"]
-        ];
-        
-        // Все шутки вместе
-        const allJokes = [...lifeJokes, ...minecraftJokes, ...youtubeJokes];
         
         // Загрузка случайных шаблонов
         function loadRandomTemplates() {
             templatesContainer.innerHTML = '';
             
-            // Создаем массив из случайных шаблонов
             const shuffled = [...memeTemplates].sort(() => 0.5 - Math.random());
             const selectedTemplates = shuffled.slice(0, 3);
             
@@ -926,7 +844,6 @@
         function applyAnimation(animation) {
             currentStyle.animation = animation;
             
-            // Удаляем предыдущие анимации
             topTextElement.style.animation = '';
             bottomTextElement.style.animation = '';
             
@@ -953,14 +870,12 @@
             topTextElement.textContent = topTextInput.value;
             bottomTextElement.textContent = bottomTextInput.value;
             
-            // Сохраняем текущие настройки
             currentStyle.fontFamily = fontFamilySelect.value;
             currentStyle.fontSize = fontSizeSlider.value + 'px';
             currentStyle.textColor = textColorInput.value;
             currentStyle.strokeColor = strokeColorInput.value;
             currentStyle.strokeWidth = strokeWidthSlider.value + 'px';
             
-            // Применяем стили
             topTextElement.style.fontFamily = currentStyle.fontFamily;
             bottomTextElement.style.fontFamily = currentStyle.fontFamily;
             
@@ -970,26 +885,21 @@
             topTextElement.style.color = currentStyle.textColor;
             bottomTextElement.style.color = currentStyle.textColor;
             
-            // Обводка текста
             topTextElement.style.webkitTextStroke = `${currentStyle.strokeWidth} ${currentStyle.strokeColor}`;
             bottomTextElement.style.webkitTextStroke = `${currentStyle.strokeWidth} ${currentStyle.strokeColor}`;
             
-            // Обновляем значения в интерфейсе
             fontSizeValue.textContent = currentStyle.fontSize;
             colorHex.textContent = currentStyle.textColor.toUpperCase();
             strokeWidthValue.textContent = currentStyle.strokeWidth;
             
-            // Обновляем высоту текстовых фонов
             const textHeight = parseInt(currentStyle.fontSize) * 2;
             document.getElementById('top-text-background').style.height = textHeight + 'px';
             document.getElementById('bottom-text-background').style.height = textHeight + 'px';
             
-            // Применяем текущие эффекты
             applyTextEffect(currentStyle.textEffect);
             applyFilter(currentStyle.filter);
             applyAnimation(currentStyle.animation);
             
-            // Обновляем рамку
             updateFrame();
         }
         
@@ -1002,23 +912,19 @@
                 
                 const frameSize = Math.min(containerWidth, containerHeight) * frameSizePercent / 100;
                 
-                // Показываем рамку
                 frameOverlay.style.display = 'block';
                 framedImage.style.display = 'block';
                 memeImage.style.display = 'none';
                 
-                // Устанавливаем размеры для изображения с рамкой
                 framedImage.src = memeImage.src;
                 framedImage.style.width = `calc(100% - ${frameSize * 2}px)`;
                 framedImage.style.height = `calc(100% - ${frameSize * 2}px)`;
                 framedImage.style.left = `${frameSize}px`;
                 framedImage.style.top = `${frameSize}px`;
                 
-                // Устанавливаем размеры для фона рамки
                 frameOverlay.style.width = '100%';
                 frameOverlay.style.height = '100%';
             } else {
-                // Скрываем рамку
                 frameOverlay.style.display = 'none';
                 framedImage.style.display = 'none';
                 memeImage.style.display = 'block';
@@ -1052,7 +958,6 @@
                     memeImage.src = event.target.result;
                     memeImage.style.display = 'block';
                     
-                    // Получаем реальные размеры изображения после загрузки
                     memeImage.onload = function() {
                         imageAspectRatio = this.naturalWidth / this.naturalHeight;
                         updateFrame();
@@ -1067,17 +972,15 @@
             memeImage.src = img.src;
             memeImage.style.display = 'block';
             
-            // Получаем реальные размеры изображения после загрузки
             memeImage.onload = function() {
                 imageAspectRatio = this.naturalWidth / this.naturalHeight;
                 updateFrame();
             };
         }
         
-        // Умная генерация мема (без изменения стилей)
+        // Умная генерация мема
         function generateSmartMeme() {
             if (!memeImage.src) {
-                // Если изображение не загружено, используем случайный шаблон
                 loadRandomTemplates();
                 setTimeout(() => {
                     const templates = document.querySelectorAll('.template');
@@ -1087,8 +990,7 @@
                 }, 100);
             }
             
-            // Выбираем случайную шутку
-            const randomTemplate = allJokes[Math.floor(Math.random() * allJokes.length)];
+            const randomTemplate = lifeJokes[Math.floor(Math.random() * lifeJokes.length)];
             topTextInput.value = randomTemplate[0];
             bottomTextInput.value = randomTemplate[1];
             
@@ -1151,23 +1053,6 @@
             }
         }
         
-        // Альтернативный способ поделиться
-        function fallbackShare(canvas = null) {
-            if (canvas) {
-                const dataUrl = canvas.toDataURL('image/png');
-                const tempLink = document.createElement('a');
-                tempLink.href = dataUrl;
-                tempLink.download = 'meme.png';
-                tempLink.click();
-                
-                setTimeout(() => {
-                    alert('Мем сохранен! Теперь вы можете отправить его вручную.');
-                }, 100);
-            } else {
-                alert('Произошла ошибка при создании мема для отправки');
-            }
-        }
-        
         // Переключение рамки
         frameToggle.addEventListener('change', function() {
             currentStyle.frameEnabled = this.checked;
@@ -1182,7 +1067,7 @@
             updateFrame();
         });
         
-        // Редактирование текста прямо на изображении
+        // Редактирование текста
         topTextElement.addEventListener('input', function() {
             topTextInput.value = this.textContent;
         });
