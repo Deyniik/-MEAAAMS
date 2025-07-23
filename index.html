@@ -41,7 +41,7 @@
         .app-container {
             display: flex;
             gap: 20px;
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             width: 100%;
             flex-wrap: wrap;
@@ -235,28 +235,32 @@
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
-            height: 10px;
+            height: 12px;
             background: var(--slider-track);
-            border-radius: 5px;
+            border-radius: 6px;
             margin: 12px 0;
             outline: none;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
         }
         
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: var(--slider-thumb);
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3),
+                        inset 0 0 0 2px rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.5);
         }
         
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4),
+                        inset 0 0 0 2px rgba(255,255,255,0.3);
         }
         
         .slider-value {
@@ -264,6 +268,7 @@
             font-size: 0.9em;
             margin-top: -8px;
             font-weight: bold;
+            color: var(--accent);
         }
         
         .templates-header {
@@ -412,7 +417,7 @@
         
         .panel {
             display: none;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             gap: 10px;
             margin-top: 12px;
         }
@@ -430,6 +435,7 @@
             flex-direction: column;
             align-items: center;
             gap: 5px;
+            word-break: break-word;
         }
         
         .effect-btn:hover {
@@ -723,6 +729,10 @@
                             <i class="fas fa-fire"></i>
                             Свечение
                         </div>
+                        <div class="effect-btn" onclick="applyTextEffect('3d')">
+                            <i class="fas fa-cube"></i>
+                            3D Текст
+                        </div>
                     </div>
                 </div>
                 
@@ -767,6 +777,22 @@
                         <div class="effect-btn" onclick="applyFilter('saturate(2)')">
                             <i class="fas fa-tint"></i>
                             Насыщенность
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('opacity(0.8)')">
+                            <i class="fas fa-low-vision"></i>
+                            Прозрачность
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('drop-shadow(5px 5px 5px #222)')">
+                            <i class="fas fa-cloud"></i>
+                            Тень
+                        </div>
+                        <div class="effect-btn" onclick="applyVintageFilter()">
+                            <i class="fas fa-camera-retro"></i>
+                            Винтаж
+                        </div>
+                        <div class="effect-btn" onclick="applyPixelFilter()">
+                            <i class="fas fa-gamepad"></i>
+                            Пиксели
                         </div>
                     </div>
                 </div>
@@ -892,18 +918,38 @@
             textPosition: 'both'
         };
         
-        // Новые шутки
-        const lifeJokes = [
-            ["Когда просыпаешься", "а надо на работу"],
-            ["Когда понедельник", "а ты не готов"],
-            ["Когда пятница", "а денег нет"],
-            ["Когда зарплата", "а её уже нет"],
-            ["Когда выходной", "и надо убираться"],
-            ["Когда хочется есть", "но лень готовить"],
-            ["Когда хочется спать", "но надо смотреть сериал"],
-            ["Когда много работы", "но интернет зовёт"],
-            ["Когда хочешь похудеть", "но вкусняшки рядом"],
-            ["Когда надо экономить", "но увидел распродажу"]
+        // Шутки для мемов (30 вариантов без "Когда")
+        const memeJokes = [
+            ["Это не баг", "Это фича"],
+            ["Программист спит", "Код работает"],
+            ["Утро начинается", "С кофе и ошибок"],
+            ["Сначала работа", "Потом магия"],
+            ["Я не ленивый", "Я на энергосбережении"],
+            ["404", "Остроумие не найдено"],
+            ["Ctrl+C", "Ctrl+V"],
+            ["Быстро, дешево, качественно", "Выбери два"],
+            ["Понедельник меня не любит", "И я его тоже"],
+            ["Я не прокрастинирую", "Я заряжаюсь"],
+            ["Спасибо, что объяснил", "Теперь я вообще ничего не понимаю"],
+            ["Мой код", "Мои проблемы"],
+            ["Думаю о хорошем", "Но получается как всегда"],
+            ["Хочу быть продуктивным", "Но Netflix зовет"],
+            ["План на сегодня", "Ничего не делать"],
+            ["Я не странный", "Я ограниченный выпуск"],
+            ["Счастье есть", "Но не для всех"],
+            ["Жизнь прекрасна", "Когда закрываешь глаза"],
+            ["Мечты сбываются", "Но не твои"],
+            ["Все будет хорошо", "Но не сразу"],
+            ["Лучше поздно", "Чем никогда"],
+            ["Смех без причины", "Признак мема"],
+            ["Ты не одинок", "Но всем все равно"],
+            ["Будь собой", "Но лучше не надо"],
+            ["Улыбайся чаще", "Особенно когда грустно"],
+            ["Все получится", "Или нет"],
+            ["Я не неудачник", "Я прелюдия к успеху"],
+            ["Завтра новый день", "И новые проблемы"],
+            ["Жизнь - это не боль", "Это хроническое заболевание"],
+            ["Все идет по плану", "Но плана нет"]
         ];
         
         // Загрузка случайных шаблонов
@@ -988,6 +1034,15 @@
                     topTextElement.style.animation = 'glow 2s ease-in-out infinite alternate';
                     bottomTextElement.style.animation = 'glow 2s ease-in-out infinite alternate';
                     break;
+                    
+                case '3d':
+                    const textShadow = [];
+                    for (let i = 1; i <= 5; i++) {
+                        textShadow.push(`${i}px ${i}px 0 ${getRandomColor()}`);
+                    }
+                    topTextElement.style.textShadow = textShadow.join(', ');
+                    bottomTextElement.style.textShadow = textShadow.join(', ');
+                    break;
             }
         }
         
@@ -996,6 +1051,35 @@
             currentStyle.filter = filter;
             memeImage.style.filter = filter;
             framedImage.style.filter = filter;
+        }
+        
+        // Винтажный фильтр (комбинация эффектов)
+        function applyVintageFilter() {
+            currentStyle.filter = 'sepia(70%) brightness(80%) contrast(120%) saturate(80%)';
+            memeImage.style.filter = currentStyle.filter;
+            framedImage.style.filter = currentStyle.filter;
+        }
+        
+        // Пиксельный эффект
+        function applyPixelFilter() {
+            currentStyle.filter = 'contrast(2) brightness(1.2)';
+            memeImage.style.filter = currentStyle.filter;
+            framedImage.style.filter = currentStyle.filter;
+            
+            // Создаем эффект пикселизации через canvas
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = memeImage.naturalWidth;
+            canvas.height = memeImage.naturalHeight;
+            
+            // Уменьшаем и увеличиваем изображение для эффекта пикселизации
+            const size = Math.min(canvas.width, canvas.height) * 0.1;
+            ctx.drawImage(memeImage, 0, 0, size, size);
+            ctx.imageSmoothingEnabled = false;
+            ctx.drawImage(canvas, 0, 0, size, size, 0, 0, canvas.width, canvas.height);
+            
+            memeImage.src = canvas.toDataURL();
+            framedImage.src = canvas.toDataURL();
         }
         
         // Установка позиции текста
@@ -1180,7 +1264,7 @@
                 }, 100);
             }
             
-            const randomTemplate = lifeJokes[Math.floor(Math.random() * lifeJokes.length)];
+            const randomTemplate = memeJokes[Math.floor(Math.random() * memeJokes.length)];
             topTextInput.value = randomTemplate[0];
             bottomTextInput.value = randomTemplate[1];
             
