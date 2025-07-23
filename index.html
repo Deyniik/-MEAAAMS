@@ -40,25 +40,41 @@
         
         .app-container {
             display: flex;
-            flex-direction: column;
             gap: 15px;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+            flex-wrap: wrap;
         }
         
-        .controls-row {
+        .left-column {
+            flex: 1;
+            min-width: 300px;
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            flex-wrap: wrap;
+        }
+        
+        .right-column {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .meme-panel {
+            flex: 2;
+            min-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .control-panel {
             background: var(--container-bg);
             border-radius: 10px;
             padding: 15px;
-            flex: 1;
-            min-width: 250px;
         }
         
         .panel-title {
@@ -276,11 +292,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            max-width: 800px;
-            max-height: 600px;
             width: 100%;
             height: 100%;
-            margin: 0 auto;
+            max-width: 500px;
+            max-height: 500px;
         }
         
         #meme-image {
@@ -477,6 +492,22 @@
             background: black;
             z-index: 0;
         }
+
+        @media (max-width: 1000px) {
+            .app-container {
+                flex-direction: column;
+            }
+            .meme-panel {
+                order: 1;
+                margin-bottom: 15px;
+            }
+            .left-column {
+                order: 2;
+            }
+            .right-column {
+                order: 3;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
@@ -487,9 +518,9 @@
     <div class="logo">DeyMem Pro+</div>
     
     <div class="app-container">
-        <!-- Первая строка панелей -->
-        <div class="controls-row">
-            <!-- Панель загрузки и шаблонов -->
+        <!-- Левая колонка -->
+        <div class="left-column">
+            <!-- Панель загрузки -->
             <div class="control-panel">
                 <div class="panel-title">
                     <i class="fas fa-image"></i>
@@ -500,16 +531,6 @@
                         <i class="fas fa-upload"></i> Загрузить фото
                         <input type="file" id="upload" accept="image/*">
                     </label>
-                </div>
-                
-                <div class="templates-header">
-                    <span>Шаблоны:</span>
-                    <button class="refresh-templates" onclick="loadRandomTemplates()">
-                        <i class="fas fa-sync-alt"></i> Обновить
-                    </button>
-                </div>
-                <div class="templates" id="templates-container">
-                    <!-- Шаблоны будут загружены динамически -->
                 </div>
             </div>
             
@@ -523,17 +544,8 @@
                     <input type="text" id="text-top" placeholder="Верхний текст">
                     <input type="text" id="text-bottom" placeholder="Нижний текст">
                 </div>
-                
-                <div class="action-buttons">
-                    <button onclick="generateSmartMeme()">
-                        <i class="fas fa-brain"></i> Умный мем
-                    </button>
-                </div>
             </div>
-        </div>
-        
-        <!-- Вторая строка панелей -->
-        <div class="controls-row">
+            
             <!-- Панель стилей -->
             <div class="control-panel">
                 <div class="panel-title">
@@ -577,6 +589,40 @@
                         <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
                         <span id="stroke-width-value">1px</span>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Центральная панель с изображением -->
+        <div class="meme-panel">
+            <div id="meme-container">
+                <img id="meme-image" src="">
+                <div id="top-text-background" class="text-background"></div>
+                <div id="bottom-text-background" class="text-background"></div>
+                <div id="top-text" class="meme-text" contenteditable="true"></div>
+                <div id="bottom-text" class="meme-text" contenteditable="true"></div>
+                <div id="meme-mask" style="position: absolute; pointer-events: none; z-index: 3;"></div>
+                <div id="frame-overlay" class="frame-overlay" style="display: none;"></div>
+                <img id="framed-image" class="framed-image" style="display: none;">
+            </div>
+        </div>
+        
+        <!-- Правая колонка -->
+        <div class="right-column">
+            <!-- Панель шаблонов -->
+            <div class="control-panel">
+                <div class="panel-title">
+                    <i class="fas fa-th"></i>
+                    <span>Шаблоны</span>
+                </div>
+                <div class="templates-header">
+                    <span>Популярные мемы:</span>
+                    <button class="refresh-templates" onclick="loadRandomTemplates()">
+                        <i class="fas fa-sync-alt"></i> Обновить
+                    </button>
+                </div>
+                <div class="templates" id="templates-container">
+                    <!-- Шаблоны будут загружены динамически -->
                 </div>
             </div>
             
@@ -630,10 +676,7 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Третья строка панелей -->
-        <div class="controls-row">
+            
             <!-- Панель рамки и действий -->
             <div class="control-panel">
                 <div class="panel-title">
@@ -654,6 +697,9 @@
                 </div>
                 
                 <div class="action-buttons">
+                    <button onclick="generateSmartMeme()">
+                        <i class="fas fa-brain"></i> Умный мем
+                    </button>
                     <button onclick="downloadMeme()">
                         <i class="fas fa-download"></i> Скачать
                     </button>
@@ -661,20 +707,6 @@
                         <i class="fas fa-share-alt"></i> Поделиться
                     </button>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Панель с изображением -->
-        <div class="meme-panel">
-            <div id="meme-container">
-                <img id="meme-image" src="">
-                <div id="top-text-background" class="text-background"></div>
-                <div id="bottom-text-background" class="text-background"></div>
-                <div id="top-text" class="meme-text" contenteditable="true"></div>
-                <div id="bottom-text" class="meme-text" contenteditable="true"></div>
-                <div id="meme-mask" style="position: absolute; pointer-events: none; z-index: 3;"></div>
-                <div id="frame-overlay" class="frame-overlay" style="display: none;"></div>
-                <img id="framed-image" class="framed-image" style="display: none;">
             </div>
         </div>
     </div>
