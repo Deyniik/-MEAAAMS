@@ -4,10 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeyMem Pro+</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Основные шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <!-- Дополнительные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -57,6 +69,15 @@
                             <option value="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif">Roboto</option>
                             <option value="'Montserrat', sans-serif" style="font-family: 'Montserrat', sans-serif">Montserrat</option>
                             <option value="'Oswald', sans-serif" style="font-family: 'Oswald', sans-serif">Oswald</option>
+                            <option value="'Comfortaa', cursive" style="font-family: 'Comfortaa', cursive">Comfortaa</option>
+                            <option value="'Rubik', sans-serif" style="font-family: 'Rubik', sans-serif">Rubik</option>
+                            <option value="'Press Start 2P', cursive" style="font-family: 'Press Start 2P', cursive">Press Start 2P</option>
+                            <option value="'Caveat', cursive" style="font-family: 'Caveat', cursive">Caveat</option>
+                            <option value="'Lobster', cursive" style="font-family: 'Lobster', cursive">Lobster</option>
+                            <option value="'Bad Script', cursive" style="font-family: 'Bad Script', cursive">Bad Script</option>
+                            <option value="'Underdog', cursive" style="font-family: 'Underdog', cursive">Underdog</option>
+                            <option value="'Neucha', cursive" style="font-family: 'Neucha', cursive">Neucha</option>
+                            <option value="'Amatic SC', cursive" style="font-family: 'Amatic SC', cursive">Amatic SC</option>
                         </select>
                         <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                     </div>
@@ -232,6 +253,26 @@
                             <i class="fas fa-gamepad"></i>
                             Пиксели
                         </div>
+                        <div class="effect-btn" onclick="applyFilter('contrast(2) brightness(1.2) saturate(0)')">
+                            <i class="fas fa-snowflake"></i>
+                            Холодный
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('sepia(50%) contrast(1.2) brightness(1.1) hue-rotate(-10deg)')">
+                            <i class="fas fa-leaf"></i>
+                            Ретро
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('brightness(1.1) contrast(1.1) saturate(1.5)')">
+                            <i class="fas fa-fire"></i>
+                            Яркий
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('grayscale(50%) contrast(1.5) brightness(0.9)')">
+                            <i class="fas fa-film"></i>
+                            Кино
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('hue-rotate(180deg)')">
+                            <i class="fas fa-magic"></i>
+                            Инверсия цвета
+                        </div>
                     </div>
                 </div>
                 
@@ -278,6 +319,15 @@
                     <label class="control-label">Размер рамки:</label>
                     <input type="range" id="frame-size" min="0" max="50" value="10">
                     <div class="slider-value" id="frame-size-value">10%</div>
+                </div>
+                
+                <div class="control-group">
+                    <span>Формат изображения:</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="format-toggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span style="margin-left: 10px;">Квадрат</span>
                 </div>
                 
                 <div class="action-buttons">
