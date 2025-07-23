@@ -26,13 +26,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding: 10px;
+            padding: 15px;
         }
         
         .logo {
-            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: bold;
-            margin: 10px 0;
+            margin: 15px 0;
             color: var(--accent);
             text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
             text-align: center;
@@ -40,8 +40,8 @@
         
         .app-container {
             display: flex;
-            gap: 15px;
-            max-width: 1200px;
+            gap: 20px;
+            max-width: 1300px;
             margin: 0 auto;
             width: 100%;
             flex-wrap: wrap;
@@ -49,23 +49,23 @@
         
         .left-column {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
         
         .right-column {
             flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
         
         .meme-panel {
             flex: 2;
-            min-width: 400px;
+            min-width: 450px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -73,38 +73,39 @@
         
         .control-panel {
             background: var(--container-bg);
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         .panel-title {
-            font-size: 1rem;
-            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
             color: var(--accent);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .file-upload {
             position: relative;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .file-upload-btn {
             border: 2px dashed #444;
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 10px;
+            padding: 15px;
             background: rgba(255,255,255,0.05);
             color: var(--text);
-            font-size: 0.9em;
+            font-size: 1em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
         }
         
@@ -126,39 +127,45 @@
         .text-inputs {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
         
         input[type="text"] {
             background: rgba(255,255,255,0.1);
             border: 1px solid #444;
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 10px;
+            padding: 12px;
             color: var(--text);
-            font-size: 0.9em;
+            font-size: 1em;
             width: 100%;
+            transition: border 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            outline: none;
         }
         
         .style-controls {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 12px;
         }
         
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
         }
         
         .control-label {
-            font-size: 0.8em;
-            opacity: 0.8;
+            font-size: 0.9em;
+            opacity: 0.9;
         }
         
         .font-select-container {
             display: flex;
-            gap: 5px;
+            gap: 8px;
             align-items: center;
         }
         
@@ -166,11 +173,16 @@
             background: #444;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 8px;
+            border-radius: 6px;
+            padding: 10px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
         }
         
         .reset-font-btn:hover {
@@ -180,69 +192,85 @@
         select {
             background: #333;
             border: 1px solid #444;
-            border-radius: 8px;
-            padding: 8px;
+            border-radius: 10px;
+            padding: 10px;
             color: var(--text);
-            font-size: 0.9em;
+            font-size: 1em;
             width: 100%;
+            transition: border 0.3s;
+            cursor: pointer;
+        }
+        
+        select:focus {
+            border-color: var(--accent);
+            outline: none;
         }
         
         option {
             background: #333;
-            padding: 5px;
+            padding: 8px;
             font-family: inherit;
         }
         
         .color-control {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         input[type="color"] {
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border: 1px solid #444;
             border-radius: 50%;
             padding: 0;
             cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        input[type="color"]:hover {
+            transform: scale(1.1);
         }
         
         input[type="range"] {
             -webkit-appearance: none;
             width: 100%;
-            height: 8px;
+            height: 10px;
             background: var(--slider-track);
-            border-radius: 4px;
-            margin: 10px 0;
+            border-radius: 5px;
+            margin: 12px 0;
+            outline: none;
         }
         
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background: var(--slider-thumb);
             cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         input[type="range"]::-webkit-slider-thumb:hover {
             transform: scale(1.2);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
         }
         
         .slider-value {
             text-align: center;
-            font-size: 0.8em;
-            margin-top: -5px;
+            font-size: 0.9em;
+            margin-top: -8px;
+            font-weight: bold;
         }
         
         .templates-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
         .refresh-templates {
@@ -250,12 +278,12 @@
             border: none;
             color: var(--accent);
             cursor: pointer;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             transition: all 0.2s;
         }
         
@@ -266,14 +294,14 @@
         .templates {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
         
         .template {
             width: 100%;
             aspect-ratio: 1;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
             border: 2px solid #444;
             transition: all 0.2s;
@@ -282,20 +310,22 @@
         .template:hover {
             border-color: var(--accent);
             transform: scale(1.03);
+            box-shadow: 0 4px 8px rgba(255,94,98,0.2);
         }
         
         #meme-container {
             position: relative;
             background: black;
-            border-radius: 8px;
+            border-radius: 10px;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             height: 100%;
-            max-width: 500px;
-            max-height: 500px;
+            max-width: 550px;
+            max-height: 550px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
         }
         
         #meme-image {
@@ -312,7 +342,7 @@
             text-align: center;
             font-weight: bold;
             word-wrap: break-word;
-            padding: 5px;
+            padding: 8px;
             cursor: text;
             user-select: text;
             -webkit-text-stroke: 1px black;
@@ -333,7 +363,7 @@
             left: 0;
             width: 100%;
             height: 30%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0));
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
             z-index: 1;
         }
         
@@ -343,12 +373,13 @@
         
         #bottom-text-background {
             bottom: 0;
+            transform: rotate(180deg);
         }
         
         .action-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 12px;
+            margin-top: 20px;
         }
         
         button {
@@ -356,44 +387,49 @@
             background: linear-gradient(45deg, var(--accent), #e04a4e);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 0.9em;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1em;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            min-width: 0;
         }
         
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255,94,98,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,94,98,0.4);
         }
         
         .stroke-control {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         
         .panel {
             display: none;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 10px;
+            gap: 10px;
+            margin-top: 12px;
         }
         
         .effect-btn {
             background: rgba(255,255,255,0.1);
             border: 1px solid #444;
-            border-radius: 6px;
-            padding: 8px;
+            border-radius: 8px;
+            padding: 10px;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s;
-            font-size: 0.8em;
+            font-size: 0.9em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
         }
         
         .effect-btn:hover {
@@ -401,19 +437,23 @@
             border-color: var(--accent);
         }
         
+        .effect-btn i {
+            font-size: 1.2em;
+        }
+        
         .more-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid #444;
-            border-radius: 6px;
-            padding: 8px;
+            border-radius: 8px;
+            padding: 10px;
             cursor: pointer;
             text-align: center;
-            margin-top: 5px;
+            margin-top: 8px;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 8px;
         }
         
         .more-btn:hover {
@@ -425,14 +465,14 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
+            margin-top: 12px;
         }
         
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 50px;
-            height: 24px;
+            width: 55px;
+            height: 28px;
         }
         
         .toggle-switch input {
@@ -450,14 +490,14 @@
             bottom: 0;
             background-color: #444;
             transition: .4s;
-            border-radius: 24px;
+            border-radius: 28px;
         }
         
         .slider:before {
             position: absolute;
             content: "";
-            height: 16px;
-            width: 16px;
+            height: 20px;
+            width: 20px;
             left: 4px;
             bottom: 4px;
             background-color: white;
@@ -470,7 +510,7 @@
         }
         
         input:checked + .slider:before {
-            transform: translateX(26px);
+            transform: translateX(27px);
         }
         
         .framed-image {
@@ -493,13 +533,34 @@
             z-index: 0;
         }
 
-        @media (max-width: 1000px) {
+        /* Анимации */
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent), 0 0 20px var(--accent);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 15px var(--accent), 0 0 20px var(--accent), 0 0 25px var(--accent);
+            }
+        }
+
+        @media (max-width: 1100px) {
             .app-container {
                 flex-direction: column;
             }
             .meme-panel {
                 order: 1;
-                margin-bottom: 15px;
+                margin-bottom: 20px;
             }
             .left-column {
                 order: 2;
@@ -569,7 +630,7 @@
                 <div class="style-controls">
                     <div class="control-group">
                         <label class="control-label">Размер текста:</label>
-                        <input type="range" id="font-size" min="10" max="100" value="42">
+                        <input type="range" id="font-size" min="30" max="100" value="42">
                         <div class="slider-value" id="font-size-value">42px</div>
                     </div>
                     
@@ -638,13 +699,30 @@
                         <span>Текстовые эффекты</span>
                     </div>
                     <div class="panel" id="effects-panel">
-                        <div class="effect-btn" onclick="applyTextEffect('gradient')">Градиент</div>
-                        <div class="effect-btn" onclick="applyTextEffect('neon')">Неон</div>
-                        <div class="effect-btn" onclick="applyTextEffect('outline')">Контур</div>
-                        <div class="effect-btn" onclick="applyTextEffect('shadow')">Тень</div>
-                        <div class="effect-btn" onclick="applyTextEffect('rainbow')">Радуга</div>
-                        <div class="effect-btn" onclick="applyTextEffect('glow')">Свечение</div>
-                        <div class="effect-btn" onclick="applyTextEffect('none')">Нет</div>
+                        <div class="effect-btn" onclick="applyTextEffect('gradient')">
+                            <i class="fas fa-fill-drip"></i>
+                            Градиент
+                        </div>
+                        <div class="effect-btn" onclick="applyTextEffect('neon')">
+                            <i class="fas fa-lightbulb"></i>
+                            Неон
+                        </div>
+                        <div class="effect-btn" onclick="applyTextEffect('outline')">
+                            <i class="fas fa-border-style"></i>
+                            Контур
+                        </div>
+                        <div class="effect-btn" onclick="applyTextEffect('shadow')">
+                            <i class="fas fa-shadow"></i>
+                            Тень
+                        </div>
+                        <div class="effect-btn" onclick="applyTextEffect('rainbow')">
+                            <i class="fas fa-rainbow"></i>
+                            Радуга
+                        </div>
+                        <div class="effect-btn" onclick="applyTextEffect('glow')">
+                            <i class="fas fa-fire"></i>
+                            Свечение
+                        </div>
                     </div>
                 </div>
                 
@@ -654,25 +732,67 @@
                         <span>Фильтры изображения</span>
                     </div>
                     <div class="panel" id="filters-panel">
-                        <div class="effect-btn" onclick="applyFilter('none')">Нет</div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">Ч/Б</div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')">Сепия</div>
-                        <div class="effect-btn" onclick="applyFilter('invert(100%)')">Инверт</div>
-                        <div class="effect-btn" onclick="applyFilter('blur(2px)')">Размытие</div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">Ярче</div>
+                        <div class="effect-btn" onclick="applyFilter('none')">
+                            <i class="fas fa-times"></i>
+                            Нет
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">
+                            <i class="fas fa-moon"></i>
+                            Ч/Б
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')">
+                            <i class="fas fa-umbrella-beach"></i>
+                            Сепия
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('invert(100%)')">
+                            <i class="fas fa-adjust"></i>
+                            Инверт
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('blur(2px)')">
+                            <i class="fas fa-smog"></i>
+                            Размытие
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">
+                            <i class="fas fa-sun"></i>
+                            Ярче
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('contrast(1.5)')">
+                            <i class="fas fa-sliders-h"></i>
+                            Контраст
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('hue-rotate(90deg)')">
+                            <i class="fas fa-paint-brush"></i>
+                            Оттенок
+                        </div>
+                        <div class="effect-btn" onclick="applyFilter('saturate(2)')">
+                            <i class="fas fa-tint"></i>
+                            Насыщенность
+                        </div>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('animations-panel')">
-                        <i class="fas fa-running"></i>
-                        <span>Анимации текста</span>
+                    <div class="more-btn" onclick="togglePanel('text-positions-panel')">
+                        <i class="fas fa-text-height"></i>
+                        <span>Позиции текста</span>
                     </div>
-                    <div class="panel" id="animations-panel">
-                        <div class="effect-btn" onclick="applyAnimation('none')">Нет</div>
-                        <div class="effect-btn" onclick="applyAnimation('blink')">Мерцание</div>
-                        <div class="effect-btn" onclick="applyAnimation('shake')">Дрожание</div>
-                        <div class="effect-btn" onclick="applyAnimation('float')">Плавное</div>
+                    <div class="panel" id="text-positions-panel">
+                        <div class="effect-btn" onclick="setTextPosition('top')">
+                            <i class="fas fa-arrow-up"></i>
+                            Только верх
+                        </div>
+                        <div class="effect-btn" onclick="setTextPosition('bottom')">
+                            <i class="fas fa-arrow-down"></i>
+                            Только низ
+                        </div>
+                        <div class="effect-btn" onclick="setTextPosition('both')">
+                            <i class="fas fa-arrows-alt-v"></i>
+                            Верх и низ
+                        </div>
+                        <div class="effect-btn" onclick="setTextPosition('center')">
+                            <i class="fas fa-align-center"></i>
+                            По центру
+                        </div>
                     </div>
                 </div>
             </div>
@@ -737,6 +857,8 @@
         const frameOverlay = document.getElementById('frame-overlay');
         const framedImage = document.getElementById('framed-image');
         const frameSizeControl = document.getElementById('frame-size-control');
+        const topTextBackground = document.getElementById('top-text-background');
+        const bottomTextBackground = document.getElementById('bottom-text-background');
         
         // Популярные шаблоны мемов
         const memeTemplates = [
@@ -765,10 +887,9 @@
             strokeWidth: '1px',
             textEffect: 'none',
             filter: 'none',
-            animation: 'none',
-            mask: 'none',
             frameEnabled: false,
-            frameSize: 10
+            frameSize: 10,
+            textPosition: 'both'
         };
         
         // Новые шутки
@@ -777,7 +898,12 @@
             ["Когда понедельник", "а ты не готов"],
             ["Когда пятница", "а денег нет"],
             ["Когда зарплата", "а её уже нет"],
-            ["Когда выходной", "и надо убираться"]
+            ["Когда выходной", "и надо убираться"],
+            ["Когда хочется есть", "но лень готовить"],
+            ["Когда хочется спать", "но надо смотреть сериал"],
+            ["Когда много работы", "но интернет зовёт"],
+            ["Когда хочешь похудеть", "но вкусняшки рядом"],
+            ["Когда надо экономить", "но увидел распродажу"]
         ];
         
         // Загрузка случайных шаблонов
@@ -872,27 +998,60 @@
             framedImage.style.filter = filter;
         }
         
-        // Применение анимаций
-        function applyAnimation(animation) {
-            currentStyle.animation = animation;
+        // Установка позиции текста
+        function setTextPosition(position) {
+            currentStyle.textPosition = position;
             
-            topTextElement.style.animation = '';
-            bottomTextElement.style.animation = '';
-            
-            switch(animation) {
-                case 'blink':
-                    topTextElement.style.animation = 'blink 1s infinite';
-                    bottomTextElement.style.animation = 'blink 1s infinite';
+            switch(position) {
+                case 'top':
+                    topTextElement.style.display = 'block';
+                    bottomTextElement.style.display = 'none';
+                    topTextBackground.style.display = 'block';
+                    bottomTextBackground.style.display = 'none';
                     break;
                     
-                case 'shake':
-                    topTextElement.style.animation = 'shake 0.5s infinite';
-                    bottomTextElement.style.animation = 'shake 0.5s infinite';
+                case 'bottom':
+                    topTextElement.style.display = 'none';
+                    bottomTextElement.style.display = 'block';
+                    topTextBackground.style.display = 'none';
+                    bottomTextBackground.style.display = 'block';
                     break;
                     
-                case 'float':
-                    topTextElement.style.animation = 'float 3s ease-in-out infinite';
-                    bottomTextElement.style.animation = 'float 3s ease-in-out infinite alternate';
+                case 'both':
+                    topTextElement.style.display = 'block';
+                    bottomTextElement.style.display = 'block';
+                    topTextBackground.style.display = 'block';
+                    bottomTextBackground.style.display = 'block';
+                    break;
+                    
+                case 'center':
+                    topTextElement.style.display = 'none';
+                    bottomTextElement.style.display = 'none';
+                    topTextBackground.style.display = 'none';
+                    bottomTextBackground.style.display = 'none';
+                    
+                    // Создаем центральный текст, если его нет
+                    let centerText = document.getElementById('center-text');
+                    if (!centerText) {
+                        centerText = document.createElement('div');
+                        centerText.id = 'center-text';
+                        centerText.className = 'meme-text';
+                        centerText.contentEditable = 'true';
+                        centerText.style.position = 'absolute';
+                        centerText.style.top = '50%';
+                        centerText.style.left = '5%';
+                        centerText.style.width = '90%';
+                        centerText.style.textAlign = 'center';
+                        centerText.style.transform = 'translateY(-50%)';
+                        centerText.style.zIndex = '10';
+                        centerText.style.color = currentStyle.textColor;
+                        centerText.style.fontFamily = currentStyle.fontFamily;
+                        centerText.style.fontSize = currentStyle.fontSize;
+                        centerText.style.webkitTextStroke = `${currentStyle.strokeWidth} ${currentStyle.strokeColor}`;
+                        memeContainer.appendChild(centerText);
+                    } else {
+                        centerText.style.display = 'block';
+                    }
                     break;
             }
         }
@@ -925,12 +1084,11 @@
             strokeWidthValue.textContent = currentStyle.strokeWidth;
             
             const textHeight = parseInt(currentStyle.fontSize) * 2;
-            document.getElementById('top-text-background').style.height = textHeight + 'px';
-            document.getElementById('bottom-text-background').style.height = textHeight + 'px';
+            topTextBackground.style.height = textHeight + 'px';
+            bottomTextBackground.style.height = textHeight + 'px';
             
             applyTextEffect(currentStyle.textEffect);
             applyFilter(currentStyle.filter);
-            applyAnimation(currentStyle.animation);
             
             updateFrame();
         }
