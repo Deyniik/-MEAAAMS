@@ -319,6 +319,44 @@
             box-shadow: 0 5px 15px rgba(255,94,98,0.4);
         }
         
+        /* Мемные рамки */
+        .meme-frame {
+            position: absolute;
+            pointer-events: none;
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.8;
+        }
+        
+        .frame-selector {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .frame-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            background-size: cover;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .frame-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .frame-option.selected {
+            border-color: var(--accent);
+            transform: scale(1.1);
+        }
+        
         /* Шрифты с гарантированной поддержкой кириллицы */
         @font-face {
             font-family: 'Impact';
@@ -449,6 +487,17 @@
             </div>
             
             <div class="control-group">
+                <label class="control-label">Мемные рамки:</label>
+                <div class="frame-selector">
+                    <div class="frame-option selected" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"none\"/></svg>')" onclick="setMemeFrame('none')"></div>
+                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\"/></svg>')" onclick="setMemeFrame('solid')"></div>
+                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\" stroke-dasharray=\"10,5\"/></svg>')" onclick="setMemeFrame('dashed')"></div>
+                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\" rx=\"20\"/></svg>')" onclick="setMemeFrame('rounded')"></div>
+                    <div class="frame-option" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><path d=\"M10,10 L90,10 L90,90 L10,90 Z\" fill=\"none\" stroke=\"%23ff5e62\" stroke-width=\"8\"/></svg>')" onclick="setMemeFrame('angled')"></div>
+                </div>
+            </div>
+            
+            <div class="control-group">
                 <div class="templates-header">
                     <label class="control-label">Шаблоны:</label>
                     <button class="refresh-templates" onclick="loadRandomTemplates()">
@@ -481,6 +530,7 @@
                 <div id="bottom-text-background" class="text-background"></div>
                 <div id="top-text" class="meme-text"></div>
                 <div id="bottom-text" class="meme-text"></div>
+                <div id="meme-frame" class="meme-frame"></div>
             </div>
         </div>
     </div>
@@ -501,6 +551,7 @@
         const bottomTextElement = document.getElementById('bottom-text');
         const templatesContainer = document.getElementById('templates-container');
         const memeContainer = document.getElementById('meme-container');
+        const memeFrame = document.getElementById('meme-frame');
         
         // Популярные шаблоны мемов
         const memeTemplates = [
@@ -548,6 +599,34 @@
             });
         }
         
+        // Установка мемной рамки
+        function setMemeFrame(type) {
+            // Удаляем все классы
+            memeFrame.className = 'meme-frame';
+            
+            // Обновляем выбранную рамку в селекторе
+            document.querySelectorAll('.frame-option').forEach(el => el.classList.remove('selected'));
+            event.target.classList.add('selected');
+            
+            switch(type) {
+                case 'none':
+                    memeFrame.style.backgroundImage = 'none';
+                    break;
+                case 'solid':
+                    memeFrame.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="${encodeURIComponent(textColorInput.value)}" stroke-width="8"/></svg>')`;
+                    break;
+                case 'dashed':
+                    memeFrame.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="${encodeURIComponent(textColorInput.value)}" stroke-width="8" stroke-dasharray="10,5"/></svg>')`;
+                    break;
+                case 'rounded':
+                    memeFrame.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="${encodeURIComponent(textColorInput.value)}" stroke-width="8" rx="20"/></svg>')`;
+                    break;
+                case 'angled':
+                    memeFrame.style.backgroundImage = `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="${encodeURIComponent(textColorInput.value)}" stroke-width="8"/></svg>')`;
+                    break;
+            }
+        }
+        
         // Обновление мема в реальном времени
         function updateMeme() {
             topTextElement.textContent = topTextInput.value;
@@ -564,6 +643,14 @@
             const textColor = textColorInput.value;
             topTextElement.style.color = textColor;
             bottomTextElement.style.color = textColor;
+            
+            // Обновляем цвет рамки, если она есть
+            if (!memeFrame.style.backgroundImage.includes('none')) {
+                setMemeFrame(document.querySelector('.frame-option.selected').onclick.toString().match(/'(.*?)'/)[1]);
+            }
+            
+            // Обновляем hex-значение цвета
+            colorHex.textContent = textColor.toUpperCase();
             
             // Обновляем высоту текстовых фонов
             const textHeight = parseInt(fontSize) * 2;
@@ -634,21 +721,18 @@
         // Умная генерация мема
         function generateSmartMeme() {
             if (!memeImage.src) {
-                alert('Сначала загрузи изображение!');
-                return;
+                // Если изображение не загружено, используем случайный шаблон
+                loadRandomTemplates();
+                setTimeout(() => {
+                    const templates = document.querySelectorAll('.template');
+                    if (templates.length > 0) {
+                        useTemplate(templates[Math.floor(Math.random() * templates.length)]);
+                    }
+                }, 100);
             }
             
+            // 50+ смешных мемных шаблонов
             const memeTemplates = [
-                ["Когда увидел цену", "на бензин"],
-                ["Это не баг", "это фича"],
-                ["Я не ленивый", "я на энергосбережении"],
-                ["404", "Мотивация не найдена"],
-                ["Выглядит нормально", "не трогай!"],
-                ["Ctrl+C", "Ctrl+V"],
-                ["Работает? Не трогай!", "Не работает? Все равно не трогай!"],
-                ["Когда кто-то говорит", "что программирование легко"],
-                ["Понедельник:", "Я готов к продуктивной неделе!"],
-                ["Пятница:", "Где неделя?"],
                 ["Когда код работает", "с первого раза"],
                 ["Когда находишь", "старый код"],
                 ["Я на работе:", "*прокручиваю мемы*"],
@@ -658,7 +742,123 @@
                 ["Когда deadline", "уже завтра"],
                 ["Я:", "Должен работать"],
                 ["Также я:", "*прокручиваю мемы*"],
-                ["Когда понимаешь", "что понедельник завтра"]
+                ["Когда понимаешь", "что понедельник завтра"],
+                ["Когда пишешь код", "и он работает без ошибок"],
+                ["Когда кто-то говорит", "что программирование легко"],
+                ["Когда клиент говорит", "'Сделайте как в Figma'"],
+                ["Когда заказчик просит", "'Сделайте красиво'"],
+                ["Когда тестировщик", "нашел баг"],
+                ["Когда фиксишь один баг", "и создаешь два новых"],
+                ["Когда пишешь 'Hello World'", "и чувствуешь себя хакером"],
+                ["Когда Google говорит", "'Попробуйте перезагрузить'"],
+                ["Когда забываешь", "зачем зашел на кухню"],
+                ["Когда видишь ценник", "в Apple Store"],
+                ["Когда открываешь", "банковское приложение"],
+                ["Когда начальник говорит", "'Это займет 5 минут'"],
+                ["Когда клиент присылает", "'Небольшие правки'"],
+                ["Когда дизайнер говорит", "'Это просто'"],
+                ["Когда заказчик просит", "'Сделайте как у Apple'"],
+                ["Когда пишешь код", "в 3 часа ночи"],
+                ["Когда понимаешь", "что забыл сохранить"],
+                ["Когда видишь", "'Обновление системы'"],
+                ["Когда Windows", "решает обновиться"],
+                ["Когда забываешь", "Ctrl+S"],
+                ["Когда пишешь код", "без Google"],
+                ["Когда клиент говорит", "'Мне нужно это вчера'"],
+                ["Когда заказчик просит", "'Сделайте оригинально'"],
+                ["Когда дизайнер рисует", "в Photoshop"],
+                ["Когда тестировщик", "не нашел багов"],
+                ["Когда код", "сам себя написал"],
+                ["Когда понимаешь", "что пора спать"],
+                ["Когда видишь", "свой первый код"],
+                ["Когда клиент говорит", "'Можно бесплатно?'"],
+                ["Когда заказчик просит", "'Сделайте как у конкурентов'"],
+                ["Когда дизайнер", "использует все шрифты"],
+                ["Когда тестировщик", "ставит баг в пятницу"],
+                ["Когда пишешь код", "и он работает"],
+                ["Когда понимаешь", "что пора учиться"],
+                ["Когда видишь", "свой код через год"],
+                ["Когда клиент говорит", "'Это не то, что я хотел'"],
+                ["Когда заказчик просит", "'Сделайте как в кино'"],
+                ["Когда дизайнер", "рисует в Paint"],
+                ["Когда тестировщик", "не может воспроизвести баг"],
+                ["Когда пишешь код", "и не понимаешь как он работает"],
+                ["Когда понимаешь", "что программирование - это магия"],
+                ["Когда видишь", "свой счет за интернет"],
+                ["Когда клиент говорит", "'Я передумал'"],
+                ["Когда заказчик просит", "'Сделайте как у Tesla'"],
+                ["Когда дизайнер", "использует Comic Sans"],
+                ["Когда тестировщик", "находит баг в production"],
+                ["Когда пишешь код", "и он не работает"],
+                ["Когда понимаешь", "что нужно было читать документацию"],
+                ["Когда видишь", "цену на видеокарты"],
+                ["Когда клиент говорит", "'Это срочно'"],
+                ["Когда заказчик просит", "'Сделайте как у Google'"],
+                ["Когда дизайнер"],
+                ["Когда понимаешь", "что нужно было сделать backup"],
+                ["Когда видишь", "размер node_modules"],
+                ["Когда клиент говорит", "'Я не знаю, что хочу'"],
+                ["Когда заказчик просит", "'Сделайте как у Facebook'"],
+                ["Когда дизайнер", "использует только красный"],
+                ["Когда тестировщик", "находит баг в 'Hello World'"],
+                ["Когда пишешь код", "и он делает не то"],
+                ["Когда понимаешь", "что нужно было спать"],
+                ["Когда видишь", "цену на MacBook Pro"],
+                ["Когда клиент говорит", "'Это не то'"],
+                ["Когда заказчик просит", "'Сделайте как у Amazon'"],
+                ["Когда дизайнер", "рисует в PowerPoint"],
+                ["Когда тестировщик", "не может описать баг"],
+                ["Когда пишешь код", "и он делает что-то странное"],
+                ["Когда понимаешь", "что нужно было учить математику"],
+                ["Когда видишь", "свой код после отпуска"],
+                ["Когда клиент говорит", "'Я передумал опять'"],
+                ["Когда заказчик просит", "'Сделайте как у Microsoft'"],
+                ["Когда дизайнер", "использует радугу"],
+                ["Когда тестировщик", "находит баг в стандартной библиотеке"],
+                ["Когда пишешь код", "и он делает то, что нужно"],
+                ["Когда понимаешь", "что это был сон"],
+                ["Когда видишь", "свой первый pull request"],
+                ["Когда клиент говорит", "'Я знаю, как это сделать лучше'"],
+                ["Когда заказчик просит", "'Сделайте как у SpaceX'"],
+                ["Когда дизайнер", "рисует в Minecraft"],
+                ["Когда тестировщик", "не может найти баг, но чувствует его"],
+                ["Когда пишешь код", "и он делает магию"],
+                ["Когда понимаешь", "что нужно было пить кофе"],
+                ["Когда видишь", "свой код после рефакторинга"],
+                ["Когда клиент говорит", "'Это не то, что я имел в виду'"],
+                ["Когда заказчик просит", "'Сделайте как у Netflix'"],
+                ["Когда дизайнер", "использует Wingdings"],
+                ["Когда тестировщик", "находит баг в железе"],
+                ["Когда пишешь код", "и он делает что-то полезное"],
+                ["Когда понимаешь", "что нужно было использовать Python"],
+                ["Когда видишь", "свой код после code review"],
+                ["Когда клиент говорит", "'Можно еще 100 правок?'"],
+                ["Когда заказчик просит", "'Сделайте как у Twitter'"],
+                ["Когда дизайнер", "рисует в Excel"],
+                ["Когда тестировщик", "находит баг в BIOS"],
+                ["Когда пишешь код", "и он делает что-то неожиданное"],
+                ["Когда понимаешь", "что нужно было использовать библиотеку"],
+                ["Когда видишь", "свой код после обновления зависимостей"],
+                ["Когда клиент говорит", "'Это не то, что я ожидал'"],
+                ["Когда заказчик просит", "'Сделайте как у Tesla, но дешевле'"],
+                ["Когда дизайнер", "использует только черный"],
+                ["Когда тестировщик", "находит баг в законе Мура"],
+                ["Когда пишешь код", "и он делает что-то гениальное"],
+                ["Когда понимаешь", "что нужно было просто перезагрузить"],
+                ["Когда видишь", "свой код после хакатона"],
+                ["Когда клиент говорит", "'Можно сделать это бесплатно для опыта?'"],
+                ["Когда заказчик просит", "'Сделайте как у NASA'"],
+                ["Когда дизайнер", "рисует в Notepad"],
+                ["Когда тестировщик", "находит баг в теории относительности"],
+                ["Когда пишешь код", "и он делает что-то эпичное"],
+                ["Когда понимаешь", "что нужно было просто погуглить"],
+                ["Когда видишь", "свой код после 10 чашек кофе"],
+                ["Когда клиент говорит", "'Я передумал еще раз'"],
+                ["Когда заказчик просит", "'Сделайте как у Adobe'"],
+                ["Когда дизайнер", "использует все фильтры Instagram"],
+                ["Когда тестировщик", "находит баг в квантовой физике"],
+                ["Когда пишешь код", "и он делает что-то легендарное"],
+                ["Когда понимаешь", "что нужно было просто поспать"]
             ];
             
             const randomTemplate = memeTemplates[Math.floor(Math.random() * memeTemplates.length)];
@@ -669,6 +869,11 @@
             randomFont();
             textColorInput.value = getRandomColor();
             colorHex.textContent = textColorInput.value.toUpperCase();
+            
+            // Случайная рамка
+            const frameTypes = ['none', 'solid', 'dashed', 'rounded', 'angled'];
+            const randomFrame = frameTypes[Math.floor(Math.random() * frameTypes.length)];
+            setMemeFrame(randomFrame);
             
             updateMeme();
         }
