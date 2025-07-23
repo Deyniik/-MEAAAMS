@@ -16,7 +16,6 @@ const topTextElement = document.getElementById('top-text');
 const bottomTextElement = document.getElementById('bottom-text');
 const templatesContainer = document.getElementById('templates-container');
 const memeContainer = document.getElementById('meme-container');
-const memeMask = document.getElementById('meme-mask');
 const frameToggle = document.getElementById('frame-toggle');
 const frameSizeSlider = document.getElementById('frame-size');
 const frameSizeValue = document.getElementById('frame-size-value');
@@ -30,6 +29,7 @@ const fileUploadPanel = document.getElementById('file-upload-panel');
 const downloadBtn = document.getElementById('download-btn');
 const shareBtn = document.getElementById('share-btn');
 const smartMemeBtn = document.getElementById('smart-meme-btn');
+const formatToggle = document.getElementById('format-toggle');
 
 // Популярные шаблоны мемов
 const memeTemplates = [
@@ -60,7 +60,8 @@ let currentStyle = {
     filter: 'none',
     frameEnabled: false,
     frameSize: 10,
-    textPosition: 'both'
+    textPosition: 'both',
+    squareFormat: false
 };
 
 // Шутки для мемов
@@ -94,7 +95,27 @@ const memeJokes = [
     ["Я не неудачник", "Я прелюдия к успеху"],
     ["Завтра новый день", "И новые проблемы"],
     ["Жизнь - это не боль", "Это хроническое заболевание"],
-    ["Все идет по плану", "Но плана нет"]
+    ["Все идет по плану", "Но плана нет"],
+    ["Я не ошибка", "Я фича"],
+    ["Код не работает", "И я не знаю почему"],
+    ["Код работает", "И я не знаю почему"],
+    ["Пытался исправить баг", "Создал два новых"],
+    ["Гуглил ошибку", "Нашел свой же вопрос"],
+    ["Начал проект", "Уже жалею"],
+    ["Дедлайн близко", "А я в интернете"],
+    ["Сложно быть гением", "Но кто-то же должен"],
+    ["Не стрессую", "Просто так выгляжу"],
+    ["Не ленивый", "Эффективный"],
+    ["Не грустный", "Просто лицо такое"],
+    ["Не кричу", "Просто громко говорю"],
+    ["Не сплю", "Просто тестирую кровать"],
+    ["Не опаздываю", "Просто иду по своему времени"],
+    ["Не забыл", "Просто не сделал"],
+    ["Не ошибся", "Просто альтернативный вариант"],
+    ["Не сдаюсь", "Просто делаю перерыв"],
+    ["Не туплю", "Просто думаю"],
+    ["Не вру", "Просто фантазирую"],
+    ["Не криворукий", "Просто левша"]
 ];
 
 // Функция загрузки случайных шаблонов
@@ -113,7 +134,7 @@ function loadRandomTemplates() {
     });
 }
 
-// Переключение панелей
+// Переключение панелей с анимацией
 function togglePanel(panelId) {
     const panels = document.querySelectorAll('.panel');
     panels.forEach(panel => {
@@ -123,7 +144,13 @@ function togglePanel(panelId) {
     });
     
     const panel = document.getElementById(panelId);
-    panel.style.display = panel.style.display === 'grid' ? 'none' : 'grid';
+    if (panel.style.display === 'grid') {
+        panel.style.display = 'none';
+    } else {
+        panel.style.display = 'grid';
+        // Прокручиваем к панели, если она не видна
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 }
 
 // Применение эффектов к тексту
@@ -317,6 +344,7 @@ function updateMeme() {
     applyFilter(currentStyle.filter);
     
     updateFrame();
+    updateImageFormat();
 }
 
 // Обновление рамки
@@ -344,6 +372,21 @@ function updateFrame() {
         frameOverlay.style.display = 'none';
         framedImage.style.display = 'none';
         memeImage.style.display = 'block';
+    }
+}
+
+// Обновление формата изображения
+function updateImageFormat() {
+    if (currentStyle.squareFormat && memeImage.src) {
+        memeImage.style.objectFit = 'cover';
+        memeImage.style.width = '100%';
+        memeImage.style.height = '100%';
+        framedImage.style.objectFit = 'cover';
+    } else {
+        memeImage.style.objectFit = 'contain';
+        memeImage.style.width = '';
+        memeImage.style.height = '';
+        framedImage.style.objectFit = 'contain';
     }
 }
 
@@ -391,6 +434,7 @@ function handleFileUpload(e, inputElement) {
             memeImage.onload = function() {
                 imageAspectRatio = this.naturalWidth / this.naturalHeight;
                 updateFrame();
+                updateImageFormat();
             };
             
             // Сброс значения input, чтобы можно было загрузить тот же файл снова
@@ -412,6 +456,7 @@ function useTemplate(img) {
     memeImage.onload = function() {
         imageAspectRatio = this.naturalWidth / this.naturalHeight;
         updateFrame();
+        updateImageFormat();
     };
 }
 
@@ -502,6 +547,12 @@ frameSizeSlider.addEventListener('input', function() {
     currentStyle.frameSize = this.value;
     frameSizeValue.textContent = this.value + '%';
     updateFrame();
+});
+
+// Переключение формата изображения
+formatToggle.addEventListener('change', function() {
+    currentStyle.squareFormat = this.checked;
+    updateImageFormat();
 });
 
 // Редактирование текста
