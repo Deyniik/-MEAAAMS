@@ -2,12 +2,19 @@
 <html>
 <head>
     <title>DeyMem Pro+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
             --main-bg: #0f0f0f;
             --container-bg: #1a1a1a;
             --accent: #ff5e62;
             --text: #f0f0f0;
+            --slider-thumb: #ff5e62;
+            --slider-track: #444;
+        }
+        
+        * {
+            box-sizing: border-box;
         }
         
         body {
@@ -19,13 +26,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100vh;
-            box-sizing: border-box;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         
         .logo {
-            font-size: 2.2em;
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
             font-weight: bold;
             margin: 5px 0;
             color: var(--accent);
@@ -37,12 +43,21 @@
             display: flex;
             width: 100%;
             max-width: 900px;
-            height: calc(100vh - 80px);
+            flex-direction: column;
             gap: 15px;
         }
         
+        @media (min-width: 768px) {
+            .app-container {
+                flex-direction: row;
+                height: calc(100vh - 80px);
+            }
+        }
+        
         .controls-panel {
-            width: 300px;
+            width: 100%;
+            max-width: 320px;
+            margin-left: -10px;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -50,6 +65,14 @@
             background: var(--container-bg);
             border-radius: 10px;
             overflow-y: auto;
+        }
+        
+        @media (max-width: 767px) {
+            .controls-panel {
+                max-width: 100%;
+                margin-left: 0;
+                order: 2;
+            }
         }
         
         .meme-panel {
@@ -60,7 +83,6 @@
             position: relative;
         }
         
-        /* Стили для загрузки файлов */
         .file-upload {
             position: relative;
             width: 100%;
@@ -80,7 +102,6 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            box-sizing: border-box;
         }
         
         .file-upload-btn:hover {
@@ -98,7 +119,6 @@
             cursor: pointer;
         }
         
-        /* Стили для текстовых полей */
         .text-inputs {
             display: flex;
             flex-direction: column;
@@ -113,10 +133,8 @@
             color: var(--text);
             font-size: 0.9em;
             width: 100%;
-            box-sizing: border-box;
         }
         
-        /* Сетка для контролов */
         .style-controls {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -134,7 +152,6 @@
             opacity: 0.8;
         }
         
-        /* Выбор шрифта */
         .font-select-container {
             display: flex;
             gap: 5px;
@@ -172,7 +189,6 @@
             font-family: inherit;
         }
         
-        /* Цветовые контролы */
         .color-control {
             display: flex;
             align-items: center;
@@ -188,12 +204,45 @@
             cursor: pointer;
         }
         
+        /* Стилизованные ползунки */
         input[type="range"] {
+            -webkit-appearance: none;
             width: 100%;
-            margin-top: 5px;
+            height: 8px;
+            background: var(--slider-track);
+            border-radius: 4px;
+            margin: 10px 0;
         }
         
-        /* Шаблоны */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+        }
+        
+        .slider-value {
+            text-align: center;
+            font-size: 0.8em;
+            margin-top: -5px;
+        }
+        
         .templates-header {
             display: flex;
             justify-content: space-between;
@@ -240,7 +289,6 @@
             transform: scale(1.03);
         }
         
-        /* Контейнер мема */
         #meme-container {
             position: relative;
             background: black;
@@ -249,8 +297,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            max-height: 100%;
+            max-height: 70vh;
             max-width: 100%;
+            aspect-ratio: 1;
+        }
+        
+        @media (min-width: 768px) {
+            #meme-container {
+                max-height: 100%;
+                aspect-ratio: unset;
+            }
         }
         
         #meme-image {
@@ -259,7 +315,6 @@
             display: none;
         }
         
-        /* Текст мема */
         .meme-text {
             position: absolute;
             width: 90%;
@@ -282,7 +337,6 @@
             bottom: 10px;
         }
         
-        /* Фон для текста */
         .text-background {
             position: absolute;
             left: 0;
@@ -307,7 +361,6 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         
-        /* Кнопки действий */
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -334,7 +387,6 @@
             box-shadow: 0 5px 15px rgba(255,94,98,0.4);
         }
         
-        /* Обводка текста */
         .stroke-control {
             display: flex;
             align-items: center;
@@ -345,8 +397,8 @@
             width: 60px;
         }
         
-        /* Дополнительные эффекты */
-        .effects-panel {
+        /* Панели эффектов */
+        .panel {
             display: none;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
@@ -361,6 +413,7 @@
             cursor: pointer;
             text-align: center;
             transition: all 0.2s;
+            font-size: 0.8em;
         }
         
         .effect-btn:hover {
@@ -368,42 +421,6 @@
             border-color: var(--accent);
         }
         
-        /* Мемные маски */
-        .masks-panel {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .mask {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: contain;
-            cursor: pointer;
-            background: rgba(255,255,255,0.1);
-            border-radius: 6px;
-            padding: 5px;
-            box-sizing: border-box;
-        }
-        
-        /* Фильтры изображений */
-        .filters-panel {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .filter {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: cover;
-            cursor: pointer;
-            border-radius: 6px;
-        }
-        
-        /* Кнопка "Еще" */
         .more-btn {
             background: rgba(255,255,255,0.05);
             border: 1px solid #444;
@@ -413,6 +430,10 @@
             text-align: center;
             margin-top: 5px;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
         
         .more-btn:hover {
@@ -420,23 +441,56 @@
             border-color: var(--accent);
         }
         
-        /* Анимации */
-        .animations-panel {
-            display: none;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .animation {
+        /* Мемные маски */
+        .mask-option {
             width: 100%;
-            aspect-ratio: 1;
+            height: 60px;
             object-fit: contain;
             cursor: pointer;
-            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
             border-radius: 6px;
             padding: 5px;
             box-sizing: border-box;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+        
+        .mask-option:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        /* Анимации */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes rainbow {
+            0% { color: red; }
+            14% { color: orange; }
+            28% { color: yellow; }
+            42% { color: green; }
+            57% { color: blue; }
+            71% { color: indigo; }
+            85% { color: violet; }
+            100% { color: red; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px currentColor; }
+            50% { text-shadow: 0 0 20px currentColor; }
         }
     </style>
     <!-- Подключение шрифтов -->
@@ -494,7 +548,7 @@
                 <div class="control-group">
                     <label class="control-label">Размер текста:</label>
                     <input type="range" id="font-size" min="10" max="100" value="42">
-                    <div style="text-align: center; font-size: 0.8em;" id="font-size-value">42px</div>
+                    <div class="slider-value" id="font-size-value">42px</div>
                 </div>
                 
                 <div class="control-group">
@@ -510,53 +564,57 @@
                 <label class="control-label">Обводка текста:</label>
                 <div class="stroke-control">
                     <input type="color" id="stroke-color" value="#000000">
-                    <input type="range" id="stroke-width" min="0" max="5" value="1">
+                    <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
                     <span id="stroke-width-value">1px</span>
                 </div>
             </div>
             
             <!-- Эффекты текста -->
             <div class="control-group">
-                <div class="more-btn" onclick="togglePanel('effects-panel')">🎨</div>
-                <div class="effects-panel" id="effects-panel">
+                <div class="more-btn" onclick="togglePanel('effects-panel')">
+                    <span>🎨 Эффекты</span>
+                </div>
+                <div class="panel" id="effects-panel">
                     <div class="effect-btn" onclick="applyTextEffect('gradient')">Градиент</div>
                     <div class="effect-btn" onclick="applyTextEffect('neon')">Неон</div>
                     <div class="effect-btn" onclick="applyTextEffect('outline')">Контур</div>
                     <div class="effect-btn" onclick="applyTextEffect('shadow')">Тень</div>
+                    <div class="effect-btn" onclick="applyTextEffect('rainbow')">Радуга</div>
+                    <div class="effect-btn" onclick="applyTextEffect('glow')">Свечение</div>
                     <div class="effect-btn" onclick="applyTextEffect('none')">Нет</div>
-                </div>
-            </div>
-            
-            <!-- Мемные маски -->
-            <div class="control-group">
-                <div class="more-btn" onclick="togglePanel('masks-panel')">👓</div>
-                <div class="masks-panel" id="masks-panel">
-                    <img src="https://i.imgur.com/WqJj3Jt.png" class="mask" onclick="applyMask(this.src, 'glasses')">
-                    <img src="https://i.imgur.com/5X5wX5x.png" class="mask" onclick="applyMask(this.src, 'mustache')">
-                    <img src="https://i.imgur.com/8X8X8X8.png" class="mask" onclick="applyMask(this.src, 'hat')">
-                    <img src="https://i.imgur.com/9X9X9X9.png" class="mask" onclick="applyMask(this.src, 'crown')">
-                    <img src="https://i.imgur.com/7X7X7X7.png" class="mask" onclick="applyMask(this.src, 'dog')">
-                    <img src="https://i.imgur.com/6X6X6X6.png" class="mask" onclick="applyMask(this.src, 'none')">
                 </div>
             </div>
             
             <!-- Фильтры изображений -->
             <div class="control-group">
-                <div class="more-btn" onclick="togglePanel('filters-panel')">🌅</div>
-                <div class="filters-panel" id="filters-panel">
+                <div class="more-btn" onclick="togglePanel('filters-panel')">
+                    <span>🌅 Фильтры</span>
+                </div>
+                <div class="panel" id="filters-panel">
                     <div class="effect-btn" onclick="applyFilter('none')">Нет</div>
                     <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">Ч/Б</div>
                     <div class="effect-btn" onclick="applyFilter('sepia(100%)')">Сепия</div>
                     <div class="effect-btn" onclick="applyFilter('invert(100%)')">Инверт</div>
                     <div class="effect-btn" onclick="applyFilter('blur(2px)')">Размытие</div>
                     <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">Ярче</div>
+                    <div class="effect-btn" onclick="applyFilter('contrast(200%)')">Контраст</div>
+                    <div class="effect-btn" onclick="applyFilter('hue-rotate(90deg)')">Hue</div>
+                    <div class="effect-btn" onclick="applyFilter('saturate(300%)')">Насыщенность</div>
+                    <div class="effect-btn" onclick="applyFilter('opacity(0.7)')">Прозрачность</div>
+                    <div class="effect-btn" onclick="applyFilter('drop-shadow(5px 5px 5px #222)')">Тень</div>
+                    <div class="effect-btn" onclick="applyFilter('sepia(50%) hue-rotate(30deg)')">Винтаж</div>
+                    <div class="effect-btn" onclick="applyFilter('brightness(1.2) contrast(1.2) saturate(1.5)')">Кино</div>
+                    <div class="effect-btn" onclick="applyFilter('grayscale(50%) brightness(1.2)')">Гранж</div>
+                    <div class="effect-btn" onclick="applyFilter('hue-rotate(180deg)')">Инопланетный</div>
                 </div>
             </div>
             
             <!-- Анимации -->
             <div class="control-group">
-                <div class="more-btn" onclick="togglePanel('animations-panel')">✨</div>
-                <div class="animations-panel" id="animations-panel">
+                <div class="more-btn" onclick="togglePanel('animations-panel')">
+                    <span>✨ Анимации</span>
+                </div>
+                <div class="panel" id="animations-panel">
                     <div class="effect-btn" onclick="applyAnimation('none')">Нет</div>
                     <div class="effect-btn" onclick="applyAnimation('blink')">Мерцание</div>
                     <div class="effect-btn" onclick="applyAnimation('shake')">Дрожание</div>
@@ -698,7 +756,12 @@
             ["Когда находишь деревню", "и грабишь её"],
             ["Когда видишь эндермена", "*смотрит вниз*"],
             ["Когда заходишь в Nether", "и сразу умираешь"],
-            ["Когда строишь автоматическую ферму", "и она не работает"]
+            ["Когда строишь автоматическую ферму", "и она не работает"],
+            ["Когда находишь сокровищницу", "а там только гнилая плоть"],
+            ["Когда пытаешься убить дракона", "и падаешь в энд"],
+            ["Когда играешь с друзьями", "и они взрывают твой дом"],
+            ["Когда строишь что-то эпичное", "и крипер взрывает"],
+            ["Когда играешь в выживание", "и переключаешься на креатив"]
         ];
         
         const youtubeJokes = [
@@ -721,7 +784,9 @@
             ["Когда записываешь песню", "и все ненавидят"],
             ["Когда делаешь таймлапс", "и ничего не видно"],
             ["Когда снимаешь урок", "и сам не понимаешь тему"],
-            ["Когда записываешь подкаст", "и микрофон не работает"]
+            ["Когда записываешь подкаст", "и микрофон не работает"],
+            ["Когда просишь комменты", "а там только спам"],
+            ["Когда делаешь коллаб", "а тебя игнорят"]
         ];
         
         // Все шутки вместе
@@ -746,6 +811,13 @@
         
         // Переключение панелей
         function togglePanel(panelId) {
+            const panels = document.querySelectorAll('.panel');
+            panels.forEach(panel => {
+                if (panel.id !== panelId) {
+                    panel.style.display = 'none';
+                }
+            });
+            
             const panel = document.getElementById(panelId);
             panel.style.display = panel.style.display === 'grid' ? 'none' : 'grid';
         }
@@ -758,9 +830,11 @@
             topTextElement.style.background = '';
             topTextElement.style.webkitTextFillColor = '';
             topTextElement.style.textShadow = '';
+            topTextElement.style.animation = '';
             bottomTextElement.style.background = '';
             bottomTextElement.style.webkitTextFillColor = '';
             bottomTextElement.style.textShadow = '';
+            bottomTextElement.style.animation = '';
             
             switch(effect) {
                 case 'gradient':
@@ -791,19 +865,17 @@
                     topTextElement.style.textShadow = '3px 3px 0 rgba(0,0,0,0.5)';
                     bottomTextElement.style.textShadow = '3px 3px 0 rgba(0,0,0,0.5)';
                     break;
+                    
+                case 'rainbow':
+                    topTextElement.style.animation = 'rainbow 3s linear infinite';
+                    bottomTextElement.style.animation = 'rainbow 3s linear infinite';
+                    break;
+                    
+                case 'glow':
+                    topTextElement.style.animation = 'glow 2s ease-in-out infinite alternate';
+                    bottomTextElement.style.animation = 'glow 2s ease-in-out infinite alternate';
+                    break;
             }
-        }
-        
-        // Применение масок
-        function applyMask(src, type) {
-            currentStyle.mask = type;
-            
-            if (type === 'none') {
-                memeMask.innerHTML = '';
-                return;
-            }
-            
-            memeMask.innerHTML = `<img src="${src}" style="width: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">`;
         }
         
         // Применение фильтров
@@ -1067,7 +1139,7 @@
         });
         strokeColorInput.addEventListener('input', updateMeme);
         strokeWidthSlider.addEventListener('input', function() {
-            strokeWidthValue.textContent = this.value + 'px';
+            strokeWidthValue.textContent = parseFloat(this.value).toFixed(1) + 'px';
             updateMeme();
         });
         
@@ -1081,119 +1153,6 @@
         // Инициализация
         loadRandomTemplates();
         updateMeme();
-        
-        // CSS анимации
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0; }
-            }
-            
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-            
-            @keyframes float {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-10px); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DeyMem Pro+</title>
-    <style>
-        /* Все предыдущие стили остаются без изменений */
-        /* ... */
-        
-        /* Добавляем стили для масок */
-        .mask-option {
-            width: 100%;
-            height: 60px;
-            object-fit: contain;
-            cursor: pointer;
-            border: 1px solid #444;
-            border-radius: 6px;
-            padding: 5px;
-            box-sizing: border-box;
-            background: rgba(255,255,255,0.1);
-            transition: all 0.2s;
-        }
-        
-        .mask-option:hover {
-            border-color: var(--accent);
-            transform: scale(1.05);
-        }
-        
-        /* Иконки для кнопок */
-        .icon-btn {
-            font-size: 1.5em;
-            padding: 5px;
-            text-align: center;
-        }
-    </style>
-    <!-- Все подключения шрифтов остаются -->
-    <!-- ... -->
-</head>
-<body>
-    <!-- Предыдущая разметка остается -->
-    <!-- ... -->
-    
-    <!-- Обновленная секция масок -->
-    <div class="control-group">
-        <div class="more-btn icon-btn" onclick="togglePanel('masks-panel')">👓</div>
-        <div class="masks-panel" id="masks-panel">
-            <img src="https://i.ibb.co/7QZ7QZ7/glasses.png" class="mask-option" onclick="applyMask(this.src, 'glasses')" alt="Очки">
-            <img src="https://i.ibb.co/0jQ7J7Q/mustache.png" class="mask-option" onclick="applyMask(this.src, 'mustache')" alt="Усы">
-            <img src="https://i.ibb.co/0jQ7J7Q/hat.png" class="mask-option" onclick="applyMask(this.src, 'hat')" alt="Кепка">
-            <img src="https://i.ibb.co/0jQ7J7Q/crown.png" class="mask-option" onclick="applyMask(this.src, 'crown')" alt="Корона">
-            <img src="https://i.ibb.co/0jQ7J7Q/dog.png" class="mask-option" onclick="applyMask(this.src, 'dog')" alt="Собака">
-            <div class="effect-btn" onclick="applyMask('', 'none')">Убрать</div>
-        </div>
-    </div>
-
-    <script>
-        // Обновленная функция для масок
-        function applyMask(src, type) {
-            currentStyle.mask = type;
-            
-            if (type === 'none') {
-                memeMask.innerHTML = '';
-                return;
-            }
-            
-            // Позиционируем маску в зависимости от типа
-            let style = '';
-            switch(type) {
-                case 'glasses':
-                    style = 'width: 150px; top: 40%; left: 50%; transform: translate(-50%, -50%);';
-                    break;
-                case 'mustache':
-                    style = 'width: 120px; top: 55%; left: 50%; transform: translate(-50%, -50%);';
-                    break;
-                case 'hat':
-                    style = 'width: 180px; top: 30%; left: 50%; transform: translate(-50%, -50%);';
-                    break;
-                case 'crown':
-                    style = 'width: 150px; top: 25%; left: 50%; transform: translate(-50%, -50%);';
-                    break;
-                case 'dog':
-                    style = 'width: 200px; bottom: 10%; left: 50%; transform: translate(-50%, 0);';
-                    break;
-            }
-            
-            memeMask.innerHTML = `<img src="${src}" style="position: absolute; ${style}">`;
-        }
-
-        // Все остальные функции остаются без изменений
-        // ...
     </script>
 </body>
 </html>
