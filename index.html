@@ -22,9 +22,9 @@
                     <i class="fas fa-image"></i>
                     <span>Изображение</span>
                 </div>
-                <div class="file-upload">
+                <div class="file-upload" id="file-upload-panel" style="display: none;">
                     <label class="file-upload-btn">
-                        <i class="fas fa-upload"></i> Загрузить фото
+                        <i class="fas fa-upload"></i> Загрузить новое фото
                         <input type="file" id="upload" accept="image/*">
                     </label>
                 </div>
@@ -93,10 +93,13 @@
         <div class="meme-panel">
             <div id="meme-container">
                 <div id="upload-placeholder">
-                    <button id="upload-btn" class="upload-placeholder-btn">
-                        <i class="fas fa-upload"></i>
-                        <span>Загрузить фото</span>
-                    </button>
+                    <label class="upload-label">
+                        <input type="file" id="upload-main" accept="image/*">
+                        <div class="upload-content">
+                            <i class="fas fa-upload"></i>
+                            <span>Загрузить фото</span>
+                        </div>
+                    </label>
                 </div>
                 <img id="meme-image" src="" style="display: none;">
                 <div id="top-text-background" class="text-background"></div>
@@ -278,13 +281,13 @@
                 </div>
                 
                 <div class="action-buttons">
-                    <button onclick="generateSmartMeme()">
+                    <button id="smart-meme-btn" onclick="generateSmartMeme()">
                         <i class="fas fa-brain"></i> Умный мем
                     </button>
-                    <button onclick="downloadMeme()">
+                    <button id="download-btn" onclick="downloadMeme()" disabled>
                         <i class="fas fa-download"></i> Скачать
                     </button>
-                    <button onclick="shareMeme()">
+                    <button id="share-btn" onclick="shareMeme()" disabled>
                         <i class="fas fa-share-alt"></i> Поделиться
                     </button>
                 </div>
@@ -296,26 +299,3 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-<div class="control-panel">
-    <div class="panel-title">
-        <i class="fas fa-image"></i>
-        <span>Изображение</span>
-    </div>
-    <div class="file-upload" id="file-upload-panel" style="display: none;">
-        <label class="file-upload-btn">
-            <i class="fas fa-upload"></i> Загрузить новое фото
-            <input type="file" id="upload" accept="image/*">
-        </label>
-    </div>
-    
-    <!-- Остальные элементы панели -->
-    
-    <div class="action-buttons">
-        <button id="download-btn" onclick="downloadMeme()" disabled>
-            <i class="fas fa-download"></i> Скачать
-        </button>
-        <button id="share-btn" onclick="shareMeme()" disabled>
-            <i class="fas fa-share-alt"></i> Поделиться
-        </button>
-    </div>
-</div>
