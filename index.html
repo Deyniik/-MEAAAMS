@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>DeyMem Pro</title>
+    <title>DeyMem Pro+</title>
     <style>
         :root {
             --main-bg: #0f0f0f;
@@ -57,8 +57,10 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
+            position: relative;
         }
         
+        /* Стили для загрузки файлов */
         .file-upload {
             position: relative;
             width: 100%;
@@ -96,6 +98,7 @@
             cursor: pointer;
         }
         
+        /* Стили для текстовых полей */
         .text-inputs {
             display: flex;
             flex-direction: column;
@@ -113,6 +116,7 @@
             box-sizing: border-box;
         }
         
+        /* Сетка для контролов */
         .style-controls {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -130,6 +134,7 @@
             opacity: 0.8;
         }
         
+        /* Выбор шрифта */
         .font-select-container {
             display: flex;
             gap: 5px;
@@ -167,6 +172,7 @@
             font-family: inherit;
         }
         
+        /* Цветовые контролы */
         .color-control {
             display: flex;
             align-items: center;
@@ -187,6 +193,7 @@
             margin-top: 5px;
         }
         
+        /* Шаблоны */
         .templates-header {
             display: flex;
             justify-content: space-between;
@@ -233,6 +240,7 @@
             transform: scale(1.03);
         }
         
+        /* Контейнер мема */
         #meme-container {
             position: relative;
             background: black;
@@ -251,6 +259,7 @@
             display: none;
         }
         
+        /* Текст мема */
         .meme-text {
             position: absolute;
             width: 90%;
@@ -261,7 +270,7 @@
             padding: 5px;
             cursor: text;
             user-select: text;
-            -webkit-text-stroke: 1px black; /* Обводка текста */
+            -webkit-text-stroke: 1px black;
             text-stroke: 1px black;
         }
         
@@ -273,6 +282,7 @@
             bottom: 10px;
         }
         
+        /* Фон для текста */
         .text-background {
             position: absolute;
             left: 0;
@@ -297,6 +307,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         
+        /* Кнопки действий */
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -323,7 +334,7 @@
             box-shadow: 0 5px 15px rgba(255,94,98,0.4);
         }
         
-        /* Настройки обводки текста */
+        /* Обводка текста */
         .stroke-control {
             display: flex;
             align-items: center;
@@ -333,32 +344,115 @@
         #stroke-width {
             width: 60px;
         }
+        
+        /* Дополнительные эффекты */
+        .effects-panel {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .effect-btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .effect-btn:hover {
+            background: rgba(255,94,98,0.2);
+            border-color: var(--accent);
+        }
+        
+        /* Мемные маски */
+        .masks-panel {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .mask {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        
+        /* Фильтры изображений */
+        .filters-panel {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .filter {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        
+        /* Кнопка "Еще" */
+        .more-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 8px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 5px;
+            transition: all 0.2s;
+        }
+        
+        .more-btn:hover {
+            background: rgba(255,94,98,0.1);
+            border-color: var(--accent);
+        }
+        
+        /* Анимации */
+        .animations-panel {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .animation {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            cursor: pointer;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            padding: 5px;
+            box-sizing: border-box;
+        }
     </style>
-    <!-- Подключение шрифтов с поддержкой кириллицы -->
+    <!-- Подключение шрифтов -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700;800&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Podkova:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
 </head>
 <body>
-    <div class="logo">DeyMem Pro</div>
+    <div class="logo">DeyMem Pro+</div>
     
     <div class="app-container">
         <div class="controls-panel">
@@ -391,11 +485,6 @@
                         <option value="'Jura', sans-serif" style="font-family: 'Jura', sans-serif">Jura Bold</option>
                         <option value="'Podkova', serif" style="font-family: 'Podkova', serif">Podkova Bold</option>
                         <option value="'Comic Sans MS', cursive" style="font-family: 'Comic Sans MS', cursive">Comic Sans</option>
-                        <option value="'Courier New', monospace" style="font-family: 'Courier New', monospace">Courier New</option>
-                        <option value="'Neucha', cursive" style="font-family: 'Neucha', cursive">Neucha</option>
-                        <option value="'Bad Script', cursive" style="font-family: 'Bad Script', cursive">Bad Script</option>
-                        <option value="'Marck Script', cursive" style="font-family: 'Marck Script', cursive">Marck Script</option>
-                        <option value="'Underdog', cursive" style="font-family: 'Underdog', cursive">Underdog</option>
                     </select>
                     <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
                 </div>
@@ -423,6 +512,55 @@
                     <input type="color" id="stroke-color" value="#000000">
                     <input type="range" id="stroke-width" min="0" max="5" value="1">
                     <span id="stroke-width-value">1px</span>
+                </div>
+            </div>
+            
+            <!-- Эффекты текста -->
+            <div class="control-group">
+                <div class="more-btn" onclick="togglePanel('effects-panel')">🎨</div>
+                <div class="effects-panel" id="effects-panel">
+                    <div class="effect-btn" onclick="applyTextEffect('gradient')">Градиент</div>
+                    <div class="effect-btn" onclick="applyTextEffect('neon')">Неон</div>
+                    <div class="effect-btn" onclick="applyTextEffect('outline')">Контур</div>
+                    <div class="effect-btn" onclick="applyTextEffect('shadow')">Тень</div>
+                    <div class="effect-btn" onclick="applyTextEffect('none')">Нет</div>
+                </div>
+            </div>
+            
+            <!-- Мемные маски -->
+            <div class="control-group">
+                <div class="more-btn" onclick="togglePanel('masks-panel')">👓</div>
+                <div class="masks-panel" id="masks-panel">
+                    <img src="https://i.imgur.com/WqJj3Jt.png" class="mask" onclick="applyMask(this.src, 'glasses')">
+                    <img src="https://i.imgur.com/5X5wX5x.png" class="mask" onclick="applyMask(this.src, 'mustache')">
+                    <img src="https://i.imgur.com/8X8X8X8.png" class="mask" onclick="applyMask(this.src, 'hat')">
+                    <img src="https://i.imgur.com/9X9X9X9.png" class="mask" onclick="applyMask(this.src, 'crown')">
+                    <img src="https://i.imgur.com/7X7X7X7.png" class="mask" onclick="applyMask(this.src, 'dog')">
+                    <img src="https://i.imgur.com/6X6X6X6.png" class="mask" onclick="applyMask(this.src, 'none')">
+                </div>
+            </div>
+            
+            <!-- Фильтры изображений -->
+            <div class="control-group">
+                <div class="more-btn" onclick="togglePanel('filters-panel')">🌅</div>
+                <div class="filters-panel" id="filters-panel">
+                    <div class="effect-btn" onclick="applyFilter('none')">Нет</div>
+                    <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">Ч/Б</div>
+                    <div class="effect-btn" onclick="applyFilter('sepia(100%)')">Сепия</div>
+                    <div class="effect-btn" onclick="applyFilter('invert(100%)')">Инверт</div>
+                    <div class="effect-btn" onclick="applyFilter('blur(2px)')">Размытие</div>
+                    <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">Ярче</div>
+                </div>
+            </div>
+            
+            <!-- Анимации -->
+            <div class="control-group">
+                <div class="more-btn" onclick="togglePanel('animations-panel')">✨</div>
+                <div class="animations-panel" id="animations-panel">
+                    <div class="effect-btn" onclick="applyAnimation('none')">Нет</div>
+                    <div class="effect-btn" onclick="applyAnimation('blink')">Мерцание</div>
+                    <div class="effect-btn" onclick="applyAnimation('shake')">Дрожание</div>
+                    <div class="effect-btn" onclick="applyAnimation('float')">Плавное</div>
                 </div>
             </div>
             
@@ -459,6 +597,7 @@
                 <div id="bottom-text-background" class="text-background"></div>
                 <div id="top-text" class="meme-text" contenteditable="true"></div>
                 <div id="bottom-text" class="meme-text" contenteditable="true"></div>
+                <div id="meme-mask" style="position: absolute; pointer-events: none; z-index: 3;"></div>
             </div>
         </div>
     </div>
@@ -482,6 +621,7 @@
         const bottomTextElement = document.getElementById('bottom-text');
         const templatesContainer = document.getElementById('templates-container');
         const memeContainer = document.getElementById('meme-container');
+        const memeMask = document.getElementById('meme-mask');
         
         // Популярные шаблоны мемов
         const memeTemplates = [
@@ -507,8 +647,85 @@
             fontSize: '42px',
             textColor: '#ffffff',
             strokeColor: '#000000',
-            strokeWidth: '1px'
+            strokeWidth: '1px',
+            textEffect: 'none',
+            filter: 'none',
+            animation: 'none',
+            mask: 'none'
         };
+        
+        // Новые шутки (60+)
+        const lifeJokes = [
+            ["Когда просыпаешься", "а надо на работу"],
+            ["Когда понедельник", "а ты не готов"],
+            ["Когда пятница", "а денег нет"],
+            ["Когда зарплата", "а её уже нет"],
+            ["Когда выходной", "и надо убираться"],
+            ["Когда отпуск", "и ты заболел"],
+            ["Когда покупаешь новое", "и оно ломается"],
+            ["Когда готовишь", "и всё горит"],
+            ["Когда уборка", "и гости приходят"],
+            ["Когда спишь", "и соседи шумят"],
+            ["Когда отдыхаешь", "и звонит начальник"],
+            ["Когда выходной", "и просыпаешься в 6 утра"],
+            ["Когда праздник", "и все работают"],
+            ["Когда покупаешь еду", "и забываешь её дома"],
+            ["Когда готовишься к встрече", "и её отменяют"],
+            ["Когда ждёшь гостей", "и они не приходят"],
+            ["Когда покупаешь билеты", "и самолёт отменяют"],
+            ["Когда едешь в отпуск", "и забываешь паспорт"],
+            ["Когда собираешь чемодан", "и всё не помещается"],
+            ["Когда приходишь в магазин", "и он закрыт"],
+            ["Когда находишь деньги", "а это старые джинсы"],
+            ["Когда заряжаешь телефон", "и забываешь включить"],
+            ["Когда делаешь backup", "и он не работает"],
+            ["Когда ищешь телефон", "а он в руке"],
+            ["Когда долго грузится", "и ты уже передумал"],
+            ["Когда долго ждешь", "а оно того не стоит"],
+            ["Когда думаешь, что помнишь", "а оказывается нет"],
+            ["Когда опаздываешь", "и все ждут"],
+            ["Когда приходишь вовремя", "а все опаздывают"],
+            ["Когда делаешь все правильно", "а оказывается нет"]
+        ];
+        
+        const minecraftJokes = [
+            ["Когда находишь алмазы", "и забыл кирку"],
+            ["Крипер:", "*подкрадывается*"],
+            ["Я:", "*строю дом*"],
+            ["Также я:", "*поджигаю его*"],
+            ["Когда играешь в хардкор", "и умираешь от падения"],
+            ["Когда копаешь вниз", "и падаешь в лаву"],
+            ["Когда находишь деревню", "и грабишь её"],
+            ["Когда видишь эндермена", "*смотрит вниз*"],
+            ["Когда заходишь в Nether", "и сразу умираешь"],
+            ["Когда строишь автоматическую ферму", "и она не работает"]
+        ];
+        
+        const youtubeJokes = [
+            ["Когда снимаешь видео", "и забываешь включить запись"],
+            ["Когда набираешь 1000 подписчиков", "и YouTube удаляет канал"],
+            ["Когда делаешь стрим", "и интернет отключается"],
+            ["Когда загружаешь видео", "и получаешь копирайт"],
+            ["Когда просишь 'лайк и подписку'", "и все дизлайкают"],
+            ["Когда делаешь обзор", "и продукт ломается"],
+            ["Когда снимаешь челлендж", "и получаешь травму"],
+            ["Когда записываешь подкаст", "и все молчат"],
+            ["Когда делаешь распаковку", "и там пустая коробка"],
+            ["Когда снимаешь влог", "и камера разряжается"],
+            ["Когда набираешь 1M просмотров", "и видео удаляют"],
+            ["Когда делаешь мемный обзор", "и твой мем в нём"],
+            ["Когда снимаешь реакцию", "и ничего не происходит"],
+            ["Когда записываешь летсплей", "и умираешь на первой минуте"],
+            ["Когда делаешь турнир", "и все вылетают"],
+            ["Когда снимаешь скетч", "и никто не смеётся"],
+            ["Когда записываешь песню", "и все ненавидят"],
+            ["Когда делаешь таймлапс", "и ничего не видно"],
+            ["Когда снимаешь урок", "и сам не понимаешь тему"],
+            ["Когда записываешь подкаст", "и микрофон не работает"]
+        ];
+        
+        // Все шутки вместе
+        const allJokes = [...lifeJokes, ...minecraftJokes, ...youtubeJokes];
         
         // Загрузка случайных шаблонов
         function loadRandomTemplates() {
@@ -525,6 +742,100 @@
                 img.onclick = function() { useTemplate(this); };
                 templatesContainer.appendChild(img);
             });
+        }
+        
+        // Переключение панелей
+        function togglePanel(panelId) {
+            const panel = document.getElementById(panelId);
+            panel.style.display = panel.style.display === 'grid' ? 'none' : 'grid';
+        }
+        
+        // Применение эффектов к тексту
+        function applyTextEffect(effect) {
+            currentStyle.textEffect = effect;
+            
+            // Сбрасываем все эффекты
+            topTextElement.style.background = '';
+            topTextElement.style.webkitTextFillColor = '';
+            topTextElement.style.textShadow = '';
+            bottomTextElement.style.background = '';
+            bottomTextElement.style.webkitTextFillColor = '';
+            bottomTextElement.style.textShadow = '';
+            
+            switch(effect) {
+                case 'gradient':
+                    const gradient = `linear-gradient(to right, ${textColorInput.value}, ${getRandomColor()})`;
+                    topTextElement.style.background = gradient;
+                    topTextElement.style.webkitBackgroundClip = 'text';
+                    topTextElement.style.webkitTextFillColor = 'transparent';
+                    bottomTextElement.style.background = gradient;
+                    bottomTextElement.style.webkitBackgroundClip = 'text';
+                    bottomTextElement.style.webkitTextFillColor = 'transparent';
+                    break;
+                    
+                case 'neon':
+                    const neonColor = textColorInput.value || '#ffffff';
+                    const neonShadow = `0 0 5px ${neonColor}, 0 0 10px ${neonColor}, 0 0 20px ${neonColor}`;
+                    topTextElement.style.textShadow = neonShadow;
+                    bottomTextElement.style.textShadow = neonShadow;
+                    break;
+                    
+                case 'outline':
+                    topTextElement.style.webkitTextStroke = `2px ${textColorInput.value}`;
+                    topTextElement.style.webkitTextFillColor = 'transparent';
+                    bottomTextElement.style.webkitTextStroke = `2px ${textColorInput.value}`;
+                    bottomTextElement.style.webkitTextFillColor = 'transparent';
+                    break;
+                    
+                case 'shadow':
+                    topTextElement.style.textShadow = '3px 3px 0 rgba(0,0,0,0.5)';
+                    bottomTextElement.style.textShadow = '3px 3px 0 rgba(0,0,0,0.5)';
+                    break;
+            }
+        }
+        
+        // Применение масок
+        function applyMask(src, type) {
+            currentStyle.mask = type;
+            
+            if (type === 'none') {
+                memeMask.innerHTML = '';
+                return;
+            }
+            
+            memeMask.innerHTML = `<img src="${src}" style="width: 100px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">`;
+        }
+        
+        // Применение фильтров
+        function applyFilter(filter) {
+            currentStyle.filter = filter;
+            memeImage.style.filter = filter;
+        }
+        
+        // Применение анимаций
+        function applyAnimation(animation) {
+            currentStyle.animation = animation;
+            
+            // Удаляем предыдущие анимации
+            topTextElement.style.animation = '';
+            bottomTextElement.style.animation = '';
+            
+            switch(animation) {
+                case 'blink':
+                    topTextElement.style.animation = 'blink 1s infinite';
+                    bottomTextElement.style.animation = 'blink 1s infinite';
+                    break;
+                    
+                case 'shake':
+                    topTextElement.style.animation = 'shake 0.5s infinite';
+                    bottomTextElement.style.animation = 'shake 0.5s infinite';
+                    break;
+                    
+                case 'float':
+                    topTextElement.style.animation = 'float 3s ease-in-out infinite';
+                    bottomTextElement.style.animation = 'float 3s ease-in-out infinite alternate';
+                    break;
+            }
         }
         
         // Обновление мема в реальном времени
@@ -562,6 +873,11 @@
             const textHeight = parseInt(currentStyle.fontSize) * 2;
             document.getElementById('top-text-background').style.height = textHeight + 'px';
             document.getElementById('bottom-text-background').style.height = textHeight + 'px';
+            
+            // Применяем текущие эффекты
+            applyTextEffect(currentStyle.textEffect);
+            applyFilter(currentStyle.filter);
+            applyAnimation(currentStyle.animation);
         }
         
         // Случайный шрифт
@@ -570,6 +886,16 @@
             const randomFont = fonts[Math.floor(Math.random() * fonts.length)];
             fontFamilySelect.value = randomFont;
             updateMeme();
+        }
+        
+        // Генерация случайного цвета
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
         }
         
         // Загрузка изображения
@@ -637,27 +963,8 @@
                 }, 100);
             }
             
-            // Смешные мемные шаблоны
-            const memeTemplates = [
-                ["Когда код работает", "с первого раза"],
-                ["Когда находишь", "старый код"],
-                ["Я на работе:", "*прокручиваю мемы*"],
-                ["План на день:", "Ничего не делать"],
-                ["Прогресс:", "0%"],
-                ["Когда копаешь вниз", "и падаешь в лаву"],
-                ["Когда находишь деревню", "и грабишь её"],
-                ["Когда снимаешь видео", "и забываешь включить запись"],
-                ["Когда просыпаешься", "а надо на работу"],
-                ["Когда понедельник", "а ты не готов"],
-                ["Когда находишь алмазы", "и забыл кирку"],
-                ["Когда копаешь песок", "и находишь под ним ещё песок"],
-                ["Когда строишь замок", "и забываешь дверь"],
-                ["Когда делаешь контент", "и его никто не смотрит"],
-                ["Когда покупаешь новое", "и оно есть у всех"],
-                ["Когда готовишь ужин", "и все уже поели"]
-            ];
-            
-            const randomTemplate = memeTemplates[Math.floor(Math.random() * memeTemplates.length)];
+            // Выбираем случайную шутку
+            const randomTemplate = allJokes[Math.floor(Math.random() * allJokes.length)];
             topTextInput.value = randomTemplate[0];
             bottomTextInput.value = randomTemplate[1];
             
@@ -774,6 +1081,27 @@
         // Инициализация
         loadRandomTemplates();
         updateMeme();
+        
+        // CSS анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0; }
+            }
+            
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+            
+            @keyframes float {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
