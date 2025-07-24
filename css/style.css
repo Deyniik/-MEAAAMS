@@ -1,355 +1,703 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeyMem Pro+</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
-    <link rel="stylesheet" href="css/style.css">
-    <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="logo">DeyMem Pro+</div>
-    
-    <div class="app-container">
-        <!-- Левая колонка -->
-        <div class="left-column">
-            <!-- Панель загрузки -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-image"></i>
-                    <span>Изображение</span>
-                </div>
-                <div class="file-upload">
-                    <label class="file-upload-btn">
-                        <i class="fas fa-upload"></i> Загрузить фото (или Ctrl+V)
-                        <input type="file" id="upload" accept="image/*">
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Панель текста -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-font"></i>
-                    <span>Текст мема</span>
-                </div>
-                <div class="text-inputs">
-                    <input type="text" id="text-top" placeholder="Верхний текст">
-                    <input type="text" id="text-bottom" placeholder="Нижний текст">
-                </div>
-            </div>
-            
-            <!-- Панель стилей -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-paint-brush"></i>
-                    <span>Стиль текста</span>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Шрифт:</label>
-                    <div class="font-select-container">
-                        <select id="font-family">
-                            <option value="Impact" style="font-family: Impact">Impact</option>
-                            <option value="Arial Black" style="font-family: Arial Black">Arial Black</option>
-                            <option value="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif">Roboto</option>
-                            <option value="'Montserrat', sans-serif" style="font-family: 'Montserrat', sans-serif">Montserrat</option>
-                            <option value="'Oswald', sans-serif" style="font-family: 'Oswald', sans-serif">Oswald</option>
-                            <option value="'Comfortaa', cursive" style="font-family: 'Comfortaa', cursive">Comfortaa</option>
-                            <option value="'Rubik', sans-serif" style="font-family: 'Rubik', sans-serif">Rubik</option>
-                            <option value="'Press Start 2P', cursive" style="font-family: 'Press Start 2P', cursive">Press Start 2P</option>
-                            <option value="'Caveat', cursive" style="font-family: 'Caveat', cursive">Caveat</option>
-                            <option value="'Lobster', cursive" style="font-family: 'Lobster', cursive">Lobster</option>
-                            <option value="'Bad Script', cursive" style="font-family: 'Bad Script', cursive">Bad Script</option>
-                            <option value="'Underdog', cursive" style="font-family: 'Underdog', cursive">Underdog</option>
-                            <option value="'Neucha', cursive" style="font-family: 'Neucha', cursive">Neucha</option>
-                            <option value="'Amatic SC', cursive" style="font-family: 'Amatic SC', cursive">Amatic SC</option>
-                            <option value="'Russo One', sans-serif" style="font-family: 'Russo One', sans-serif">Russo One</option>
-                            <option value="'Marck Script', cursive" style="font-family: 'Marck Script', cursive">Marck Script</option>
-                            <option value="'Cuprum', sans-serif" style="font-family: 'Cuprum', sans-serif">Cuprum</option>
-                            <option value="'Yanone Kaffeesatz', sans-serif" style="font-family: 'Yanone Kaffeesatz', sans-serif">Yanone Kaffeesatz</option>
-                        </select>
-                        <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
-                    </div>
-                </div>
-                
-                <div class="style-controls">
-                    <div class="control-group">
-                        <label class="control-label">Размер текста:</label>
-                        <input type="range" id="font-size" min="30" max="100" value="42">
-                        <div class="slider-value" id="font-size-value">42px</div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label">Цвет текста:</label>
-                        <div class="color-control">
-                            <input type="color" id="text-color" value="#ffffff">
-                            <span id="color-hex">#FFFFFF</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Обводка текста:</label>
-                    <div class="stroke-control">
-                        <input type="color" id="stroke-color" value="#000000">
-                        <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
-                        <span id="stroke-width-value">1px</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Центральная панель с изображением -->
-        <div class="meme-panel">
-            <div id="meme-container">
-                <div id="upload-placeholder">
-                    <label class="upload-label">
-                        <input type="file" id="upload-main" accept="image/*">
-                        <div class="upload-content">
-                            <i class="fas fa-upload"></i>
-                            <span>Загрузить фото (или Ctrl+V)</span>
-                        </div>
-                    </label>
-                </div>
-                <img id="meme-image" src="" style="display: none;">
-                <div id="top-text-background" class="text-background"></div>
-                <div id="bottom-text-background" class="text-background"></div>
-                <div id="top-text" class="meme-text" contenteditable="true"></div>
-                <div id="bottom-text" class="meme-text" contenteditable="true"></div>
-                <div id="frame-overlay" class="frame-overlay" style="display: none;"></div>
-                <img id="framed-image" class="framed-image" style="display: none;">
-            </div>
-            
-            <div class="action-buttons">
-                <button id="smart-meme-btn" onclick="generateSmartMeme()">
-                    <i class="fas fa-brain"></i> Умный мем
-                </button>
-                <button id="download-btn" onclick="downloadMeme()" disabled>
-                    <i class="fas fa-download"></i> Скачать
-                </button>
-                <button id="share-btn" onclick="shareMeme()" disabled>
-                    <i class="fas fa-share-alt"></i> Поделиться
-                </button>
-            </div>
-        </div>
-        
-        <!-- Правая колонка -->
-        <div class="right-column">
-            <!-- Панель шаблонов -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-th"></i>
-                    <span>Шаблоны</span>
-                </div>
-                <div class="templates-header">
-                    <span>Популярные мемы:</span>
-                    <button class="refresh-templates" onclick="loadRandomTemplates()">
-                        <i class="fas fa-sync-alt"></i> Обновить
-                    </button>
-                </div>
-                <div class="templates" id="templates-container">
-                    <!-- Шаблоны будут загружены динамически -->
-                </div>
-            </div>
-            
-            <!-- Панель эффектов -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-magic"></i>
-                    <span>Эффекты</span>
-                </div>
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('effects-panel')">
-                        <i class="fas fa-palette"></i>
-                        <span>Текстовые эффекты</span>
-                    </div>
-                    <div class="panel" id="effects-panel">
-                        <div class="effect-btn" onclick="applyTextEffect('gradient')">
-                            <i class="fas fa-fill-drip"></i>
-                            Градиент
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('neon')">
-                            <i class="fas fa-lightbulb"></i>
-                            Неон
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('outline')">
-                            <i class="fas fa-border-style"></i>
-                            Контур
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('shadow')">
-                            <i class="fas fa-shadow"></i>
-                            Тень
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('rainbow')">
-                            <i class="fas fa-rainbow"></i>
-                            Радуга
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('glow')">
-                            <i class="fas fa-fire"></i>
-                            Свечение
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('3d')">
-                            <i class="fas fa-cube"></i>
-                            3D Текст
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('none')">
-                            <i class="fas fa-times"></i>
-                            Сбросить
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('image-effects-panel')">
-                        <i class="fas fa-sliders-h"></i>
-                        <span>Эффекты изображения</span>
-                    </div>
-                    <div class="panel" id="image-effects-panel">
-                        <div class="effect-btn" onclick="applyPixelEffect()">
-                            <i class="fas fa-gamepad"></i>
-                            Пикселизация
-                        </div>
-                        <div class="effect-btn" onclick="applyBlurEffect()">
-                            <i class="fas fa-smog"></i>
-                            Размытие
-                        </div>
-                        <div class="effect-btn" onclick="applyNoiseEffect()">
-                            <i class="fas fa-bahai"></i>
-                            Шум
-                        </div>
-                        <div class="effect-btn" onclick="applyVignetteEffect()">
-                            <i class="fas fa-circle-notch"></i>
-                            Виньетка
-                        </div>
-                        <div class="effect-btn" onclick="applyPosterizeEffect()">
-                            <i class="fas fa-layer-group"></i>
-                            Постеризация
-                        </div>
-                        <div class="effect-btn" onclick="applyEdgeEffect()">
-                            <i class="fas fa-border-all"></i>
-                            Края
-                        </div>
-                        <div class="effect-btn" onclick="applyNoneEffect()">
-                            <i class="fas fa-times"></i>
-                            Сбросить
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Панель фильтров и рамки -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-filter"></i>
-                    <span>Фильтры и рамка</span>
-                </div>
-                
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('filters-panel')">
-                        <i class="fas fa-filter"></i>
-                        <span>Фильтры изображения</span>
-                    </div>
-                    <div class="panel" id="filters-panel">
-                        <div class="effect-btn" onclick="applyFilter('none')">
-                            <i class="fas fa-times"></i>
-                            Нет
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">
-                            <i class="fas fa-moon"></i>
-                            Ч/Б
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')">
-                            <i class="fas fa-umbrella-beach"></i>
-                            Сепия
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">
-                            <i class="fas fa-sun"></i>
-                            Ярче
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('contrast(1.5)')">
-                            <i class="fas fa-sliders-h"></i>
-                            Контраст
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('hue-rotate(90deg)')">
-                            <i class="fas fa-paint-brush"></i>
-                            Оттенок
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('saturate(2)')">
-                            <i class="fas fa-tint"></i>
-                            Насыщенность
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('opacity(0.8)')">
-                            <i class="fas fa-low-vision"></i>
-                            Прозрачность
-                        </div>
-                        <div class="effect-btn" onclick="applyVintageFilter()">
-                            <i class="fas fa-camera-retro"></i>
-                            Винтаж
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('contrast(2) brightness(1.2) saturate(0)')">
-                            <i class="fas fa-snowflake"></i>
-                            Холодный
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(50%) contrast(1.2) brightness(1.1) hue-rotate(-10deg)')">
-                            <i class="fas fa-leaf"></i>
-                            Ретро
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.1) contrast(1.1) saturate(1.5)')">
-                            <i class="fas fa-fire"></i>
-                            Яркий
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(50%) contrast(1.5) brightness(0.9)')">
-                            <i class="fas fa-film"></i>
-                            Кино
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="frame-control-vertical">
-                    <div class="frame-control-item">
-                        <span>Чёрная рамка</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="frame-toggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="frame-control-item">
-                        <span>Квадратный формат</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="format-toggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="control-group" id="frame-size-control" style="display: none;">
-                    <label class="control-label">Размер рамки:</label>
-                    <input type="range" id="frame-size" min="0" max="50" value="10">
-                    <div class="slider-value" id="frame-size-value">10%</div>
-                </div>
-            </div>
-        </div>
-    </div>
+:root {
+    --main-bg: #0f0f0f;
+    --container-bg: #1a1a1a;
+    --accent: #ff5e62;
+    --text: #f0f0f0;
+    --slider-thumb: #ff5e62;
+    --slider-track: #444;
+}
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="js/script.js"></script>
-</body>
-</html>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--main-bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.logo {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: bold;
+    margin: 15px 0;
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(255, 94, 98, 0.3);
+    text-align: center;
+    font-family: 'Russo One', sans-serif;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.logo::after {
+    content: '+';
+    position: absolute;
+    top: -5px;
+    right: -15px;
+    font-size: 1.2em;
+    color: #ffcc00;
+}
+
+.app-container {
+    display: flex;
+    gap: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.left-column {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.right-column {
+    flex: 1;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.meme-panel {
+    flex: 2;
+    min-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+.control-panel {
+    background: var(--container-bg);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.panel-title {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-upload {
+    position: relative;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.file-upload-btn {
+    border: 2px dashed #444;
+    border-radius: 10px;
+    padding: 15px;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.file-upload-btn:hover {
+    border-color: var(--accent);
+    background: rgba(255,94,98,0.1);
+}
+
+.file-upload input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.text-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+input[type="text"] {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 12px;
+    color: var(--text);
+    font-size: 1em;
+    width: 100%;
+    transition: border 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.style-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-label {
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.font-select-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.reset-font-btn {
+    background: #444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.reset-font-btn:hover {
+    background: #555;
+}
+
+select {
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 10px;
+    color: var(--text);
+    font-size: 1em;
+    width: 100%;
+    transition: border 0.3s;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+option {
+    background: #333;
+    padding: 8px;
+    font-family: inherit;
+}
+
+.color-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="color"] {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]:hover {
+    transform: scale(1.1);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 12px;
+    background: var(--slider-track);
+    border-radius: 6px;
+    margin: 12px 0;
+    outline: none;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--slider-thumb);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3),
+                inset 0 0 0 2px rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.4),
+                inset 0 0 0 2px rgba(255,255,255,0.3);
+}
+
+.slider-value {
+    text-align: center;
+    font-size: 0.9em;
+    margin-top: -8px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.templates-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.refresh-templates {
+    background: rgba(255, 94, 98, 0.2);
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.refresh-templates:hover {
+    background: rgba(255, 94, 98, 0.3);
+}
+
+.templates {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.template {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid #444;
+    transition: all 0.2s;
+}
+
+.template:hover {
+    border-color: var(--accent);
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(255,94,98,0.2);
+}
+
+#meme-container {
+    position: relative;
+    background: black;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-width: 550px;
+    max-height: 550px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+#upload-placeholder {
+    position: absolute;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--container-bg);
+    border-radius: 10px;
+    z-index: 10;
+    border: 2px dashed #444;
+    transition: all 0.3s;
+}
+
+#upload-placeholder:hover {
+    border-color: var(--accent);
+    background: rgba(255,94,98,0.1);
+}
+
+.upload-label {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--text);
+}
+
+.upload-label input[type="file"] {
+    display: none;
+}
+
+.upload-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.upload-content i {
+    font-size: 3em;
+    opacity: 0.8;
+}
+
+.upload-content span {
+    font-size: 1.2em;
+    text-align: center;
+    max-width: 80%;
+}
+
+#meme-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    object-fit: contain;
+}
+
+.meme-text {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    text-align: center;
+    font-weight: bold;
+    word-wrap: break-word;
+    padding: 8px;
+    cursor: text;
+    user-select: text;
+    -webkit-text-stroke: 1px black;
+    text-stroke: 1px black;
+    z-index: 10;
+}
+
+#top-text {
+    top: 10px;
+}
+
+#bottom-text {
+    bottom: 10px;
+}
+
+.text-background {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0));
+    z-index: 1;
+}
+
+#top-text-background {
+    top: 0;
+}
+
+#bottom-text-background {
+    bottom: 0;
+    transform: rotate(180deg);
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.action-buttons button {
+    flex: 1;
+    background: linear-gradient(45deg, var(--accent), #e04a4e);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    box-sizing: border-box;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.action-buttons button span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.action-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #444;
+}
+
+.action-buttons button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255,94,98,0.4);
+}
+
+.stroke-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.effect-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    word-break: break-word;
+}
+
+.effect-btn:hover {
+    background: rgba(255,94,98,0.2);
+    border-color: var(--accent);
+}
+
+.effect-btn i {
+    font-size: 1.2em;
+}
+
+.more-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 8px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.more-btn:hover {
+    background: rgba(255,94,98,0.1);
+    border-color: var(--accent);
+}
+
+.frame-control-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.frame-control-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+}
+
+input:checked + .slider:before {
+    transform: translateX(27px);
+}
+
+.framed-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+}
+
+.frame-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    z-index: 0;
+}
+
+/* Анимации */
+@keyframes rainbow {
+    0% { color: #ff0000; }
+    14% { color: #ff7f00; }
+    28% { color: #ffff00; }
+    42% { color: #00ff00; }
+    57% { color: #0000ff; }
+    71% { color: #4b0082; }
+    85% { color: #9400d3; }
+    100% { color: #ff0000; }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--accent), 0 0 20px var(--accent);
+    }
+    to {
+        text-shadow: 0 0 10px #fff, 0 0 15px var(--accent), 0 0 20px var(--accent), 0 0 25px var(--accent);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1100px) {
+    .app-container {
+        flex-direction: column;
+    }
+    .meme-panel {
+        order: 1;
+        margin-bottom: 20px;
+        position: static;
+    }
+    .left-column {
+        order: 2;
+    }
+    .right-column {
+        order: 3;
+    }
+    
+    .panel {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .panel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .style-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
