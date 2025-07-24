@@ -6,24 +6,8 @@
     <title>DeyMem Pro+</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😂</text></svg>">
     <link rel="stylesheet" href="css/style.css">
-    <!-- Шрифты -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cuprum:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@400;700&display=swap&subset=cyrillic" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Подключаем иконки -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="logo">DeyMem Pro+</div>
@@ -31,7 +15,7 @@
     <div class="app-container">
         <!-- Левая колонка -->
         <div class="left-column">
-            <!-- Панель загрузки -->
+            <!-- Панель загрузки изображения -->
             <div class="control-panel">
                 <div class="panel-title">
                     <i class="fas fa-image"></i>
@@ -44,8 +28,8 @@
                     </label>
                 </div>
             </div>
-            
-            <!-- Панель текста -->
+
+            <!-- Панель ввода текста -->
             <div class="control-panel">
                 <div class="panel-title">
                     <i class="fas fa-font"></i>
@@ -56,67 +40,37 @@
                     <input type="text" id="text-bottom" placeholder="Нижний текст">
                 </div>
             </div>
-            
-            <!-- Панель стилей -->
+
+            <!-- Панель стилей текста -->
             <div class="control-panel">
                 <div class="panel-title">
                     <i class="fas fa-paint-brush"></i>
                     <span>Стиль текста</span>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Шрифт:</label>
-                    <div class="font-select-container">
-                        <select id="font-family">
-                            <option value="Impact" style="font-family: Impact">Impact</option>
-                            <option value="Arial Black" style="font-family: Arial Black">Arial Black</option>
-                            <option value="'Roboto', sans-serif" style="font-family: 'Roboto', sans-serif">Roboto</option>
-                            <option value="'Montserrat', sans-serif" style="font-family: 'Montserrat', sans-serif">Montserrat</option>
-                            <option value="'Oswald', sans-serif" style="font-family: 'Oswald', sans-serif">Oswald</option>
-                            <option value="'Comfortaa', cursive" style="font-family: 'Comfortaa', cursive">Comfortaa</option>
-                            <option value="'Rubik', sans-serif" style="font-family: 'Rubik', sans-serif">Rubik</option>
-                            <option value="'Press Start 2P', cursive" style="font-family: 'Press Start 2P', cursive">Press Start 2P</option>
-                            <option value="'Caveat', cursive" style="font-family: 'Caveat', cursive">Caveat</option>
-                            <option value="'Lobster', cursive" style="font-family: 'Lobster', cursive">Lobster</option>
-                            <option value="'Bad Script', cursive" style="font-family: 'Bad Script', cursive">Bad Script</option>
-                            <option value="'Underdog', cursive" style="font-family: 'Underdog', cursive">Underdog</option>
-                            <option value="'Neucha', cursive" style="font-family: 'Neucha', cursive">Neucha</option>
-                            <option value="'Amatic SC', cursive" style="font-family: 'Amatic SC', cursive">Amatic SC</option>
-                            <option value="'Russo One', sans-serif" style="font-family: 'Russo One', sans-serif">Russo One</option>
-                            <option value="'Marck Script', cursive" style="font-family: 'Marck Script', cursive">Marck Script</option>
-                            <option value="'Cuprum', sans-serif" style="font-family: 'Cuprum', sans-serif">Cuprum</option>
-                            <option value="'Yanone Kaffeesatz', sans-serif" style="font-family: 'Yanone Kaffeesatz', sans-serif">Yanone Kaffeesatz</option>
-                        </select>
-                        <button class="reset-font-btn" title="Случайный шрифт" onclick="randomFont()">A</button>
-                    </div>
-                </div>
-                
                 <div class="style-controls">
+                    <div class="control-group">
+                        <label class="control-label">Шрифт:</label>
+                        <select id="font-family">
+                            <option value="Impact">Impact</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="'Roboto', sans-serif">Roboto</option>
+                            <option value="'Montserrat', sans-serif">Montserrat</option>
+                            <option value="'Oswald', sans-serif">Oswald</option>
+                        </select>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">Размер текста:</label>
                         <input type="range" id="font-size" min="30" max="100" value="42">
-                        <div class="slider-value" id="font-size-value">42px</div>
+                        <div id="font-size-value">42px</div>
                     </div>
-                    
                     <div class="control-group">
                         <label class="control-label">Цвет текста:</label>
-                        <div class="color-control">
-                            <input type="color" id="text-color" value="#ffffff">
-                            <span id="color-hex">#FFFFFF</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label">Обводка текста:</label>
-                    <div class="stroke-control">
-                        <input type="color" id="stroke-color" value="#000000">
-                        <input type="range" id="stroke-width" min="0" max="5" value="1" step="0.1">
-                        <span id="stroke-width-value">1px</span>
+                        <input type="color" id="text-color" value="#ffffff">
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <!-- Центральная панель с изображением -->
         <div class="meme-panel">
             <div id="meme-container">
@@ -130,221 +84,17 @@
                     </label>
                 </div>
                 <img id="meme-image" src="" style="display: none;">
-                <div id="top-text-background" class="text-background"></div>
-                <div id="bottom-text-background" class="text-background"></div>
                 <div id="top-text" class="meme-text" contenteditable="true"></div>
                 <div id="bottom-text" class="meme-text" contenteditable="true"></div>
-                <div id="frame-overlay" class="frame-overlay" style="display: none;"></div>
-                <img id="framed-image" class="framed-image" style="display: none;">
             </div>
-            
+
             <div class="action-buttons">
-                <button id="smart-meme-btn" onclick="generateSmartMeme()">
-                    <i class="fas fa-brain"></i> Умный мем
-                </button>
                 <button id="download-btn" onclick="downloadMeme()" disabled>
                     <i class="fas fa-download"></i> Скачать
                 </button>
                 <button id="share-btn" onclick="shareMeme()" disabled>
                     <i class="fas fa-share-alt"></i> Поделиться
                 </button>
-            </div>
-        </div>
-        
-        <!-- Правая колонка -->
-        <div class="right-column">
-            <!-- Панель шаблонов -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-th"></i>
-                    <span>Шаблоны</span>
-                </div>
-                <div class="templates-header">
-                    <span>Популярные мемы:</span>
-                    <button class="refresh-templates" onclick="loadRandomTemplates()">
-                        <i class="fas fa-sync-alt"></i> Обновить
-                    </button>
-                </div>
-                <div class="templates" id="templates-container">
-                    <!-- Шаблоны будут загружены динамически -->
-                </div>
-            </div>
-            
-            <!-- Панель эффектов -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-magic"></i>
-                    <span>Эффекты</span>
-                </div>
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('effects-panel')">
-                        <i class="fas fa-palette"></i>
-                        <span>Текстовые эффекты</span>
-                    </div>
-                    <div class="panel" id="effects-panel">
-                        <div class="effect-btn" onclick="applyTextEffect('gradient')">
-                            <i class="fas fa-fill-drip"></i>
-                            Градиент
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('neon')">
-                            <i class="fas fa-lightbulb"></i>
-                            Неон
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('outline')">
-                            <i class="fas fa-border-style"></i>
-                            Контур
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('shadow')">
-                            <i class="fas fa-shadow"></i>
-                            Тень
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('rainbow')">
-                            <i class="fas fa-rainbow"></i>
-                            Радуга
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('glow')">
-                            <i class="fas fa-fire"></i>
-                            Свечение
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('3d')">
-                            <i class="fas fa-cube"></i>
-                            3D Текст
-                        </div>
-                        <div class="effect-btn" onclick="applyTextEffect('none')">
-                            <i class="fas fa-times"></i>
-                            Сбросить
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('image-effects-panel')">
-                        <i class="fas fa-sliders-h"></i>
-                        <span>Эффекты изображения</span>
-                    </div>
-                    <div class="panel" id="image-effects-panel">
-                        <div class="effect-btn" onclick="applyPixelEffect()">
-                            <i class="fas fa-gamepad"></i>
-                            Пикселизация
-                        </div>
-                        <div class="effect-btn" onclick="applyBlurEffect()">
-                            <i class="fas fa-smog"></i>
-                            Размытие
-                        </div>
-                        <div class="effect-btn" onclick="applyNoiseEffect()">
-                            <i class="fas fa-bahai"></i>
-                            Шум
-                        </div>
-                        <div class="effect-btn" onclick="applyVignetteEffect()">
-                            <i class="fas fa-circle-notch"></i>
-                            Виньетка
-                        </div>
-                        <div class="effect-btn" onclick="applyPosterizeEffect()">
-                            <i class="fas fa-layer-group"></i>
-                            Постеризация
-                        </div>
-                        <div class="effect-btn" onclick="applyEdgeEffect()">
-                            <i class="fas fa-border-all"></i>
-                            Края
-                        </div>
-                        <div class="effect-btn" onclick="applyNoneEffect()">
-                            <i class="fas fa-times"></i>
-                            Сбросить
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Панель фильтров и рамки -->
-            <div class="control-panel">
-                <div class="panel-title">
-                    <i class="fas fa-filter"></i>
-                    <span>Фильтры и рамка</span>
-                </div>
-                
-                <div class="control-group">
-                    <div class="more-btn" onclick="togglePanel('filters-panel')">
-                        <i class="fas fa-filter"></i>
-                        <span>Фильтры изображения</span>
-                    </div>
-                    <div class="panel" id="filters-panel">
-                        <div class="effect-btn" onclick="applyFilter('none')">
-                            <i class="fas fa-times"></i>
-                            Нет
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(100%)')">
-                            <i class="fas fa-moon"></i>
-                            Ч/Б
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(100%)')">
-                            <i class="fas fa-umbrella-beach"></i>
-                            Сепия
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.5)')">
-                            <i class="fas fa-sun"></i>
-                            Ярче
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('contrast(1.5)')">
-                            <i class="fas fa-sliders-h"></i>
-                            Контраст
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('hue-rotate(90deg)')">
-                            <i class="fas fa-paint-brush"></i>
-                            Оттенок
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('saturate(2)')">
-                            <i class="fas fa-tint"></i>
-                            Насыщенность
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('opacity(0.8)')">
-                            <i class="fas fa-low-vision"></i>
-                            Прозрачность
-                        </div>
-                        <div class="effect-btn" onclick="applyVintageFilter()">
-                            <i class="fas fa-camera-retro"></i>
-                            Винтаж
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('contrast(2) brightness(1.2) saturate(0)')">
-                            <i class="fas fa-snowflake"></i>
-                            Холодный
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('sepia(50%) contrast(1.2) brightness(1.1) hue-rotate(-10deg)')">
-                            <i class="fas fa-leaf"></i>
-                            Ретро
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('brightness(1.1) contrast(1.1) saturate(1.5)')">
-                            <i class="fas fa-fire"></i>
-                            Яркий
-                        </div>
-                        <div class="effect-btn" onclick="applyFilter('grayscale(50%) contrast(1.5) brightness(0.9)')">
-                            <i class="fas fa-film"></i>
-                            Кино
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="frame-control-vertical">
-                    <div class="frame-control-item">
-                        <span>Чёрная рамка</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="frame-toggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                    <div class="frame-control-item">
-                        <span>Квадратный формат</span>
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="format-toggle">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-                </div>
-                
-                <div class="control-group" id="frame-size-control" style="display: none;">
-                    <label class="control-label">Размер рамки:</label>
-                    <input type="range" id="frame-size" min="0" max="50" value="10">
-                    <div class="slider-value" id="frame-size-value">10%</div>
-                </div>
             </div>
         </div>
     </div>
